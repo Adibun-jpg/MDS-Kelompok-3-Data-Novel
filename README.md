@@ -1,2 +1,2 @@
-# belajar
- Repository ini untuk belajar
+# MANAJEMEN DATA STATISTIKA
+ Project ini merupakan Data Novel
