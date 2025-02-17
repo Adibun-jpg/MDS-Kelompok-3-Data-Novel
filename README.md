@@ -1,8 +1,6 @@
-# Front End Developer
-📍 Tugas dalam GitHub:
+# Front End Developer (Front-End branch)
+📍 Tugas di GitHub:
 
-- Bekerja di dalam folder frontend/
-- Mengembangkan UI menggunakan React.js, Vue.js, atau HTML+CSS
-- Menggunakan branch khusus, misalnya feature/frontend-navbar
-- Menggunakan Pull Request (PR) untuk menggabungkan perubahan ke main
-- Mengupdate README.md untuk menjelaskan cara menjalankan UI
+- Mengembangkan tampilan dashboard dengan React.js, Vue.js, atau HTML+CSS.
+- Menghubungkan UI dengan API dari Back-End.
+- Menambahkan fitur pencarian, filter, dan sorting novel.
