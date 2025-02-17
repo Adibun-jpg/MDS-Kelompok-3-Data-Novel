@@ -1,6 +1,6 @@
-# Designer Database (Database-Manager branch)
+# Designer UI/UX (Designer branch)
 📍 Tugas di GitHub:
 
-- Membuat Entity Relationship Diagram (ERD).
-- Menulis skrip SQL untuk tabel novel, ulasan, dsb..
-- Menentukan indeks dan optimasi query.
+- Membuat desain UI/UX dalam Figma atau Adobe XD.
+- Menyusun ikon, warna, dan layout untuk dashboard.
+- Bekerja sama dengan Front-End Developer.
