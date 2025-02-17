@@ -1,10 +1,9 @@
 # Back End Developer
+📍 Tugas dalam GitHub:
 
-📌 Peran: Mengelola logika bisnis dan komunikasi antara Front End dan database.
-
-📌 Tanggung Jawab:
-- Membuat API untuk menghubungkan Front End dengan Database.
-- Menangani otentikasi pengguna jika dashboard memiliki sistem login.
-- Mengolah data dari database sebelum ditampilkan di UI.
-- Memastikan API bekerja dengan baik dan optimal.
-- Menangani keamanan sistem, seperti validasi input dan perlindungan dari serangan SQL Injection atau Cross-Site Scripting (XSS).
+- Bekerja di dalam folder backend/
+- Mengembangkan REST API untuk mengambil data novel, penulis, ulasan, dsb.
+- Mengelola API authentication jika ada sistem login
+- Membuat unit testing untuk API
+- Menggunakan branch khusus, misalnya feature/backend-api-novel
+- Menulis dokumentasi API di docs/
