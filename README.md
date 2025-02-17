@@ -1,8 +1,6 @@
-# Copy Writer
-📍 Tugas dalam GitHub:
+# Copy Writer (Copywriter branch)
+📍 Tugas di GitHub:
 
-- Bekerja di dalam folder docs/
-- Menulis teks UI untuk front-end (copy.txt)
-- Menyusun panduan penggunaan dalam docs/README.md
-- Menulis pesan error yang jelas untuk sistem
-- Menggunakan branch khusus, misalnya docs/update-copywriting
+- Menulis teks UI dan pesan error.
+- Menyusun dokumentasi penggunaan dashboard.
+- Menambahkan README.md & help text.
