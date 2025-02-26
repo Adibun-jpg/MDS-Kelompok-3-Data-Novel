@@ -1,0 +1,405 @@
+---
+title: "Rshiny MDS Kelompok 3"
+author: "Adib Roisilmi Abdullah"
+date: "2025-02-23"
+output: html_document
+---
+
+```{r}
+# === 1. Load Library ===
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(ggplot2)
+library(readr)
+
+# === 2. Membaca Data CSV ===
+data_penulis <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penulis.csv")
+data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv")
+data_ulasan <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv")
+
+# === 3. UI: Struktur Dashboard ===
+ui <- dashboardPage(
+  dashboardHeader(title = "Novel Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Cari Novel Di Sini", tabName = "my_books", icon = icon("book")),
+      menuItem("Penulis", tabName = "authors", icon = icon("user")),
+      menuItem("Penerbit", tabName = "publishers", icon = icon("building")),
+      menuItem("Ulasan", tabName = "reviews", icon = icon("star")),
+      menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "my_books",
+        fluidRow(
+          column(12, textInput("search", "Search Novel", placeholder = "Type novel title...")),
+          column(12, h2("Novel Collection")),
+          column(12, fluidRow(uiOutput("novel_cards")))
+        )
+      ),
+      tabItem(tabName = "authors",
+        box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
+      ),
+      tabItem(tabName = "publishers",
+        box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))
+      ),
+      tabItem(tabName = "reviews",
+        box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))
+      ),
+      tabItem(tabName = "stats",
+        fluidRow(
+          box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 6, plotOutput("rating_plot")),
+          box(title = "Number of Novels Published Per Year", status = "info", solidHeader = TRUE, width = 6, plotOutput("novel_per_year")),
+          box(title = "Number of Novels by Publisher", status = "warning", solidHeader = TRUE, width = 6, plotOutput("novel_per_publisher")),
+          box(title = "Number of Novels by Author", status = "success", solidHeader = TRUE, width = 6, plotOutput("novel_per_author")),
+          box(title = "Novel Length by Rating", status = "danger", solidHeader = TRUE, width = 6, plotOutput("boxplot_length_rating"))
+        )
+      )
+    )
+  )
+)
+
+# === 4. Server: Logika Aplikasi ===
+server <- function(input, output, session) {
+  
+  # Reactive filter untuk pencarian novel berdasarkan judul
+  filtered_novels <- reactive({
+    if (is.null(input$search) || input$search == "") {
+      return(data_novel)  # Tampilkan semua novel jika pencarian kosong
+    }
+    data_novel[grep(input$search, data_novel$judul, ignore.case = TRUE), ]
+  })
+  
+  # Menampilkan novel dalam bentuk card layout
+  output$novel_cards <- renderUI({
+    books <- filtered_novels()
+    
+    if (is.null(books) || nrow(books) == 0) {
+      return(h4("No books found", style = "text-align: center; color: red;"))
+    }
+    
+    fluidRow(
+      lapply(1:nrow(books), function(i) {
+        book_id <- books$id_novel[i]
+        
+        column(4,  
+          box(
+            width = NULL, status = "primary", solidHeader = TRUE, height = "255px",
+            style = "border-radius: 10px; padding: 10px; flex-shrink: 0;",
+            
+            div(style = "display: flex; align-items: center; gap: 20px;",
+                
+                img(src = books$cover_image[i], width = "120px", height = "200px", 
+                    style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
+                
+                div(style = "text-align: left; width: 100%;",
+                    h4(books$judul[i]),
+                    p(paste("Penulis:", books$penulis[i])),
+                    p(paste("Tahun Terbit:", books$tahun_terbit[i])),
+                    p(paste("ISBN:", books$ISBN[i])),
+                    p(paste("Bahasa:", books$bahasa[i])),
+                    div(style = "color: gold; font-size: 18px;",
+                        paste0(strrep("★", round(books$rating_novel[i])), strrep("☆", 5 - round(books$rating_novel[i]))),
+                        span(style = "font-size: 16px; color: black;", paste0(" ", books$rating_novel[i]))),
+                    actionButton(inputId = paste0("btn_", book_id), label = "Read More", class = "btn-primary")
+                )
+            )
+          )
+        )
+      })
+    )
+  })
+
+  # Handling event tombol "Read More"
+  observe({
+    books <- filtered_novels()
+    
+    lapply(1:nrow(books), function(i) {
+      book_id <- books$id_novel[i]
+      
+      observeEvent(input[[paste0("btn_", book_id)]], {
+        showModal(modalDialog(
+          title = books$judul[i], 
+          size = "m",
+          div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
+              img(src = books$cover_image[i], width = "150px", height = "220px",
+                  style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
+              div(style = "text-align: justify; width: 100%;",
+                  h4(books$judul[i]),
+                  p(paste("Penulis:", books$id_penulis[i])),
+                  p(paste("Tahun Terbit:", books$tahun_terbit[i])),
+                  p(paste("ISBN:", books$ISBN[i])),
+                  p(paste("Bahasa:", books$bahasa[i])),
+                  hr(),
+                  p(books$deskripsi[i])
+              )
+          ),
+          easyClose = TRUE
+        ))
+      })
+    })
+  })
+
+  output$authors_table <- renderDT({ datatable(data_penulis, options = list(pageLength = 5)) })
+  output$publishers_table <- renderDT({ datatable(data_penerbit, options = list(pageLength = 5)) })
+  output$reviews_table <- renderDT({ datatable(data_ulasan, options = list(pageLength = 5)) })
+
+  output$rating_plot <- renderPlot({
+    ggplot(data_novel, aes(x = rating_novel)) +
+      geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+      theme_minimal()
+  })
+}
+
+# === 6. Menjalankan Aplikasi ===
+shinyApp(ui, server)
+
+```
+
+```{r}
+# === 1. Load Library ===
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(ggplot2)
+library(readr)
+library(dplyr)
+
+# === 2. Membaca Data CSV ===
+data_penulis <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penulis.csv")
+data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv")
+data_ulasan <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv")
+
+
+# === 3. UI: Struktur Dashboard ===
+ui <- dashboardPage(
+  dashboardHeader(title = "Novel Dashboard"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Cari Novel Di Sini", tabName = "my_books", icon = icon("book")),
+      menuItem("Penulis", tabName = "authors", icon = icon("user")),
+      menuItem("Penerbit", tabName = "publishers", icon = icon("building")),
+      menuItem("Ulasan", tabName = "reviews", icon = icon("star")),
+      menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "my_books",
+        fluidRow(
+          column(12, textInput("search", "Search Novel", placeholder = "Type novel title...")),
+          column(12, h2("The Best Novel by Ratings")),
+          column(12,uiOutput("best_novel")),
+          column(12, h2("Novel Collection")),
+          column(12, fluidRow(uiOutput("novel_cards")))
+        )
+      ),
+      tabItem(tabName = "authors",
+        column(12, h2("The Most Favourite Author")),
+        uiOutput("most_fav_author"),  # Menampilkan The Most Favourite Author
+        box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
+      ),
+      tabItem(tabName = "publishers",
+        box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))
+      ),
+      tabItem(tabName = "reviews",
+        box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))
+      ),
+      tabItem(tabName = "stats",
+        fluidRow(
+          box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 6, plotOutput("rating_plot")),
+          box(title = "Number of Novels Published Per Year", status = "info", solidHeader = TRUE, width = 6, plotOutput("novel_per_year")),
+          box(title = "Number of Novels by Publisher", status = "warning", solidHeader = TRUE, width = 6, plotOutput("novel_per_publisher")),
+          box(title = "Number of Novels by Author", status = "success", solidHeader = TRUE, width = 6, plotOutput("novel_per_author")),
+          box(title = "Novel Length by Rating", status = "danger", solidHeader = TRUE, width = 6, plotOutput("boxplot_length_rating"))
+        )
+      )
+    )
+  )
+)
+
+# === 4. Server: Logika Aplikasi ===
+server <- function(input, output, session) {
+  
+  # Reactive filter untuk pencarian novel berdasarkan judul
+  filtered_novels <- reactive({
+    if (is.null(input$search) || input$search == "") {
+      return(data_novel)  # Tampilkan semua novel jika pencarian kosong
+    }
+    data_novel[grep(input$search, data_novel$judul, ignore.case = TRUE), ]
+  })
+  
+  # Menentukan Best Novel berdasarkan Rating
+best_novel <- reactive({
+  data_novel %>%
+    arrange(desc(rating_novel)) %>%
+    head(1)  # Ambil novel dengan rating tertinggi
+})
+
+# Menampilkan Best Novel by Ratings
+output$best_novel <- renderUI({
+  novel <- best_novel()
+  
+  if (nrow(novel) == 0) {
+    return(h4("No data available", style = "text-align: center; color: red;"))
+  }
+  
+  box(
+      width = 20, status = NULL, solidHeader = FALSE,
+      style = "border-radius: 10px; 
+              padding: 10px; 
+              box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+              border: 0px solid transparent;",
+      div(style = "display: flex; align-items: center; gap: 15px;",
+        
+      img(src = novel$cover_image[1], width = "120px", height = "180px", 
+        style = "border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
+        
+      div(style = "text-align: left; width: 100%;",
+            h3(novel$judul[1]),
+            p(paste("Penulis:", novel$penulis[1])),
+            p(paste("Tahun Terbit:", novel$tahun_terbit[1])),
+            p(paste("ISBN:", ifelse(novel$ISBN[1] == "", "Not Available", novel$ISBN[1]))),
+            p(paste("Bahasa:", novel$bahasa[1])),
+            
+      div(style = "color: gold; font-size: 18px;",
+                paste0(strrep("★", round(novel$rating_novel[1])), strrep("☆", 5 - round(novel$rating_novel[1]))),
+      span(style = "font-size: 16px; color: black;", paste0(" ", novel$rating_novel[1])))
+        )
+    )
+  )
+})
+  
+  # Menampilkan novel dalam bentuk card layout
+  output$novel_cards <- renderUI({
+    books <- filtered_novels()
+    
+    if (is.null(books) || nrow(books) == 0) {
+      return(h4("No books found", style = "text-align: center; color: red;"))
+    }
+    
+    fluidRow(
+      lapply(1:nrow(books), function(i) {
+        book_id <- books$id_novel[i]
+        
+        column(4,  
+          box(
+            width = 12, status = "primary", solidHeader = TRUE, height = "255px",
+            style = "border-radius: 10px; 
+                    padding: 10px; 
+                    flex-shrink: 0;
+                    margin-bottom: 20px;",
+            
+            div(style = "display: flex; 
+                        align-items: center;
+                        gap: 10px;",
+                
+            img(src = books$cover_image[i], width = "120px", height = "200px", 
+            style = "border-radius: 10px; 
+                    box-shadow: 5px 5px 10px rgba(0,0,0,0.2); 
+                    flex-shrink: 0;"),
+                
+            div(style = "text-align: left; width: 100%;",
+                h4(books$judul[i]),
+                p(paste("Penulis:", books$penulis[i])),
+                p(paste("Tahun Terbit:", books$tahun_terbit[i])),
+                p(paste("ISBN:", books$ISBN[i])),
+                p(paste("Bahasa:", books$bahasa[i])),
+                    
+            div(style = "color: gold; font-size: 18px;",
+                paste0(strrep("★", round(books$rating_novel[i])), strrep("☆", 5 - round(books$rating_novel[i]))),
+                span(style = "font-size: 16px; color: black;", paste0(" ", books$rating_novel[i]))),
+                actionButton(inputId = paste0("btn_", book_id), label = "Read More", class = "btn-primary")
+                )
+            )
+          )
+        )
+      })
+    )
+  })
+
+  # Menampilkan The Most Favourite Author
+  most_favourite_author <- reactive({
+    data_novel %>%
+      count(id_penulis, name = "total_novel") %>%
+      left_join(data_penulis, by = "id_penulis") %>%
+      arrange(desc(total_novel)) %>%
+      head(1)  # Ambil penulis dengan novel terbanyak
+  })
+
+  output$most_fav_author <- renderUI({
+    author <- most_favourite_author()
+    
+    if (nrow(author) == 0) {
+      return(h4("No data available", style = "text-align: center; color: red;"))
+    }
+    
+    box(
+      width = 12, status = NULL, solidHeader = TRUE,
+      style = "border-radius: 10px; 
+              padding: 10px; 
+              box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+              border: 0px solid transparent;",
+      div(style = "display: flex; align-items: center; gap: 15px;",
+          
+          img(src = "author_image.png", width = "100px", height = "100px", 
+              style = "border-radius: 50%; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
+          
+          div(style = "text-align: left; width: 100%;",
+              h3(author$penulis),
+              p(paste("Total Novels:", author$total_novel)),
+              p(paste("Tempat Lahir:", author$tempat_lahir)),
+              p(paste("Tanggal Lahir:", author$tanggal_lahir))
+          )
+      )
+    )
+  })
+  
+   # Handling event tombol "Read More"
+  observe({
+    books <- filtered_novels()
+    
+    lapply(1:nrow(books), function(i) {
+      book_id <- books$id_novel[i]
+      
+      observeEvent(input[[paste0("btn_", book_id)]], {
+        showModal(modalDialog(
+          title = "Sekilas Tentang Novel", 
+          size = "m",
+          div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
+              img(src = books$cover_image[i], width = "150px", height = "220px",
+                  style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
+              div(style = "text-align: justify; width: 100%;",
+                  h4(books$judul[i]),
+                  p(paste("Penulis:", books$penulis[i])),
+                  p(paste("Tahun Terbit:", books$tahun_terbit[i])),
+                  p(paste("ISBN:", books$ISBN[i])),
+                  p(paste("Bahasa:", books$bahasa[i])),
+                  hr(),
+                  p(books$deskripsi[i])
+              )
+          ),
+          easyClose = TRUE
+        ))
+      })
+    })
+  })
+  
+  output$authors_table <- renderDT({ datatable(data_penulis, options = list(pageLength = 5)) })
+  output$publishers_table <- renderDT({ datatable(data_penerbit, options = list(pageLength = 5)) })
+  output$reviews_table <- renderDT({ datatable(data_ulasan, options = list(pageLength = 5)) })
+
+  output$rating_plot <- renderPlot({
+    ggplot(data_novel, aes(x = rating_novel)) +
+      geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+      theme_minimal()
+  })
+}
+
+# === 6. Menjalankan Aplikasi ===
+shinyApp(ui, server)
+
+```
+
