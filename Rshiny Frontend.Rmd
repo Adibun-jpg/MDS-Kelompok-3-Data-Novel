@@ -1,0 +1,108 @@
+---
+title: "Rshiny Frontend"
+author: "Baiq Nina Febriati"
+date: "2025-02-26"
+output: html_document
+---
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(shinyWidgets)
+library(DT)
+library(ggplot2)
+
+# Sample Data
+novels <- data.frame(
+  id_novel = 1:5,
+  id_penulis = c(1, 2, 3, 4, 5),
+  id_penerbit = c(1, 1, 2, 2, 3),
+  judul = c("Novel A", "Novel B", "Novel C", "Novel D", "Novel E"),
+  ISBN = c("123-456", "234-567", "345-678", "456-789", "567-890"),
+  bahasa = c("Indonesia", "English", "Indonesia", "English", "Indonesia"),
+  tahun_terbit = c(2020, 2019, 2018, 2021, 2022),
+  edisi = c(1, 2, 1, 3, 1),
+  jumlah_halaman = c(200, 300, 250, 180, 220),
+  deskripsi = c("Deskripsi Novel A", "Deskripsi Novel B", "Deskripsi Novel C", "Deskripsi Novel D", "Deskripsi Novel E"),
+  rating_novel = c(4.5, 4.2, 4.8, 4.0, 4.3),
+  stringsAsFactors = FALSE
+)
+
+penerbit <- data.frame(
+  id_penerbit = 1:3,
+  nama_penerbit = c("Penerbit X", "Penerbit Y", "Penerbit Z"),
+  alamat = c("Alamat X", "Alamat Y", "Alamat Z"),
+  stringsAsFactors = FALSE
+)
+
+penulis <- data.frame(
+  id_penulis = 1:5,
+  penulis = c("Penulis A", "Penulis B", "Penulis C", "Penulis D", "Penulis E"),
+  tempat_lahir = c("Jakarta", "Bandung", "Surabaya", "Yogyakarta", "Medan"),
+  tanggal_lahir = c("1980-01-01", "1985-05-12", "1990-07-23", "1978-03-04", "1982-09-10"),
+  jumlah_buku = c(5, 8, 3, 10, 7),
+  stringsAsFactors = FALSE
+)
+
+ulasan <- data.frame(
+  id_user = 1:5,
+  id_novel = c(1, 2, 3, 4, 5),
+  nama_user = c("User A", "User B", "User C", "User D", "User E"),
+  tanggal_ulasan = c("2024-01-10", "2024-02-15", "2024-03-20", "2024-04-25", "2024-05-30"),
+  ulasan = c("Bagus sekali!", "Lumayan menarik", "Luar biasa!", "Kurang memuaskan", "Sangat inspiratif"),
+  rating_user = c(5, 4, 5, 3, 5),
+  stringsAsFactors = FALSE
+)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Novel Collection"),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Novels", tabName = "novels", icon = icon("book")),
+      menuItem("Authors", tabName = "authors", icon = icon("user")),
+      menuItem("Publishers", tabName = "publishers", icon = icon("building")),
+      menuItem("Reviews", tabName = "reviews", icon = icon("star")),
+      menuItem("Statistics", tabName = "stats", icon = icon("chart-bar"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "novels",
+              fluidRow(
+                lapply(1:nrow(novels), function(i) {
+                  box(width = 4, status = "primary", solidHeader = TRUE,
+                      title = novels$judul[i],
+                      h5(paste("ISBN:", novels$ISBN[i])),
+                      h6(paste("Tahun Terbit:", novels$tahun_terbit[i], "| Rating:", novels$rating_novel[i])),
+                      p(novels$deskripsi[i]),
+                      actionButton(paste0("btn_", i), "Read More", class = "#343a40"))
+                })
+              )
+      ),
+      tabItem(tabName = "authors", box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))),
+      tabItem(tabName = "publishers", box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))),
+      tabItem(tabName = "reviews", box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))),
+      tabItem(tabName = "stats", box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 12, plotOutput("rating_plot")))
+    )
+  )
+)
+
+server <- function(input, output, session) {
+  output$authors_table <- renderDT({ datatable(penulis, options = list(pageLength = 5, autoWidth = TRUE)) })
+  output$publishers_table <- renderDT({ datatable(penerbit, options = list(pageLength = 5, autoWidth = TRUE)) })
+  output$reviews_table <- renderDT({ datatable(ulasan, options = list(pageLength = 5, autoWidth = TRUE)) })
+  
+  output$rating_plot <- renderPlot({
+    ggplot(novels, aes(x = rating_novel, fill = ..count..)) +
+      geom_histogram(binwidth = 0.5, color = "black", alpha = 0.8) +
+      scale_fill_gradient(low = "lightblue", high = "blue") +
+      labs(title = "Distribution of Novel Ratings", x = "Rating", y = "Count") +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+## 
