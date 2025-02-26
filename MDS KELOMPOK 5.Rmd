@@ -1,0 +1,520 @@
+---
+title: "MDS"
+author: "Adib Roisilmi Abdullah"
+date: "2025-02-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Manajemen Data Statistika
+
+**Kelompok 3:**
+
+-   Adib Roisilmi Abdullah
+
+-   Muhammad Rizal
+
+-   Baiq Nina Febriati
+
+-   Naufalia Alfiryal
+
+-   Sely Wakhidah
+
+### - Memasukkan Library
+
+```{r cars}
+library(DBI)
+library(RMySQL)
+library(readr)
+library(shiny)
+```
+
+### - Connect ke Database
+
+```{r pressure, echo=FALSE}
+con <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = "MDS5",
+  host = "127.0.0.1",
+  user = "root",
+  password = "",
+  port = 5555,
+  client.flag = CLIENT_LOCAL_FILES
+)
+```
+
+### - Cek Koneksi
+
+```{r}
+dbListTables(con)
+```
+
+```{r}
+dbGetQuery(con, "SELECT * FROM novel1")
+```
+
+## A. Data Novel
+
+### - Memasukkan Data Novel ke Data Base
+
+```{r}
+data_novel <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/novel.csv", stringsAsFactors = FALSE)
+
+head(data_novel)
+str(data_novel)
+```
+
+#### - Mengecek Data Hilang
+
+```{r}
+data_novel[data_novel == ""] <- "Belum Terdaftar"
+colSums(is.na(data_novel == "Belum Terdaftar"))
+```
+
+#### - Mengecek Data Duplikat
+
+sum(duplicated(data_novel))
+
+```{r}
+data_novel[data_novel$id_novel %in% data_novel$id_novel[duplicated(data_novel$id_novel)], ]
+
+table(data_novel$tahun_terbit)
+```
+
+### - Buat Tabel Novel di MySQL
+
+```{r}
+dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
+    id_novel VARCHAR(50) PRIMARY KEY,
+    id_penulis VARCHAR(50),
+    id_penerbit VARCHAR(50),
+    judul VARCHAR(255),
+    ISBN VARCHAR(100),
+    bahasa VARCHAR(50),
+    tahun_terbit INT,
+    edisi VARCHAR(255),
+    jumlah_halaman INT,
+    deskripsi TEXT,
+    rating_novel FLOAT
+);") 
+```
+
+### - Memastikan Apakah Tabel Novel telah terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE novel1;")
+```
+
+### - Memasukkan Data Novel ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "novel1", data_novel, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat apakah Data Novel Telah masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM novel1 LIMIT 10;")
+```
+
+## B. Data Penulis
+
+### - Memasukkan Data Penerbit ke Databae
+
+```{r}
+data_penulis <- read.csv("C:\\Users\\ASUS\\Downloads\\New folder\\Kelompok_3\\penulis.csv", stringsAsFactors = FALSE)
+
+head(data_penulis)  # Melihat beberapa baris pertama
+str(data_penulis)   # Melihat struktur data
+```
+
+```{r}
+data_penulis[data_penulis == ""] <- NA
+colSums(is.na(data_penulis))
+```
+
+### - Buat Tabel Penulis di MySQL
+
+```{r}
+query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
+    id_penulis VARCHAR(50) PRIMARY KEY,
+    penulis VARCHAR(50),
+    tempat_lahir VARCHAR(100),
+    tanggal_lahir DATE,
+    jumlah_buku INT
+    );")
+```
+
+### - Memastikan Apakah Tabel Penulis telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE penulis2;")
+```
+
+### - Memasukkan Data Penulis ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "penulis2", data_penulis, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Penulis Telah Masuk ke dalam Tavel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM penulis2 LIMIT 10;")
+```
+
+## C. Data Penerbit
+
+### - Memasukkan Data Penerbit ke Database
+
+```{r}
+data_penerbit <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv", stringsAsFactors = FALSE)
+
+head(data_penerbit)  # Melihat beberapa baris pertama
+str(data_penerbit)   # Melihat struktur data
+```
+
+```{r}
+data_penerbit[data_penerbit == ""] <- NA
+colSums(is.na(data_penerbit))
+```
+
+### - Membuat Tabel Penerbit di MYSQL
+
+```{r}
+query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
+    id_penerbit VARCHAR(50) PRIMARY KEY,
+    nama_penerbit VARCHAR(250),
+    alamat VARCHAR(255)
+    );")
+```
+
+### - Memastikan Apakah Tabel Penerbit telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE penerbit1;")
+```
+
+### - Memasukkan Data Penerbit ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "penerbit1", data_penerbit, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Penerbit Telah Masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM penerbit1 LIMIT 10;")
+```
+
+## D. Data Ulasan
+
+### - Memasukkan Data Ulasan ke Database
+
+```{r}
+data_ulasan <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv", stringsAsFactors = FALSE)
+
+head(data_ulasan)  # Melihat beberapa baris pertama
+str(data_ulasan)   # Melihat struktur data
+```
+
+```{r}
+data_ulasan[data_ulasan == ""] <- NA
+colSums(is.na(data_ulasan))
+
+View(data_ulasan)
+```
+
+### - Membuat Tabel Ulasan di MySQL
+
+```{r}
+query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
+    id_user VARCHAR(50) PRIMARY KEY,
+    id_novel VARCHAR(50),
+    nama_user VARCHAR(100),
+    tanggal_ulasan VARCHAR(100),
+    ulasan TEXT,
+    rating_user FLOAT
+    );")
+```
+
+### - Memastikan Apakah Tabel Ulasan Telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE ulasan1;")
+```
+
+### - Memasukkan Data Ulasan ke Dalam Tabel
+
+```{r}
+dbWriteTable(con, "ulasan1", data_ulasan, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Ulasan Telah Masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM ulasan1 LIMIT 10;")
+```
+
+```{r}
+View(data_ulasan)
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(shinyWidgets)
+library(DT)
+library(ggplot2)
+
+# Sample Data
+novels <- data.frame(
+  id_novel = 1:5,
+  id_penulis = c(1, 2, 3, 4, 5),
+  id_penerbit = c(1, 1, 2, 2, 3),
+  judul = c("Novel A", "Novel B", "Novel C", "Novel D", "Novel E"),
+  ISBN = c("123-456", "234-567", "345-678", "456-789", "567-890"),
+  bahasa = c("Indonesia", "English", "Indonesia", "English", "Indonesia"),
+  tahun_terbit = c(2020, 2019, 2018, 2021, 2022),
+  edisi = c(1, 2, 1, 3, 1),
+  jumlah_halaman = c(200, 300, 250, 180, 220),
+  deskripsi = c("Deskripsi Novel A", "Deskripsi Novel B", "Deskripsi Novel C", "Deskripsi Novel D", "Deskripsi Novel E"),
+  rating_novel = c(4.5, 4.2, 4.8, 4.0, 4.3),
+  stringsAsFactors = FALSE
+)
+
+penerbit <- data.frame(
+  id_penerbit = 1:3,
+  nama_penerbit = c("Penerbit X", "Penerbit Y", "Penerbit Z"),
+  alamat = c("Alamat X", "Alamat Y", "Alamat Z"),
+  stringsAsFactors = FALSE
+)
+
+penulis <- data.frame(
+  id_penulis = 1:5,
+  penulis = c("Penulis A", "Penulis B", "Penulis C", "Penulis D", "Penulis E"),
+  tempat_lahir = c("Jakarta", "Bandung", "Surabaya", "Yogyakarta", "Medan"),
+  tanggal_lahir = c("1980-01-01", "1985-05-12", "1990-07-23", "1978-03-04", "1982-09-10"),
+  jumlah_buku = c(5, 8, 3, 10, 7),
+  stringsAsFactors = FALSE
+)
+
+ulasan <- data.frame(
+  id_user = 1:5,
+  id_novel = c(1, 2, 3, 4, 5),
+  nama_user = c("User A", "User B", "User C", "User D", "User E"),
+  tanggal_ulasan = c("2024-01-10", "2024-02-15", "2024-03-20", "2024-04-25", "2024-05-30"),
+  ulasan = c("Bagus sekali!", "Lumayan menarik", "Luar biasa!", "Kurang memuaskan", "Sangat inspiratif"),
+  rating_user = c(5, 4, 5, 3, 5),
+  stringsAsFactors = FALSE
+)
+
+ui <- dashboardPage(
+  dashboardHeader(title = "Novel Collection",
+                  tags$li(class = "dropdown",
+            textInput("search", "Search Novel", placeholder = "Type novel title..."))
+  ),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("Novels", tabName = "novels", icon = icon("book")),
+      menuItem("Authors", tabName = "authors", icon = icon("user")),
+      menuItem("Publishers", tabName = "publishers", icon = icon("building")),
+      menuItem("Reviews", tabName = "reviews", icon = icon("star")),
+      menuItem("Statistics", tabName = "stats", icon = icon("chart-bar"))
+    )
+  ),
+  dashboardBody(
+    tabItems(
+      tabItem(tabName = "novels",
+              fluidRow(
+                lapply(1:nrow(novels), function(i) {
+                  box(width = 4, status = "primary", solidHeader = TRUE,
+                      title = novels$judul[i],
+                      h5(paste("ISBN:", novels$ISBN[i])),
+                      h6(paste("Tahun Terbit:", novels$tahun_terbit[i], "| Rating:", novels$rating_novel[i])),
+                      p(novels$deskripsi[i]),
+                      actionButton(paste0("btn_", i), "Read More", class = "#343a40"))
+                })
+              )
+      ),
+      tabItem(tabName = "authors", box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))),
+      tabItem(tabName = "publishers", box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))),
+      tabItem(tabName = "reviews", box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))),
+      tabItem(tabName = "stats", box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 12, plotOutput("rating_plot")))
+    )
+  )
+)
+
+server <- function(input, output, session) {
+   # Reactive filter untuk pencarian
+  filtered_novels <- reactive({
+    if (input$search == "") {
+      novels  # Jika input kosong, tampilkan semua novel
+    } else {
+      novels[grep(input$search, novels$judul, ignore.case = TRUE), ]
+    }
+  })
+  
+  # Render tampilan novel sesuai dengan pencarian
+  output$novel_cards <- renderUI({
+    novel <- filtered_novels()
+    
+    if (nrow(novel) == 0) {
+      return(h4("No novels found", style = "text-align: center;"))
+    }
+  
+  output$authors_table <- renderDT({ datatable(penulis, options = list(pageLength = 5, autoWidth = TRUE)) })
+  output$publishers_table <- renderDT({ datatable(penerbit, options = list(pageLength = 5, autoWidth = TRUE)) })
+  output$reviews_table <- renderDT({ datatable(ulasan, options = list(pageLength = 5, autoWidth = TRUE)) })
+  
+  output$rating_plot <- renderPlot({
+    ggplot(novels, aes(x = rating_novel, fill = ..count..)) +
+      geom_histogram(binwidth = 0.5, color = "black", alpha = 0.8) +
+      scale_fill_gradient(low = "lightblue", high = "blue") +
+      labs(title = "Distribution of Novel Ratings", x = "Rating", y = "Count") +
+      theme_minimal()
+  })
+}
+
+shinyApp(ui, server)
+
+```
+
+```{r}
+library(shiny)
+library(shinydashboard)
+library(DT)
+
+# === Dummy Data ===
+novels <- data.frame(
+  id_novel = 1:10,
+  judul = c("The New Girl", "Where the Crawdads Sing", "The Nickel Boys", 
+            "Under Currents", "Summer of '69", "Window on the Bay", 
+            "Evvie Drake Starts Over", "City of Girls", "Backlash", "The Silent Patient"),
+  deskripsi = c(
+    "Gabriel Allon, the chief of Israeli intelligence...",
+    "A woman who survived alone in the marsh becomes a murder suspect.",
+    "Two boys respond to horrors at a reform school...",
+    "Echoes of a violent childhood reverberate for Zane Bigelow...",
+    "The Levin family undergoes dramatic events with a son in Vietnam...",
+    "A single mom’s life takes unexpected turns...",
+    "In a seaside town, a former Major League pitcher...",
+    "An 89-year-old woman recalls her life in the 1940s...",
+    "Cut off from any support, Scot Harvath fights...",
+    "Theo Faber investigates a silent patient accused of murder."
+  ),
+  cover_image = c(
+    "https://example.com/the_new_girl.jpg",
+    "https://example.com/where_the_crawdads_sing.jpg",
+    "https://example.com/the_nickel_boys.jpg",
+    "https://example.com/under_currents.jpg",
+    "https://example.com/summer_of_69.jpg",
+    "https://example.com/window_on_the_bay.jpg",
+    "https://example.com/evvie_drake_starts_over.jpg",
+    "https://example.com/city_of_girls.jpg",
+    "https://example.com/backlash.jpg",
+    "https://example.com/the_silent_patient.jpg"
+  ),
+  stringsAsFactors = FALSE
+)
+
+# === UI ===
+ui <- dashboardPage(
+  dashboardHeader(
+    title = "Books",
+    tags$li(class = "dropdown",
+            textInput("search", "Search Books", placeholder = "Type book title..."))
+  ),
+  dashboardSidebar(
+    sidebarMenu(
+      menuItem("My Books", tabName = "my_books", icon = icon("book")),
+      menuItem("Favorite Books", icon = icon("heart")),
+      menuItem("My Categories", icon = icon("tags")),
+      menuItem("My Messages", icon = icon("envelope"))
+    ),
+    hr(),
+    h4("Book Types"),
+    menuItem("Biography"),
+    menuItem("Kids"),
+    menuItem("Sports"),
+    menuItem("Fiction"),
+    menuItem("Drama")
+  ),
+  dashboardBody(
+    fluidRow(
+      column(12, h2("My Books")),
+      column(12,
+        fluidRow(
+          uiOutput("novel_cards")  # Output untuk daftar novel yang dapat difilter
+        )
+      )
+    )
+  )
+)
+
+# === Server ===
+server <- function(input, output, session) {
+  
+  # Reactive filter untuk pencarian
+  filtered_novels <- reactive({
+    if (input$search == "") {
+      novels  # Jika input kosong, tampilkan semua novel
+    } else {
+      novels[grep(input$search, novels$judul, ignore.case = TRUE), ]
+    }
+  })
+  
+  # Render tampilan novel sesuai dengan pencarian
+  output$novel_cards <- renderUI({
+    books <- filtered_novels()
+    
+    if (nrow(books) == 0) {
+      return(h4("No books found", style = "text-align: center;"))
+    }
+    
+    fluidRow(
+      lapply(1:nrow(books), function(i) {
+        box(
+          width = 4, status = "primary", solidHeader = TRUE,
+          div(style = "display: flex; flex-direction: column; align-items: center;",
+            img(src = books$cover_image[i], width = "100px", height = "150px"),
+            h4(books$judul[i]),
+            p(substr(books$deskripsi[i], 1, 100)),  # Tampilkan hanya 100 karakter pertama
+            actionButton(paste0("btn_", i), "Read More", class = "btn-primary")
+          )
+        )
+      })
+    )
+  })
+}
+
+# === Run App ===
+shinyApp(ui, server)
+
+```
+
+### E. Memasukkan Nama Penerbit ke Data Novel Berdasarkan id_penulis
+
+```{r}
+# Menggabungkan data_novel dengan data_penerbit berdasarkan id_penerbit
+data_novel <- merge(data_novel, data_penulis[, c("id_penulis", "penulis")], 
+                    by = "id_penulist", all.x = TRUE)
+
+# Cek hasilnya
+head(data_novel)
+
+```
+
+### 
+
+```{r}
+# Menggabungkan data_novel dengan data_penerbit berdasarkan id_penerbit
+data_novel <- merge(data_novel, data_penulis[, c("id_penulis", "penulis")], 
+                    by = "id_penulis", all.x = TRUE)
+
+# Cek hasilnya
+head(data_novel)
+```
