@@ -4,7 +4,7 @@
 
 ## :bookmark_tabs: Menu
 
-- [Information](#Informasi)
+- [Informasi](#Informasi)
 - [About](#clipboard-About)
 - [Screenshot](#camera-Screenshot)
 - [Demo](#card_file_box-Demo)
