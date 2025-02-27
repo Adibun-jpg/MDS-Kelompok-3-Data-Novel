@@ -35,13 +35,17 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 
 ## 📂 Struktur Repository
 ```
-📂 Chapter-Coffee-Dashboard
-├── 📁 src
-│   ├── 📄 index.html
-│   ├── 📄 style.css
+📂 MDS---Kelompok-5---Data-Novel
+├── 📁 Data
+│    ├── 📄novel.csv
+│    ├── 📄penerbit.csv
+│    ├── 📄penulis.csv
+│    ├── 📄ulasan.csv
+├── 📁 Image
+│    ├── 📄 index.html
+│    ├── 📄 style.css
 │   ├── 📄 app.js
 ├── 📄 README.md
-├── 📄 package.json
 └── 📄 .gitignore
 ```
 
