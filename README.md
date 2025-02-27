@@ -3,7 +3,12 @@
 </div>
 
 # ☕ Daftar Menu
-- [About]((#chapter--coffee))
+- [About](#chapter-and-coffee)
+
+
+
+# ☕ Daftar Menu
+- [About](#chapter-and-coffee)
 - [Screenshot](#camera-Screenshot)
 - [Demo](#card_file_box-Demo)
 - [Requirements](#exclamation-Requirements)
@@ -14,8 +19,13 @@
 - [Our Team](#heavy_heart_exclamation-Our-Team)
 
 
-# Chapter & Coffee
+# Chapter and Coffee
 Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel dan asik. Dari novel paling hits, penulis dengan karya terbanyak, hingga kategori yang pas buat mood kamu—semuanya ada di sini! Buka halaman, temukan cerita, dan biarkan Chapter & Coffee jadi tempat terbaik untuk eksplorasi novel favoritmu. Karena setiap cerita layak untuk dinikmati! ✨📖
+
+## :pushpin: Information
+
+# Chapter and Coffee
+Ini adalah bagian About.
 
 ## 📌 Fitur Utama
 
