@@ -5,7 +5,7 @@
 ## :bookmark_tabs: Menu
 
 - [Informasi](#Informasi)
-- [About](#clipboard-About)
+- - [About](#clipboard-About)
 - [Screenshot](#camera-Screenshot)
 - [Demo](#card_file_box-Demo)
 - [Requirements](#exclamation-Requirements)
