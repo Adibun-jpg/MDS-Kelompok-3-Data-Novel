@@ -11,27 +11,22 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 
 ## 📌 Fitur Utama
 
-### 1️⃣ Pencarian Novel
+#### 1️⃣ Pencarian Novel
 - Cari novel favorit Anda dengan mengetikkan judul di kolom pencarian.
 - Sistem pencarian cepat dan akurat untuk menemukan novel yang Anda inginkan.
 
-### 2️⃣ Novel Terbaik Berdasarkan Rating
+#### 2️⃣ Novel Terbaik Berdasarkan Rating
 - Menampilkan novel dengan rating tertinggi untuk rekomendasi terbaik.
 - Informasi detail seperti penulis, tahun terbit, ISBN, dan bahasa tersedia di setiap novel.
 
-### 3️⃣ Koleksi Novel
+#### 3️⃣ Koleksi Novel
 - Menyediakan berbagai novel dengan informasi mendetail.
 - Novel disusun dalam tampilan kartu untuk kemudahan eksplorasi.
 - Tombol **Read More** untuk melihat detail lengkap dari setiap novel.
 
-### 4️⃣ Navigasi Mudah
+#### 4️⃣ Navigasi Mudah
 - Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
 
-## 🎯 Tujuan Platform
-Chapter & Coffee! dibuat untuk:
-- Mempermudah pencarian dan rekomendasi novel terbaik.
-- Menyediakan informasi lengkap terkait novel yang tersedia.
-- Menyajikan pengalaman eksplorasi novel yang interaktif dan nyaman.
 
 ## 🚀 Teknologi yang Digunakan
 - **Frontend:** HTML, CSS, JavaScript (React/Angular/Vue - jika ada)
