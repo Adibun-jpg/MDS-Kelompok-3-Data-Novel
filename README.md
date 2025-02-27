@@ -28,10 +28,10 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
 
 
-## 🚀 Teknologi yang Digunakan
-- **Frontend:** HTML, CSS, JavaScript (React/Angular/Vue - jika ada)
-- **Backend:** Node.js / Python / PHP (sesuai implementasi)
-- **Database:** MySQL / PostgreSQL / MongoDB
+## 🚀 Software yang Digunakan
+- **Frontend:** RShiny
+- **Backend:** RStudio
+- **Database:** MySQl
 
 ## 📂 Struktur Repository
 ```
