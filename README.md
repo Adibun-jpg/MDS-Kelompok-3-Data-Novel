@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="858" height="350" src="Image/Header Chapter & Coffee .png">
+  <img width="715" height="350" src="Image/Header Chapter & Coffee .png">
 </p>
 
 # MAIN MANAJEMEN DATA STATISTIKA
