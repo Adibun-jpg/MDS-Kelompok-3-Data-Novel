@@ -22,5 +22,6 @@ Tempat di mana Anda bisa menemukan berbagai informasi tentang novel, mulai dari 
 Jelajahi beragam kategori, temukan rekomendasi bacaan, dan temukan kisah yang tepat untuk menemani waktu santai Anda. Chapter & Coffee siap menjadi teman baca Anda!
 
 
+
 # MAIN MANAJEMEN DATA STATISTIKA
  Project ini merupakan Data Novel yang akan dibentuk menjadi sebuah dashboard dan terbagi menjadi 5 Role
