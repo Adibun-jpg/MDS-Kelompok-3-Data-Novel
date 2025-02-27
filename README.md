@@ -37,16 +37,15 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 ```
 📂 MDS---Kelompok-5---Data-Novel
 ├── 📁 Data
-│    ├── 📄novel.csv
-│    ├── 📄penerbit.csv
-│    ├── 📄penulis.csv
-│    ├── 📄ulasan.csv
+│    ├── 📄 novel.csv
+│    ├── 📄 penerbit.csv
+│    ├── 📄 penulis.csv
+│    ├── 📄 ulasan.csv
 ├── 📁 Image
-│    ├── 📄 index.html
+│    ├── 📄 Header Chapter & Coffee .png
 │    ├── 📄 style.css
-│   ├── 📄 app.js
-├── 📄 README.md
-└── 📄 .gitignore
+├── 📄 .gitattributes
+└── 📄 README.md
 ```
 
 ## 🔥 Cara Menjalankan Proyek
