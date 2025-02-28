@@ -5,160 +5,21 @@ date: "2025-02-23"
 output: html_document
 ---
 
-```{r}
-# === 1. Load Library ===
-library(shiny)
-library(shinydashboard)
-library(DT)
-library(ggplot2)
-library(readr)
+```         
+```
 
-# === 2. Membaca Data CSV ===
-data_penulis <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penulis.csv")
-data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv")
-data_ulasan <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv")
-
-# === 3. UI: Struktur Dashboard ===
-ui <- dashboardPage(
-  dashboardHeader(title = "Novel Dashboard"),
-  dashboardSidebar(
-    sidebarMenu(
-      menuItem("Cari Novel Di Sini", tabName = "my_books", icon = icon("book")),
-      menuItem("Penulis", tabName = "authors", icon = icon("user")),
-      menuItem("Penerbit", tabName = "publishers", icon = icon("building")),
-      menuItem("Ulasan", tabName = "reviews", icon = icon("star")),
-      menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
-    )
-  ),
-  dashboardBody(
-    tabItems(
-      tabItem(tabName = "my_books",
-        fluidRow(
-          column(12, textInput("search", "Search Novel", placeholder = "Type novel title...")),
-          column(12, h2("Novel Collection")),
-          column(12, fluidRow(uiOutput("novel_cards")))
-        )
-      ),
-      tabItem(tabName = "authors",
-        box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
-      ),
-      tabItem(tabName = "publishers",
-        box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))
-      ),
-      tabItem(tabName = "reviews",
-        box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))
-      ),
-      tabItem(tabName = "stats",
-        fluidRow(
-          box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 6, plotOutput("rating_plot")),
-          box(title = "Number of Novels Published Per Year", status = "info", solidHeader = TRUE, width = 6, plotOutput("novel_per_year")),
-          box(title = "Number of Novels by Publisher", status = "warning", solidHeader = TRUE, width = 6, plotOutput("novel_per_publisher")),
-          box(title = "Number of Novels by Author", status = "success", solidHeader = TRUE, width = 6, plotOutput("novel_per_author")),
-          box(title = "Novel Length by Rating", status = "danger", solidHeader = TRUE, width = 6, plotOutput("boxplot_length_rating"))
-        )
-      )
-    )
-  )
-)
-
-# === 4. Server: Logika Aplikasi ===
-server <- function(input, output, session) {
-  
-  # Reactive filter untuk pencarian novel berdasarkan judul
-  filtered_novels <- reactive({
-    if (is.null(input$search) || input$search == "") {
-      return(data_novel)  # Tampilkan semua novel jika pencarian kosong
-    }
-    data_novel[grep(input$search, data_novel$judul, ignore.case = TRUE), ]
-  })
-  
-  # Menampilkan novel dalam bentuk card layout
-  output$novel_cards <- renderUI({
-    books <- filtered_novels()
-    
-    if (is.null(books) || nrow(books) == 0) {
-      return(h4("No books found", style = "text-align: center; color: red;"))
-    }
-    
-    fluidRow(
-      lapply(1:nrow(books), function(i) {
-        book_id <- books$id_novel[i]
-        
-        column(4,  
-          box(
-            width = NULL, status = "primary", solidHeader = TRUE, height = "255px",
-            style = "border-radius: 10px; padding: 10px; flex-shrink: 0;",
-            
-            div(style = "display: flex; align-items: center; gap: 20px;",
-                
-                img(src = books$cover_image[i], width = "120px", height = "200px", 
-                    style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
-                
-                div(style = "text-align: left; width: 100%;",
-                    h4(books$judul[i]),
-                    p(paste("Penulis:", books$penulis[i])),
-                    p(paste("Tahun Terbit:", books$tahun_terbit[i])),
-                    p(paste("ISBN:", books$ISBN[i])),
-                    p(paste("Bahasa:", books$bahasa[i])),
-                    div(style = "color: gold; font-size: 18px;",
-                        paste0(strrep("★", round(books$rating_novel[i])), strrep("☆", 5 - round(books$rating_novel[i]))),
-                        span(style = "font-size: 16px; color: black;", paste0(" ", books$rating_novel[i]))),
-                    actionButton(inputId = paste0("btn_", book_id), label = "Read More", class = "btn-primary")
-                )
-            )
-          )
-        )
-      })
-    )
-  })
-
-  # Handling event tombol "Read More"
-  observe({
-    books <- filtered_novels()
-    
-    lapply(1:nrow(books), function(i) {
-      book_id <- books$id_novel[i]
-      
-      observeEvent(input[[paste0("btn_", book_id)]], {
-        showModal(modalDialog(
-          title = books$judul[i], 
-          size = "m",
-          div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
-              img(src = books$cover_image[i], width = "150px", height = "220px",
-                  style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
-              div(style = "text-align: justify; width: 100%;",
-                  h4(books$judul[i]),
-                  p(paste("Penulis:", books$id_penulis[i])),
-                  p(paste("Tahun Terbit:", books$tahun_terbit[i])),
-                  p(paste("ISBN:", books$ISBN[i])),
-                  p(paste("Bahasa:", books$bahasa[i])),
-                  hr(),
-                  p(books$deskripsi[i])
-              )
-          ),
-          easyClose = TRUE
-        ))
-      })
-    })
-  })
-
-  output$authors_table <- renderDT({ datatable(data_penulis, options = list(pageLength = 5)) })
-  output$publishers_table <- renderDT({ datatable(data_penerbit, options = list(pageLength = 5)) })
-  output$reviews_table <- renderDT({ datatable(data_ulasan, options = list(pageLength = 5)) })
-
-  output$rating_plot <- renderPlot({
-    ggplot(data_novel, aes(x = rating_novel)) +
-      geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
-      theme_minimal()
-  })
-}
-
-# === 6. Menjalankan Aplikasi ===
-shinyApp(ui, server)
-
+```         
 ```
 
 ```{r}
+list.files("www/")
+```
+
+```{r}
+getwd()
+```
+
+```{r Fix}
 # === 1. Load Library ===
 library(shiny)
 library(shinydashboard)
@@ -166,17 +27,56 @@ library(DT)
 library(ggplot2)
 library(readr)
 library(dplyr)
+library(leaflet)  
 
 # === 2. Membaca Data CSV ===
 data_penulis <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penulis.csv")
 data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv")
 data_ulasan <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv")
 
+# === Data Koordinat Kota ===
+koordinat_kota <- data.frame(
+  alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman"),
+  latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156),
+  longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555)
+)
+
+# Gabungkan data penerbit dengan koordinat kota
+data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
 
 # === 3. UI: Struktur Dashboard ===
 ui <- dashboardPage(
-  dashboardHeader(title = "Novel Dashboard"),
+  dashboardHeader(title = "Chapter & Coffe"),
+  
   dashboardSidebar(
+    collapsed = FALSE,
+    
+  tags$head(
+    tags$style(HTML("
+      .sidebar-menu {
+        padding-top: 20px;
+      }
+      .sidebar-menu > li > a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #6c757d;
+        padding: 10px 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .sidebar-menu > li > a:hover, 
+      .sidebar-menu > li.active > a {
+        color: #1E40AF;
+        background-color: #E0E7FF;
+        border-radius: 8px;
+      }
+      .sidebar-menu > li > a > i {
+        font-size: 18px;
+      }
+    "))
+  ),
     sidebarMenu(
       menuItem("Cari Novel Di Sini", tabName = "my_books", icon = icon("book")),
       menuItem("Penulis", tabName = "authors", icon = icon("user")),
@@ -185,29 +85,126 @@ ui <- dashboardPage(
       menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
     )
   ),
+  
   dashboardBody(
     tabItems(
+      
+  
+      #Tab Item Novel      
       tabItem(tabName = "my_books",
         fluidRow(
-          column(12, textInput("search", "Search Novel", placeholder = "Type novel title...")),
-          column(12, h2("The Best Novel by Ratings")),
+          column(12, textInput("search", "Cari Novel", placeholder = "Type novel title...")),
+          column(12, h2("Novel Terbaik Berdasarkan Ratings")),
           column(12,uiOutput("best_novel")),
-          column(12, h2("Novel Collection")),
+          column(12, h2("Koleksi Novel")),
+          fluidRow(
+  column(12, align = "center",
+    tags$div(
+      style = "display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;",
+      actionButton("btn_all", "All", class = "btn-category active"),
+      actionButton("btn_fiction", "Fiksi", class = "btn-category"),
+      actionButton("btn_nonfiction", "Bukan Fiksi", class = "btn-category"),
+      actionButton("btn_fantasi", "Fantasi", class = "btn-category"),
+      actionButton("btn_romansa", "Romansa", class = "btn-category"),
+      actionButton("btn_literature", "Literatur Indonesia", class = "btn-category")
+    ),
+    tags$style(HTML("
+      .btn-category {
+        background-color: #f0f3ff; 
+        border: none; 
+        color: #34495e; 
+        font-size: 14px; 
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 20px; 
+        cursor: pointer;
+        gap: 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-category:hover {
+        background-color: #d6dbff; 
+      }
+      .btn-category.active {
+        background-color: #3b82f6; 
+        color: white;
+      }
+    "))
+  ),
+  tags$hr()
+),
           column(12, fluidRow(uiOutput("novel_cards")))
         )
       ),
+      
+  #Tab Item Penulis      
       tabItem(tabName = "authors",
-        column(12, h2("The Most Favourite Author")),
-        uiOutput("most_fav_author"),  # Menampilkan The Most Favourite Author
-        box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
+        fluidRow(
+    valueBox(
+      value = nrow(data_penulis),  # Menampilkan total jumlah penerbit
+      subtitle = "Total Penulis",
+      icon = tags$i(class = "fa fa-users", style = "color: white;"),
+      color = "navy",
+      width = 6
+    ),
+    valueBox(
+      value = sum(data_penulis$jumlah_buku),
+      subtitle = "Jumlah Buku Terbitan Penulis",
+      icon = icon("book"),
+      color = "yellow",
+      width = 6
+    )
+  ),
+              
+        fluidRow(
+    column(6, 
+      column(12, h2("Penulis Terfavorit")),
+      column(12, uiOutput("most_fav_author")
+      )
+    ),
+    column(6, 
+      column(12, h2("Penulis dengan Karya Terbanyak")),
+      column(12, uiOutput("top_author")
+      )
+    )
+  ),
+  box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
+),
+      
+  #Tab Item Penerbit
+    tabItem(tabName = "publishers",
+        fluidRow(
+    valueBox(
+      value = nrow(data_penerbit),  # Menampilkan total jumlah penerbit
+      subtitle = "Total Penerbit",
+      icon = icon("building"),
+      color = "orange",
+      width = 6
+    ),
+    valueBox(
+      value = paste0(round(mean(data_penerbit$rating_penerbit, na.rm = TRUE), 2), " %"),  # Contoh nilai dummy
+      subtitle = "Rating Rata-rata",
+      icon = icon("chart-pie"),
+      color = "green",
+      width = 6
+    )
+  ),
+            
+        fluidRow(
+          column(12, h2("Peta Penerbit Buku")),
+          column(12, box(status = "info", solidHeader = FALSE, width = 12, leafletOutput("map_penerbit", height = "600px")))
+        ),
+        column(12, h2("List Penerbit")),
+        box(title = "List of Publishers", status = "info", solidHeader = FALSE, width = 12, DTOutput("publishers_table"))
       ),
-      tabItem(tabName = "publishers",
-        box(title = "List of Publishers", status = "info", solidHeader = TRUE, width = 12, DTOutput("publishers_table"))
-      ),
+
+  #Tab Item Ulasan
       tabItem(tabName = "reviews",
-        box(title = "User Reviews", status = "warning", solidHeader = TRUE, width = 12, DTOutput("reviews_table"))
+        column(12, h2("Penulis Terfavorit")),
+        box(status = "warning", solidHeader = FALSE, width = 12, DTOutput("reviews_table"))
       ),
-      tabItem(tabName = "stats",
+      
+  #Tab Item Statistik
+    tabItem(tabName = "stats",
         fluidRow(
           box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 6, plotOutput("rating_plot")),
           box(title = "Number of Novels Published Per Year", status = "info", solidHeader = TRUE, width = 6, plotOutput("novel_per_year")),
@@ -243,7 +240,7 @@ output$best_novel <- renderUI({
   novel <- best_novel()
   
   if (nrow(novel) == 0) {
-    return(h4("No data available", style = "text-align: center; color: red;"))
+    return(h4("Novel Tidak Ditemukan", style = "text-align: center; color: red;"))
   }
   
   box(
@@ -254,8 +251,13 @@ output$best_novel <- renderUI({
               border: 0px solid transparent;",
       div(style = "display: flex; align-items: center; gap: 15px;",
         
-      img(src = novel$cover_image[1], width = "120px", height = "180px", 
-        style = "border-radius: 10px; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
+          img(src = novel$sampul[1], width = "120px", height = "180px", 
+            style = "border-radius: 10px; 
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                    flex-shrink: 0;
+                    display:block; 
+                    margin:auto;"
+              ),
         
       div(style = "text-align: left; width: 100%;",
             h3(novel$judul[1]),
@@ -270,6 +272,28 @@ output$best_novel <- renderUI({
         )
     )
   )
+})
+
+   # Reactive value untuk menyimpan kategori yang dipilih
+selected_category <- reactiveVal("Semua")
+
+# Observasi ketika button diklik
+observeEvent(input$btn_all, { selected_category("Semua") })
+observeEvent(input$btn_fiction, { selected_category("Fiksi") })
+observeEvent(input$btn_nonfiction, { selected_category("Bukan Fiksi") })
+observeEvent(input$btn_romansa, { selected_category("Romansa") })
+observeEvent(input$btn_fantasi, { selected_category("Fantasi") })
+observeEvent(input$btn_literature, { selected_category("Literatur Indonesia")
+hr()
+  })
+
+# Filter novel berdasarkan kategori yang dipilih
+filtered_novels <- reactive({
+  if (selected_category() == "Semua") {
+    return(data_novel)
+  } else {
+    return(data_novel %>% filter(kategori == selected_category()))
+  }
 })
   
   # Menampilkan novel dalam bentuk card layout
@@ -286,24 +310,30 @@ output$best_novel <- renderUI({
         
         column(4,  
           box(
-            width = 12, status = "primary", solidHeader = TRUE, height = "255px",
-            style = "border-radius: 10px; 
+            width = 12, status = NULL, solidHeader = FALSE, height = "290px",
+            style = "border-radius: 10px;
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.2);
                     padding: 10px; 
                     flex-shrink: 0;
-                    margin-bottom: 20px;",
+                    height: 290px;
+                    margin-bottom: 20px;
+                    display:block;",
             
             div(style = "display: flex; 
                         align-items: center;
                         gap: 10px;",
                 
-            img(src = books$cover_image[i], width = "120px", height = "200px", 
-            style = "border-radius: 10px; 
+            img(src = books$sampul[i], width = "120px", height = "200px", 
+            style = "border-radius: 15px; 
                     box-shadow: 5px 5px 10px rgba(0,0,0,0.2); 
-                    flex-shrink: 0;"),
+                    flex-shrink: 0;
+                    display:block; 
+                    margin:auto;"),
                 
             div(style = "text-align: left; width: 100%;",
                 h4(books$judul[i]),
                 p(paste("Penulis:", books$penulis[i])),
+                p(paste("Kategori:", books$kategori[i])),
                 p(paste("Tahun Terbit:", books$tahun_terbit[i])),
                 p(paste("ISBN:", books$ISBN[i])),
                 p(paste("Bahasa:", books$bahasa[i])),
@@ -311,7 +341,7 @@ output$best_novel <- renderUI({
             div(style = "color: gold; font-size: 18px;",
                 paste0(strrep("★", round(books$rating_novel[i])), strrep("☆", 5 - round(books$rating_novel[i]))),
                 span(style = "font-size: 16px; color: black;", paste0(" ", books$rating_novel[i]))),
-                actionButton(inputId = paste0("btn_", book_id), label = "Read More", class = "btn-primary")
+                actionButton(inputId = paste0("btn_", book_id), label = "Selengkapnya...", class = "btn-primary")
                 )
             )
           )
@@ -337,15 +367,22 @@ output$best_novel <- renderUI({
     }
     
     box(
-      width = 12, status = NULL, solidHeader = TRUE,
+      width = 20, status = NULL, solidHeader = FALSE,
       style = "border-radius: 10px; 
-              padding: 10px; 
+              padding: 20px; 
               box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-              border: 0px solid transparent;",
-      div(style = "display: flex; align-items: center; gap: 15px;",
+              border: 0px solid transparent;
+              height: auto;
+              width: auto;
+              display:block; 
+              margin:auto;",
+      div(style = "display: flex; align-items: left; gap: 20px;",
           
-          img(src = "author_image.png", width = "100px", height = "100px", 
-              style = "border-radius: 50%; box-shadow: 3px 3px 10px rgba(0,0,0,0.2); flex-shrink: 0;"),
+          img(src = "https://asset.kompas.com/crops/PaZRk1P0VgkRvcBWl-VcvLXZoUc=/0x0:0x0/750x500/data/photo/buku/6244f60d53b8b.jpeg", width = "120px", height = "180px", 
+              style = "border-radius: 10px; 
+                      box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                      flex-shrink: 0;
+                      display:block;"),
           
           div(style = "text-align: left; width: 100%;",
               h3(author$penulis),
@@ -356,6 +393,44 @@ output$best_novel <- renderUI({
       )
     )
   })
+  
+  # Menentukan penulis dengan karya terbanyak
+top_author <- reactive({
+  data_novel %>%
+    count(penulis, name = "total_karya") %>%
+    arrange(desc(total_karya)) %>%
+    head(1)  # Ambil penulis dengan jumlah novel terbanyak
+})
+
+output$top_author <- renderUI({
+  author <- top_author()
+  
+  if (nrow(author) == 0) {
+    return(h4("No data available", style = "text-align: center; color: red;"))
+  }
+  
+  box(
+    width = 20, status = NULL, solidHeader = FALSE,
+    style = "border-radius: 15px; 
+            padding: 20px; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); 
+            border: 0px solid transparent;",
+    div(style = "display: flex; align-items: left; gap: 20px;",
+        
+        img(src = "https://asset.kompas.com/crops/PaZRk1P0VgkRvcBWl-VcvLXZoUc=/0x0:0x0/750x500/data/photo/buku/6244f60d53b8b.jpeg", width = "120px", height = "180px", 
+            style = "border-radius: 10px; 
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                    flex-shrink: 0;"),
+        
+        div(style = "text-align: left; width: 100%;",
+            h3(author$penulis),
+            p(paste("Total Novels:", author$jumlah_buku)),
+            p(paste("Tempat Lahir:", author$tempat_lahir)),
+            p(paste("Tanggal Lahir:", author$tanggal_lahir))
+        )
+    )
+  )
+})
   
    # Handling event tombol "Read More"
   observe({
@@ -369,7 +444,7 @@ output$best_novel <- renderUI({
           title = "Sekilas Tentang Novel", 
           size = "m",
           div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
-              img(src = books$cover_image[i], width = "150px", height = "220px",
+              img(src = books$sampul[i], width = "150px", height = "220px",
                   style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
               div(style = "text-align: justify; width: 100%;",
                   h4(books$judul[i]),
@@ -377,6 +452,7 @@ output$best_novel <- renderUI({
                   p(paste("Tahun Terbit:", books$tahun_terbit[i])),
                   p(paste("ISBN:", books$ISBN[i])),
                   p(paste("Bahasa:", books$bahasa[i])),
+                  h4("Harga:", books$harga[i]),
                   hr(),
                   p(books$deskripsi[i])
               )
@@ -388,9 +464,54 @@ output$best_novel <- renderUI({
   })
   
   output$authors_table <- renderDT({ datatable(data_penulis, options = list(pageLength = 5)) })
+  
+  #Value Box
+  output$rating_plot <- renderPlot({
+  ggplot(data_penerbit, aes(x = alamat)) +
+    geom_bar(fill = "blue", color = "black") +
+    theme_minimal() +
+    xlab("Kota") + ylab("Jumlah Penerbit") +
+    ggtitle("Distribusi Penerbit di Indonesia")
+})
+  
+  # Render Peta Leaflet
+  output$map_penerbit <- renderLeaflet({
+    leaflet(data_kota) %>%
+      addTiles() %>%
+      addMarkers(
+        ~longitude, ~latitude,
+        layerId = ~alamat,  # 📌 Simpan layerId sebagai alamat kota
+        popup = ~paste0("<b>", alamat, "</b><br> (Klik untuk detail)")
+      )
+  })
+  
+  # 🔹 Ketika kota diklik, tampilkan daftar penerbit dari kota tersebut
+  observeEvent(input$map_penerbit_marker_click, {
+    click <- input$map_penerbit_marker_click  # Ambil data klik
+    if (is.null(click)) return()  # Jika tidak ada klik, jangan lanjut
+    
+    # Ambil daftar penerbit dari kota yang diklik
+    penerbit_dari_kota <- data_kota %>%
+      filter(alamat == click$id) %>%
+      pull(nama_penerbit)
+    
+    # Format data penerbit sebagai HTML
+    daftar_penerbit <- paste("<li>", penerbit_dari_kota, "</li>", collapse = "")
+    popup_content <- paste0("<b>Penerbit di ", click$id, ":</b><br><ul>", daftar_penerbit, "</ul>")
+    
+    # 📌 Hapus semua pop-up sebelum menampilkan yang baru
+    leafletProxy("map_penerbit") %>%
+      clearPopups() %>%
+      addPopups(click$lng, click$lat, popup_content)
+})
+  
+  # Menampilkan Data Penerbit
   output$publishers_table <- renderDT({ datatable(data_penerbit, options = list(pageLength = 5)) })
+  
+  # Menampilkan Data Ulasan
   output$reviews_table <- renderDT({ datatable(data_ulasan, options = list(pageLength = 5)) })
 
+  # Menampilkan Data Statistik
   output$rating_plot <- renderPlot({
     ggplot(data_novel, aes(x = rating_novel)) +
       geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
@@ -400,6 +521,590 @@ output$best_novel <- renderUI({
 
 # === 6. Menjalankan Aplikasi ===
 shinyApp(ui, server)
-
 ```
 
+```{r}
+list.files("www/")
+```
+
+```{r Coba-coba}
+# === 1. Load Library ===
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(leaflet)  
+
+# === 2. Membaca Data CSV ===
+data_penulis <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penulis.csv")
+data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv")
+data_ulasan <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv")
+
+# === Data Koordinat Kota ===
+koordinat_kota <- data.frame(
+  alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman"),
+  latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156),
+  longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555)
+)
+
+# Gabungkan data penerbit dengan koordinat kota
+data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
+
+# === 3. UI: Struktur Dashboard ===
+ui <- dashboardPage(
+  dashboardHeader(title = "Chapter & Coffe"),
+  
+  dashboardSidebar(
+    collapsed = FALSE,
+    
+  tags$head(
+    tags$style(HTML("
+      .sidebar-menu {
+        padding-top: 20px;
+      }
+      .sidebar-menu > li > a {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: #6c757d;
+        padding: 10px 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .sidebar-menu > li > a:hover, 
+      .sidebar-menu > li.active > a {
+        color: #1E40AF;
+        background-color: #E0E7FF;
+        border-radius: 8px;
+      }
+      .sidebar-menu > li > a > i {
+        font-size: 18px;
+      }
+    "))
+  ),
+    sidebarMenu(
+      menuItem("Cari Novel Di Sini", tabName = "my_books", icon = icon("book")),
+      menuItem("Penulis", tabName = "authors", icon = icon("user")),
+      menuItem("Penerbit", tabName = "publishers", icon = icon("building")),
+      menuItem("Ulasan", tabName = "reviews", icon = icon("star")),
+      menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
+    )
+  ),
+  
+  dashboardBody(
+    tabItems(
+      
+  
+      #Tab Item Novel      
+      tabItem(tabName = "my_books",
+        fluidRow(
+          column(12, textInput("search", "Cari Novel", placeholder = "Type novel title...")),
+          column(12, h2("Novel Terbaik Berdasarkan Ratings")),
+          column(12,uiOutput("best_novel")),
+          column(12, h2("Koleksi Novel")),
+          fluidRow(
+  column(12, align = "center",
+    tags$div(
+      style = "display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;",
+      actionButton("btn_all", "All", class = "btn-category active"),
+      actionButton("btn_fiction", "Fiksi", class = "btn-category"),
+      actionButton("btn_nonfiction", "Bukan Fiksi", class = "btn-category"),
+      actionButton("btn_fantasi", "Fantasi", class = "btn-category"),
+      actionButton("btn_romansa", "Romansa", class = "btn-category"),
+      actionButton("btn_literature", "Literatur Indonesia", class = "btn-category")
+    ),
+    tags$style(HTML("
+      .btn-category {
+        background-color: #f0f3ff; 
+        border: none; 
+        color: #34495e; 
+        font-size: 14px; 
+        font-weight: bold;
+        padding: 10px 20px;
+        border-radius: 20px; 
+        cursor: pointer;
+        gap: 20px;
+        transition: all 0.3s ease-in-out;
+      }
+      .btn-category:hover {
+        background-color: #d6dbff; 
+      }
+      .btn-category.active {
+        background-color: #3b82f6; 
+        color: white;
+      }
+    "))
+  ),
+  tags$hr()
+),
+          column(12, fluidRow(uiOutput("novel_cards")))
+        )
+      ),
+      
+  #Tab Item Penulis      
+      tabItem(tabName = "authors",
+        fluidRow(
+    valueBox(
+      value = nrow(data_penulis),  # Menampilkan total jumlah penerbit
+      subtitle = "Total Penulis",
+      icon = tags$i(class = "fa fa-users", style = "color: white;"),
+      color = "navy",
+      width = 6
+    ),
+    valueBox(
+      value = sum(data_penulis$jumlah_buku),
+      subtitle = "Jumlah Buku Terbitan Penulis",
+      icon = icon("book"),
+      color = "yellow",
+      width = 6
+    )
+  ),
+              
+        fluidRow(
+    column(6, 
+      column(12, h2("Penulis Terfavorit")),
+      column(12, uiOutput("most_fav_author")
+      )
+    ),
+    column(6, 
+      column(12, h2("Penulis dengan Karya Terbanyak")),
+      column(12, uiOutput("top_author")
+      )
+    )
+  ),
+  box(title = "List of Authors", status = "info", solidHeader = TRUE, width = 12, DTOutput("authors_table"))
+),
+      
+  #Tab Item Penerbit
+    tabItem(tabName = "publishers",
+        fluidRow(
+    valueBox(
+      value = nrow(data_penerbit),  # Menampilkan total jumlah penerbit
+      subtitle = "Total Penerbit",
+      icon = icon("building"),
+      color = "orange",
+      width = 6
+    ),
+    valueBox(
+      value = paste0(round(mean(data_penerbit$rating_penerbit, na.rm = TRUE), 2), " %"),  # Contoh nilai dummy
+      subtitle = "Rating Rata-rata",
+      icon = icon("chart-pie"),
+      color = "green",
+      width = 6
+    )
+  ),
+            
+        fluidRow(
+          column(12, h2("Peta Penerbit Buku")),
+          column(12, box(status = "info", solidHeader = FALSE, width = 12, leafletOutput("map_penerbit", height = "600px")))
+        ),
+        column(12, h2("List Penerbit")),
+        box(title = "List of Publishers", status = "info", solidHeader = FALSE, width = 12, DTOutput("publishers_table"))
+      ),
+
+  #Tab Item Ulasan
+      tabItem(tabName = "reviews",
+  fluidRow(
+    valueBox(
+      value = nrow(data_ulasan),  # Menampilkan total jumlah penerbit
+      subtitle = "Jumlah Ulasan",
+      icon = icon("user"),
+      color = "orange",
+      width = 6
+    ),
+    valueBox(
+      value = mean(data_ulasan$rating_user),
+      subtitle = "Rating Rata-rata",
+      icon = icon("star"),
+      color = "green",
+      width = 6
+    )
+  ),
+  fluidRow(
+    column(12, h2("Ulasan Pengguna")),
+    column(12, uiOutput("reviews_dashboard"))  # Output UI untuk ulasan dalam bentuk card layout
+  )
+),
+      
+  #Tab Item Statistik
+    tabItem(tabName = "stats",
+        fluidRow(
+          box(title = "Ratings Distribution", status = "primary", solidHeader = TRUE, width = 6, plotOutput("rating_plot")),
+          box(title = "Number of Novels Published Per Year", status = "info", solidHeader = TRUE, width = 6, plotOutput("novel_per_year")),
+          box(title = "Number of Novels by Publisher", status = "warning", solidHeader = TRUE, width = 6, plotOutput("novel_per_publisher")),
+          box(title = "Number of Novels by Author", status = "success", solidHeader = TRUE, width = 6, plotOutput("novel_per_author")),
+          box(title = "Novel Length by Rating", status = "danger", solidHeader = TRUE, width = 6, plotOutput("boxplot_length_rating"))
+        )
+      )
+    )
+  )
+)
+
+# === 4. Server: Logika Aplikasi ===
+server <- function(input, output, session) {
+  
+  # Reactive filter untuk pencarian novel berdasarkan judul
+  filtered_novels <- reactive({
+    if (is.null(input$search) || input$search == "") {
+      return(data_novel)  # Tampilkan semua novel jika pencarian kosong
+    }
+    data_novel[grep(input$search, data_novel$judul, ignore.case = TRUE), ]
+  })
+  
+  # Menentukan Best Novel berdasarkan Rating
+best_novel <- reactive({
+  data_novel %>%
+    arrange(desc(rating_novel)) %>%
+    head(1)  # Ambil novel dengan rating tertinggi
+})
+
+# Menampilkan Best Novel by Ratings
+output$best_novel <- renderUI({
+  novel <- best_novel()
+  
+  if (nrow(novel) == 0) {
+    return(h4("Novel Tidak Ditemukan", style = "text-align: center; color: red;"))
+  }
+  
+  box(
+      width = 20, status = NULL, solidHeader = FALSE,
+      style = "border-radius: 10px; 
+              padding: 10px; 
+              box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+              border: 0px solid transparent;",
+      div(style = "display: flex; align-items: center; gap: 15px;",
+        
+          img(src = novel$sampul[1], width = "120px", height = "180px", 
+            style = "border-radius: 10px; 
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                    flex-shrink: 0;
+                    display:block; 
+                    margin:auto;"
+              ),
+        
+      div(style = "text-align: left; width: 100%;",
+            h3(novel$judul[1]),
+            p(paste("Penulis:", novel$penulis[1])),
+            p(paste("Tahun Terbit:", novel$tahun_terbit[1])),
+            p(paste("ISBN:", ifelse(novel$ISBN[1] == "", "Not Available", novel$ISBN[1]))),
+            p(paste("Bahasa:", novel$bahasa[1])),
+            
+      div(style = "color: gold; font-size: 18px;",
+                paste0(strrep("★", round(novel$rating_novel[1])), strrep("☆", 5 - round(novel$rating_novel[1]))),
+      span(style = "font-size: 16px; color: black;", paste0(" ", novel$rating_novel[1])))
+        )
+    )
+  )
+})
+
+   # Reactive value untuk menyimpan kategori yang dipilih
+selected_category <- reactiveVal("Semua")
+
+# Observasi ketika button diklik
+observeEvent(input$btn_all, { selected_category("Semua") })
+observeEvent(input$btn_fiction, { selected_category("Fiksi") })
+observeEvent(input$btn_nonfiction, { selected_category("Bukan Fiksi") })
+observeEvent(input$btn_romansa, { selected_category("Romansa") })
+observeEvent(input$btn_fantasi, { selected_category("Fantasi") })
+observeEvent(input$btn_literature, { selected_category("Literatur Indonesia")
+hr()
+  })
+
+# Filter novel berdasarkan kategori yang dipilih
+filtered_novels <- reactive({
+  if (selected_category() == "Semua") {
+    return(data_novel)
+  } else {
+    return(data_novel %>% filter(kategori == selected_category()))
+  }
+})
+  
+  # Menampilkan novel dalam bentuk card layout
+output$novel_cards <- renderUI({
+  books <- filtered_novels()
+  
+  if (is.null(books) || nrow(books) == 0) {
+    return(h4("No books found", style = "text-align: center; color: red;"))
+  }
+
+  # Menggunakan grid layout agar tampilan tidak menumpuk
+  div(style = "display: grid; 
+              grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+              gap: 20px; 
+              padding: 10px;",
+      
+      lapply(1:nrow(books), function(i) {
+        book_id <- books$id_novel[i]
+
+        div(style = "background: white; 
+                     border-radius: 10px; 
+                     padding: 15px; 
+                     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+                     min-height: 320px;",
+            
+            # Gambar sampul novel
+            img(src = books$sampul[i], width = "auto", height = "200px",
+                style = "border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);"),
+            
+            # Informasi Novel
+            div(style = "text-align: left; margin-top: 10px; width: 100%;",
+                h4(books$judul[i], style = "font-size: 18px; font-weight: bold;"),
+                p(paste("Penulis:", books$penulis[i]), style = "font-size: 14px;"),
+                p(paste("Kategori:", books$kategori[i]), style = "font-size: 14px; color: gray;"),
+                p(paste("Tahun Terbit:", books$tahun_terbit[i]), style = "font-size: 14px; color: gray;"),
+                p(paste("ISBN:", books$ISBN[i]), style = "font-size: 14px; color: gray;"),
+                p(paste("Bahasa:", books$bahasa[i]), style = "font-size: 14px; color: gray;"),
+                
+                # Rating dengan ikon bintang
+                div(style = "color: gold; font-size: 18px;",
+                    paste0(strrep("★", round(books$rating_novel[i])), 
+                           strrep("☆", 5 - round(books$rating_novel[i]))),
+                    span(style = "font-size: 16px; color: black;", paste0(" ", books$rating_novel[i]))),
+                
+                # Tombol Selengkapnya
+                actionButton(inputId = paste0("btn_", book_id), 
+                             label = "Selengkapnya...", class = "btn-primary", 
+                             style = "margin-top: 10px;")
+            )
+        )
+      })
+  )
+})
+
+  # Menampilkan The Most Favourite Author
+  most_favourite_author <- reactive({
+    data_novel %>%
+      count(id_penulis, name = "total_novel") %>%
+      left_join(data_penulis, by = "id_penulis") %>%
+      arrange(desc(total_novel)) %>%
+      head(1)  # Ambil penulis dengan novel terbanyak
+  })
+
+  output$most_fav_author <- renderUI({
+    author <- most_favourite_author()
+    
+    if (nrow(author) == 0) {
+      return(h4("No data available", style = "text-align: center; color: red;"))
+    }
+    
+    box(
+      width = 20, status = NULL, solidHeader = FALSE,
+      style = "border-radius: 10px; 
+              padding: 20px; 
+              box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
+              border: 0px solid transparent;
+              height: auto;
+              width: auto;
+              display:block; 
+              margin:auto;",
+      div(style = "display: flex; align-items: left; gap: 20px;",
+          
+          img(src = "https://asset.kompas.com/crops/PaZRk1P0VgkRvcBWl-VcvLXZoUc=/0x0:0x0/750x500/data/photo/buku/6244f60d53b8b.jpeg", width = "120px", height = "180px", 
+              style = "border-radius: 10px; 
+                      box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                      flex-shrink: 0;
+                      display:block;"),
+          
+          div(style = "text-align: left; width: 100%;",
+              h3(author$penulis),
+              p(paste("Total Novels:", author$total_novel)),
+              p(paste("Tempat Lahir:", author$tempat_lahir)),
+              p(paste("Tanggal Lahir:", author$tanggal_lahir))
+          )
+      )
+    )
+  })
+  
+  # Menentukan penulis dengan karya terbanyak
+top_author <- reactive({
+  data_novel %>%
+    count(penulis, name = "total_karya") %>%
+    arrange(desc(total_karya)) %>%
+    head(1)  # Ambil penulis dengan jumlah novel terbanyak
+})
+
+output$top_author <- renderUI({
+  author <- top_author()
+  
+  if (nrow(author) == 0) {
+    return(h4("No data available", style = "text-align: center; color: red;"))
+  }
+  
+  box(
+    width = 20, status = NULL, solidHeader = FALSE,
+    style = "border-radius: 15px; 
+            padding: 20px; 
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.2); 
+            border: 0px solid transparent;",
+    div(style = "display: flex; align-items: left; gap: 20px;",
+        
+        img(src = "https://asset.kompas.com/crops/PaZRk1P0VgkRvcBWl-VcvLXZoUc=/0x0:0x0/750x500/data/photo/buku/6244f60d53b8b.jpeg", width = "120px", height = "180px", 
+            style = "border-radius: 10px; 
+                    box-shadow: 3px 3px 10px rgba(0,0,0,0.2); 
+                    flex-shrink: 0;"),
+        
+        div(style = "text-align: left; width: 100%;",
+            h3(author$penulis),
+            p(paste("Total Novels:", author$jumlah_buku)),
+            p(paste("Tempat Lahir:", author$tempat_lahir)),
+            p(paste("Tanggal Lahir:", author$tanggal_lahir))
+        )
+    )
+  )
+})
+  
+   # Handling event tombol "Read More"
+  observe({
+    books <- filtered_novels()
+    
+    lapply(1:nrow(books), function(i) {
+      book_id <- books$id_novel[i]
+      
+      observeEvent(input[[paste0("btn_", book_id)]], {
+        showModal(modalDialog(
+          title = "Sekilas Tentang Novel", 
+          size = "m",
+          div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
+              img(src = books$sampul[i], width = "150px", height = "220px",
+                  style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
+              div(style = "text-align: justify; width: 100%;",
+                  h4(books$judul[i]),
+                  p(paste("Penulis:", books$penulis[i])),
+                  p(paste("Tahun Terbit:", books$tahun_terbit[i])),
+                  p(paste("ISBN:", books$ISBN[i])),
+                  p(paste("Bahasa:", books$bahasa[i])),
+                  h4("Harga:", books$harga[i]),
+                  hr(),
+                  p(books$deskripsi[i])
+              )
+          ),
+          easyClose = TRUE
+        ))
+      })
+    })
+  })
+  
+  output$authors_table <- renderDT({ datatable(data_penulis, options = list(pageLength = 5)) })
+  
+  #Value Box
+  output$rating_plot <- renderPlot({
+  ggplot(data_penerbit, aes(x = alamat)) +
+    geom_bar(fill = "blue", color = "black") +
+    theme_minimal() +
+    xlab("Kota") + ylab("Jumlah Penerbit") +
+    ggtitle("Distribusi Penerbit di Indonesia")
+})
+  
+  # Render Peta Leaflet
+  output$map_penerbit <- renderLeaflet({
+    leaflet(data_kota) %>%
+      addTiles() %>%
+      addMarkers(
+        ~longitude, ~latitude,
+        layerId = ~alamat,  # 📌 Simpan layerId sebagai alamat kota
+        popup = ~paste0("<b>", alamat, "</b><br> (Klik untuk detail)")
+      )
+  })
+  
+  # 🔹 Ketika kota diklik, tampilkan daftar penerbit dari kota tersebut
+  observeEvent(input$map_penerbit_marker_click, {
+    click <- input$map_penerbit_marker_click  # Ambil data klik
+    if (is.null(click)) return()  # Jika tidak ada klik, jangan lanjut
+    
+    # Ambil daftar penerbit dari kota yang diklik
+    penerbit_dari_kota <- data_kota %>%
+      filter(alamat == click$id) %>%
+      pull(nama_penerbit)
+    
+    # Format data penerbit sebagai HTML
+    daftar_penerbit <- paste("<li>", penerbit_dari_kota, "</li>", collapse = "")
+    popup_content <- paste0("<b>Penerbit di ", click$id, ":</b><br><ul>", daftar_penerbit, "</ul>")
+    
+    # 📌 Hapus semua pop-up sebelum menampilkan yang baru
+    leafletProxy("map_penerbit") %>%
+      clearPopups() %>%
+      addPopups(click$lng, click$lat, popup_content)
+})
+  
+  # Menampilkan Data Penerbit
+  output$publishers_table <- renderDT({ datatable(data_penerbit, options = list(pageLength = 5)) })
+  
+  # Menampilkan Data Ulasan
+  output$reviews_dashboard <- renderUI({
+  reviews <- data_ulasan
+  
+   # Gunakan display: grid agar ulasan tertata dengan baik
+  div(style = "display: grid; 
+              grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+              gap: 20px; 
+              padding: 10px;",
+      
+      lapply(1:nrow(reviews), function(i) {
+        review_id <- reviews$id_user[i]  # ID unik untuk ulasan
+
+        div(style = "background: white; 
+                     border-radius: 10px; 
+                     padding: 15px; 
+                     box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+                     min-height: 220px;",
+            
+            # Header Ulasan dengan Avatar
+            div(style = "display: flex; align-items: center; gap: 10px;",
+                img(src = "https://www.w3schools.com/howto/img_avatar.png", width = "50px", height = "50px",
+                    style = "border-radius: 50%; box-shadow: 2px 2px 5px rgba(0,0,0,0.2); flex-shrink: 0;"),
+                div(style = "text-align: left;",
+                    h4(reviews$nama_user[i], style = "margin: 0;"),
+                    p(paste("Rating:", reviews$rating_user[i], "⭐"), 
+                      style = "margin: 0; font-weight: bold; color: #ffcc00;")
+                )
+            ),
+            
+            hr(),
+            
+            # Ulasan Singkat (10 kata pertama)
+            p(paste(strsplit(reviews$ulasan[i], " ")[[1]][1:10], collapse = " "), "..."),
+            
+            # Tombol "Selengkapnya"
+            actionButton(inputId = paste0("btn_review_", review_id), label = "Selengkapnya", class = "btn-info btn-sm")
+        )
+      })
+  )
+})
+
+# Handling event tombol "Selengkapnya"
+observe({
+  reviews <- data_ulasan
+
+  lapply(1:nrow(reviews), function(i) {
+    review_id <- reviews$id_user[i]
+
+    observeEvent(input[[paste0("btn_review_", review_id)]], {
+      showModal(modalDialog(
+        title = paste("Ulasan oleh", reviews$nama_user[i]), 
+        size = "m",
+        div(style = "padding: 20px; text-align: justify;",
+            h4(reviews$nama_user[i]),
+            p(paste("Rating:", reviews$rating_user[i], "⭐")),
+            hr(),
+            p(reviews$ulasan[i])
+        ),
+        easyClose = TRUE
+      ))
+    })
+  })
+})
+
+  # Menampilkan Data Statistik
+  output$rating_plot <- renderPlot({
+    ggplot(data_novel, aes(x = rating_novel)) +
+      geom_histogram(binwidth = 0.5, fill = "blue", color = "black") +
+      theme_minimal()
+  })
+}
+
+# === 6. Menjalankan Aplikasi ===
+shinyApp(ui, server)
+```
