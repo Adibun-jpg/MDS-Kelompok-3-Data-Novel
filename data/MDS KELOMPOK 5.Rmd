@@ -518,3 +518,23 @@ data_novel <- merge(data_novel, data_penulis[, c("id_penulis", "penulis")],
 # Cek hasilnya
 head(data_novel)
 ```
+
+## E. Sampul Buku
+
+### - Memasukkan Sampul Buku ke Database
+
+```{r}
+sampul_buku <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/sampul buku.csv", stringsAsFactors = FALSE)
+
+head(sampul_buku)  # Melihat beberapa baris pertama
+str(sampul_buku)   # Melihat struktur data
+```
+
+```{r}
+# Menggabungkan data_novel dengan data_penerbit berdasarkan id_penerbit
+data_novel <- merge(data_novel, sampul_buku[, c("judul", "sampul.")], 
+                    by = "judul", all.x = TRUE)
+
+# Cek hasilnya
+head(data_novel)
+```
