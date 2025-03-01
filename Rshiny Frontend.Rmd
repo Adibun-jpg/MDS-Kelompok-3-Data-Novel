@@ -26,7 +26,6 @@ koordinat_kota <- data.frame(
   latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156),
   longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555)
 )
-
 # Gabungkan data penerbit dengan koordinat kota
 data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
 
@@ -75,7 +74,6 @@ ui <- dashboardPage(
   dashboardBody(
     tabItems(
       
-  
       #Tab Item Novel      
       tabItem(tabName = "my_books",
         fluidRow(
