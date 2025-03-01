@@ -6,16 +6,6 @@ output:
 ---
 
 ```{r}
-# === 1. Load Library ===
-library(shiny)
-library(shinydashboard)
-library(DT)
-library(ggplot2)
-library(readr)
-library(dplyr)
-library(leaflet)  
-
-# === 2. Membaca Data CSV ===
 data_penulis <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penulis.csv")
 data_penerbit <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penerbit.csv")
 data_ulasan <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/ulasan.csv")
