@@ -57,11 +57,8 @@ ui <- dashboardPage(
       menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
     )
   ),
-  
   dashboardBody(
     tabItems(
-      
-  
       #Tab Item Novel      
       tabItem(tabName = "my_books",
         fluidRow(
