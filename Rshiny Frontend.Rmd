@@ -219,9 +219,3 @@ ui <- dashboardPage(
             title = "Jumlah Novel per Penerbit",
             plotOutput("novels_per_publisher_plot"),
             width = 6, status = "warning", solidHeader = TRUE
-        )
-      )
-    )
-  )
-)
-)
