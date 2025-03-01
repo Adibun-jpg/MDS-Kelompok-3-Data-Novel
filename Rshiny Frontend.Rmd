@@ -6,10 +6,6 @@ output:
 ---
 
 ```{r}
-data_penulis <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penulis.csv")
-data_penerbit <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penerbit.csv")
-data_ulasan <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/ulasan.csv")
-
 # === Data Koordinat Kota ===
 koordinat_kota <- data.frame(
   alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman"),
