@@ -171,8 +171,6 @@ ui <- dashboardPage(
         column(12, h2("Penulis Terfavorit")),
         box(status = "warning", solidHeader = FALSE, width = 12, DTOutput("reviews_table"))
       ),
-      
-  #Tab Item Statistik
       tabItem(tabName = "stats",
         fluidRow(
           # Value Boxes for Key Metrics
