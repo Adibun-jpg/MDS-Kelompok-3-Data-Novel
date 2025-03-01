@@ -176,7 +176,6 @@ ui <- dashboardPage(
       ),
       
   #Tab Item Statistik
-       # Stats Tab Item
       tabItem(tabName = "stats",
         fluidRow(
           # Value Boxes for Key Metrics
