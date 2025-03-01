@@ -6,12 +6,30 @@ output:
 ---
 
 ```{r}
+# === 1. Load Library ===
+library(shiny)
+library(shinydashboard)
+library(DT)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(leaflet)  
+
+# === 2. Membaca Data CSV ===
+data_penulis <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penulis.csv")
+data_penerbit <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/penerbit.csv")
+data_ulasan <- read_csv("C:/Users/ASUS/OneDrive/Dokumen/Data Novel/ulasan.csv")
+
 # === Data Koordinat Kota ===
 koordinat_kota <- data.frame(
   alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman"),
   latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156),
   longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555)
 )
+
+# Gabungkan data penerbit dengan koordinat kota
+data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
+
 # === 3. UI: Struktur Dashboard ===
 ui <- dashboardPage(
   dashboardHeader(title = "Chapter & Coffe"),
@@ -53,8 +71,11 @@ ui <- dashboardPage(
       menuItem("Novel dalam Statistik", tabName = "stats", icon = icon("chart-bar"))
     )
   ),
+  
   dashboardBody(
     tabItems(
+      
+  
       #Tab Item Novel      
       tabItem(tabName = "my_books",
         fluidRow(
@@ -167,6 +188,9 @@ ui <- dashboardPage(
         column(12, h2("Penulis Terfavorit")),
         box(status = "warning", solidHeader = FALSE, width = 12, DTOutput("reviews_table"))
       ),
+      
+  #Tab Item Statistik
+       # Stats Tab Item
       tabItem(tabName = "stats",
         fluidRow(
           # Value Boxes for Key Metrics
@@ -182,6 +206,14 @@ ui <- dashboardPage(
           )
         ),
         
+        fluidRow(
+          # Pie Chart for Number of Novels per Category
+          box(
+            title = "Jumlah Novel per Klasifikasi",
+            plotOutput("novels_per_category_plot"),
+            width = 6, status = "success", solidHeader = TRUE
+          ),
+          
           # Pie Chart for Number of Novels per Publisher
           box(
             title = "Jumlah Novel per Penerbit",
