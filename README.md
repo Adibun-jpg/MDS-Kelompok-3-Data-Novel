@@ -3,7 +3,9 @@
 </div>
 
 # ☕Daftar Menu
-- [About](#chapter-and-coffee)
+- [Tentang Chapter & Coffee](#chapter-and-coffee)
+- [Tampilan Halaman](#tampilan-halaman)
+- [Demo](#demo)
 
 
 # Chapter and Coffee
@@ -27,6 +29,9 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 #### 4️⃣ Navigasi Mudah
 - Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
 
+# Tampilan Halaman
+
+# Demo
 
 ## 🚀 Software yang Digunakan
 - **Frontend:** RShiny
