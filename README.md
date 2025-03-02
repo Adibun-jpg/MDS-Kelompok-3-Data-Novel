@@ -35,13 +35,16 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
 
 # Tampilan Halaman
+screenshoot dashboard
 
 # Demo
+📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
 # Skema Database atau Pondasi Perpustakaan
 
-# ERD atau Alur Cerita
 
+# ERD atau Alur Cerita
+![ERD Novel](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/raw/Designer/ERD%20Novel.jpg)
 
 ## 🚀 Software yang Digunakan
 - **Frontend:** RShiny
@@ -49,6 +52,7 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - **Database:** MySQl
 
 # Deskripsi Data atau Data Synopsis
+
 
 # :open_file_folder: Folder Structure atau Rak Buku
 ```
