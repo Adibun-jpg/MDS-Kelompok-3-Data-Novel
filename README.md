@@ -83,34 +83,34 @@ Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir berkat tim yang menyusun kode, data, dan desain menjadi pengalaman terbaik bagi pencinta novel. Inilah para "barista" di balik platform ini!  
 
 #### 🎨 **Front-End Developer _(Cover Designer)_**  
-👩‍💻 **[Baiq Nina Febriati](https://github.com/ngurahsentana24)**  
+👩‍💻 **[Baiq Nina Febriati](https://github.com/ninafebriati)**  
 📌 _Merancang tampilan Chapter & Coffee agar semenarik sampul buku yang menggoda untuk dibuka._  
 - Mengembangkan **UI/UX** dengan `ui.R`  
 - Mendesain interface dan komponen interaktif  
 - Mengoptimalkan tampilan dengan **CSS & responsivitas**  
 
 #### ⚙️ **Back-End Developer _(Plot Builder)_**  
-👨‍💻 **[Adib Roisilmi Abdullah](https://github.com/mhmmd25)**  
+👨‍💻 **[Adib Roisilmi Abdullah](https://github.com/Adibun-jpg)**  
 📌 _Menulis "alur cerita" di balik layar agar platform berjalan lancar dan responsif._  
 - Mengembangkan sistem dengan **`server.R`**  
 - Mengelola API dan integrasi data  
 - Menjaga performa backend agar tetap optimal  
 
 #### 🗄 **Database Manager _(Librarian of Data)_**  
-👩‍💻 **[Sely Fitriatun Wakhidah](https://github.com/desyendriani)**  
+👩‍💻 **[Sely Fitriatun Wakhidah](https://github.com/sel599)**  
 📌 _Mengelola dan mengamankan "rak buku" digital agar setiap data tersusun rapi dan siap diakses._  
 - Manajemen dan administrasi database  
 - Backup & recovery untuk keamanan data  
 - Monitoring performa database  
 
 #### 🏗 **Database Designer _(Story Architect)_**  
-👨‍💻 **[Naufalia Alfiryal](https://github.com/zahralatifah)**  
+👨‍💻 **[Naufalia Alfiryal](https://github.com/Naufaliaa)**  
 📌 _Menyusun "kerangka cerita" agar setiap bagian data saling terhubung dengan baik._  
 - Merancang skema database yang optimal  
 - Meningkatkan performa query dan arsitektur database  
 
 #### 📝 **Technical Writer _(Storyteller of Code)_**  
-👨‍💻 **[Muhammad Rizal](https://github.com/fanifahira)**  
+👨‍💻 **[Muhammad Rizal](https://github.com/rizalmmd)**  
 📌 _Menulis panduan agar setiap pengguna bisa memahami dan menikmati "cerita" di Chapter & Coffee._  
 - Menyusun dokumentasi teknis dan user guide  
 - Melakukan **Testing & QA** untuk memastikan sistem berjalan mulus  
