@@ -69,24 +69,6 @@ screenshoot dashboard
 └── 📄 README.md
 ```
 
-## 🔥 Cara Menjalankan Proyek
-1. Clone repository ini:
-   ```sh
-   git clone https://github.com/username/Chapter-Coffee-Dashboard.git
-   ```
-2. Masuk ke direktori proyek:
-   ```sh
-   cd Chapter-Coffee-Dashboard
-   ```
-3. Install dependencies (jika ada):
-   ```sh
-   npm install
-   ```
-4. Jalankan proyek secara lokal:
-   ```sh
-   npm start
-   ```
-
 ## 🔥 Kontribusi
 Kami selalu terbuka untuk kontribusi dari komunitas! Jika Anda ingin menambahkan fitur baru atau meningkatkan performa dashboard, silakan fork repository ini dan buat pull request.
 
