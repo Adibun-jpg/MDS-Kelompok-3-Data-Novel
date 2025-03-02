@@ -6,7 +6,7 @@
 - [Tentang Chapter & Coffee](#chapter-and-coffee)
 - [Tampilan Halaman](#tampilan-halaman)
 - [Demo](#demo)
-- [Rak Buku (Folder Structure)](#open_file_folder-rak-buku-folder-structure)
+- [Rak Buku (Folder Structure)](#open_file_folder-rak-buku-atau-folder-structure)
 
 
 # Chapter and Coffee
@@ -41,7 +41,7 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - **Backend:** RStudio
 - **Database:** MySQl
 
-# :open_file_folder: Rak Buku Folder Structure
+# :open_file_folder: Rak Buku atau Folder Structure
 ```
 📂 MDS---Kelompok-5---Data-Novel
 ├── 📁 Data
