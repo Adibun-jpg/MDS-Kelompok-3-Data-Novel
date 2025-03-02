@@ -6,7 +6,9 @@
 - [Tentang Chapter & Coffee](#chapter-and-coffee)
 - [Tampilan Halaman](#tampilan-halaman)
 - [Demo](#demo)
+- [Data Synopsis (Deskripsi Data)](#Data-Synopsis-atau-Deskripsi-Data)
 - [Rak Buku (Folder Structure)](#open_file_folder-rak-buku-atau-folder-structure)
+- [Tim Penulis](#tim-penulis)
 
 
 # Chapter and Coffee
@@ -40,6 +42,8 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - **Frontend:** RShiny
 - **Backend:** RStudio
 - **Database:** MySQl
+
+# Data-Synopsis-atau-Deskripsi-Data
 
 # :open_file_folder: Rak Buku atau Folder Structure
 ```
@@ -83,7 +87,7 @@ Jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercof
 ---
 Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 
-
+# Tim Penulis
 
 
 
