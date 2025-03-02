@@ -26,9 +26,9 @@ data_penerbit <- read_csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbi
 
 # === Data Koordinat Kota ===
 koordinat_kota <- data.frame(
-  alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman"),
-  latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156),
-  longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555)
+  alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman", "Malang"),
+  latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156, -7.9666),
+  longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555, 112.6326)
 )
 
 # Gabungkan data penerbit dengan koordinat kota
@@ -36,7 +36,11 @@ data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
 
 # === 3. UI: Struktur Dashboard ===
 ui <- dashboardPage(
-  dashboardHeader(title = "Chapter & Coffe"),
+  dashboardHeader(
+    title = tagList(
+    tags$img(src = "https://upload.wikimedia.org/wikipedia/commons/9/99/Coat_of_arms_of_West_Java.svg", height = "40px", style = "margin-right: 10px;"),
+    "Chapter & Coffee"
+  )),
   
   dashboardSidebar(
     collapsed = FALSE,
@@ -517,7 +521,6 @@ output$most_fav_author <- renderUI({
       addMarkers(
         ~longitude, ~latitude,
         layerId = ~alamat,  # 📌 Simpan layerId sebagai alamat kota
-        popup = ~paste0("<b>", alamat, "</b><br> (Klik untuk detail)")
       )
   })
   
