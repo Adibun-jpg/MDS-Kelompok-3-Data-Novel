@@ -41,7 +41,7 @@ screenshoot dashboard
 📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
 # Skema Database atau Pondasi Perpustakaan
-
+![Skema Database](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/Designer/Skema%20Database%20Novel.jpg)
 
 # ERD atau Alur Cerita
 ![ERD Novel](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/raw/Designer/ERD%20Novel.jpg)
