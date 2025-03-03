@@ -13,13 +13,16 @@
 
 ![Skema Database](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/Designer/Skema%20Database%20Novel.jpg)
 
-# :heavy_check_mark: Deskripsi Data
+# Deskripsi Data
 
 ## :desktop_computer: Membuat Database
 
 Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
-## :desktop_computer: Membuat Tabel Novel
+## :open_book: Membuat Tabel Novel
+
+Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun terbit, deskripsi, kategori, jumlah halaman, harga, dan rating keseluruhan.
+
 
 
 ```{r}
@@ -38,6 +41,7 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
 );")
 ```
 
+
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
 | id_novel                   | character varying(50)  | Id Novel                       		             |
@@ -54,7 +58,11 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
 
 
 
-## :desktop_computer: Membuat Tabel Penulis
+## :books: Membuat Tabel Penulis
+
+Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal lahir, serta jumlah buku yang telah ditulis.
+
+
 
 ```{r}
 query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
@@ -66,6 +74,8 @@ query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
     );")
 ```
 
+
+
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
 | id_penulis                 | character varying(50)  | Id Penulis                       		         |
@@ -75,7 +85,10 @@ query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
 | jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
 
 
-## :desktop_computer: Membuat Tabel Penerbit
+## :office: Membuat Tabel Penerbit
+
+Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distribusi novel.
+
 
 
 ```{r}
@@ -86,14 +99,20 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
     );")
 ```
 
+
+
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
 | id_penerbit                | character varying(50)  | Id Penerbit                    		             |
 | nama_penerbit              | character varying(250) | Nama Penerbit Novel                  		     |
-| alamat                     | character varying(255) | Alamat Penerbit                     	 |	
+| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
 
 
-## :desktop_computer: Membuat Tabel Ulasan
+## :memo: Membuat Tabel Ulasan
+
+Mencatat ulasan dan penilaian dari pengguna terhadap novel, termasuk rating yang diberikan dan komentar terkait.
+
+
 
 ```{r}
 query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
@@ -105,6 +124,8 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
     rating_user FLOAT
     );")
 ```
+
+
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
