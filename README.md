@@ -23,7 +23,22 @@ Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang 
 
 Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun terbit, deskripsi, kategori, jumlah halaman, harga, dan rating keseluruhan.
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_novel                   | character varying(50)  | Id Novel                       		             |
+| id_penulis                 | character varying(50)  | Id Penulis                   		             |
+| id_penerbit                | character varying(50)  | Id Penerbit                     	             |	
+| judul                      | character varying(255) | Judul Novel                		                 |
+| ISBN                       | character varying(100) | ISBN Novel	                                     |
+| bahasa	    	         | character varying(50)  | Bahasa yang digunakan pada novel                 |
+| tahun terbit	    	     | integer                | Tahun terbit novel                               |
+| edisi	    	             | character varying(255) | Edisi Novel                                      |
+| jumlah_halaman	    	 | integer                | Jumlah Halaman Novel                             |
+| deskripsi    	             | text                   | Deskripsi/Sinopsis Novel                         |
+| rating_novel	    	     | float                  | Rating Novel                                     |
 
+
+dengan query sebagai berikut:
 
 ```{r}
 dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
@@ -42,27 +57,21 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
 ```
 
 
-| Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_novel                   | character varying(50)  | Id Novel                       		             |
-| id_penulis                 | character varying(50)  | Id Penulis                   		             |
-| id_penerbit                | character varying(50)  | Id Penerbit                     	             |	
-| judul                      | character varying(255) | Judul Novel                		                 |
-| ISBN                       | character varying(100) | ISBN Novel	                                     |
-| bahasa	    	         | character varying(50)  | Bahasa yang digunakan pada novel                 |
-| tahun terbit	    	     | integer                | Tahun terbit novel                               |
-| edisi	    	             | character varying(255) | Edisi Novel                                      |
-| jumlah_halaman	    	 | integer                | Jumlah Halaman Novel                             |
-| deskripsi    	             | text                   | Deskripsi/Sinopsis Novel                         |
-| rating_novel	    	     | float                  | Rating Novel                                     |
-
-
-
 ## :books: Membuat Tabel Penulis
 
 Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal lahir, serta jumlah buku yang telah ditulis.
 
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_penulis                 | character varying(50)  | Id Penulis                       		         |
+| penulis                    | character varying(50)  | Nama Penulis Novel                   		     |
+| tempat_lahir               | character varying(50)  | Tempat Lahir Penulis Novel                     	 |	
+| tanggal_lahir              | date                   | Tanggal Lahir Penulis Novel              		 |
+| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
+
+
+dengan query sebagai berikut:
 
 ```{r}
 query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
@@ -75,21 +84,17 @@ query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
 ```
 
 
-
-| Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penulis                 | character varying(50)  | Id Penulis                       		         |
-| penulis                    | character varying(50)  | Nama Penulis Novel                   		     |
-| tempat_lahir               | character varying(50)  | Tempat Lahir Penulis Novel                     	 |	
-| tanggal_lahir              | date                   | Tanggal Lahir Penulis Novel              		 |
-| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
-
-
 ## :office: Membuat Tabel Penerbit
 
 Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distribusi novel.
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
+| nama_penerbit              | character varying(250) | Nama Penerbit Novel                  		     |
+| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
 
+dengan query sebagai berikut:
 
 ```{r}
 query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
@@ -100,19 +105,20 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
 ```
 
 
-
-| Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
-| nama_penerbit              | character varying(250) | Nama Penerbit Novel                  		     |
-| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
-
-
 ## :memo: Membuat Tabel Ulasan
 
 Mencatat ulasan dan penilaian dari pengguna terhadap novel, termasuk rating yang diberikan dan komentar terkait.
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_user                    | character varying(50)  | Id Pengguna                       		         |
+| id_novel                   | character varying(50)  | Id Novel                   		                 |
+| nama_user                  | character varying(100) | Nama Pengguna                    	             |	
+| tanggal_ulasan             | character varying(100) | Tanggal Ulasan yang Diberikan Pengguna           |
+| ulasan                     | text                   | Ulasan Pengguna	                                 |
+| rating_user	    	     | float                  | Rating dari Pengguna                             |
 
+dengan query berikut:
 
 ```{r}
 query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
@@ -124,14 +130,3 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
     rating_user FLOAT
     );")
 ```
-
-
-
-| Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_user                    | character varying(50)  | Id Pengguna                       		         |
-| id_novel                   | character varying(50)  | Id Novel                   		                 |
-| nama_user                  | character varying(100) | Nama Pengguna                    	             |	
-| tanggal_ulasan             | character varying(100) | Tanggal Ulasan yang Diberikan Pengguna           |
-| ulasan                     | text                   | Ulasan Pengguna	                                 |
-| rating_user	    	     | float                  | Rating dari Pengguna                             |
