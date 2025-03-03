@@ -59,7 +59,7 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
 
 ## :books: Membuat Tabel Penulis
 
-Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal lahir, serta jumlah buku yang telah ditulis.
+Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal lahir, serta jumlah buku yang telah diterbitkan.
 
 
 | Attribute                  | Type                   | Description                     		         |
@@ -91,7 +91,7 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
 | id_penerbit                | character varying(50)  | Id Penerbit                    		             |
-| nama_penerbit              | character varying(250) | Nama Penerbit Novel                  		     |
+| nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
 | alamat                     | character varying(255) | Alamat Penerbit                     	         |	
 
 dengan query sebagai berikut:
@@ -107,7 +107,7 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
 
 ## :memo: Membuat Tabel Ulasan
 
-Mencatat ulasan dan penilaian dari pengguna terhadap novel, termasuk rating yang diberikan dan komentar terkait.
+Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating dan komentar yang diberikan.
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
