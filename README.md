@@ -121,9 +121,3 @@ Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir 
 💡 _Dengan keahlian masing-masing, kami menciptakan Chapter & Coffee agar setiap orang dapat menemukan novel terbaik dengan cara yang lebih mudah dan menyenangkan!_  
 
 ---
-
-
-
-- Menulis teks UI dan pesan error.
-- Menyusun dokumentasi penggunaan dashboard.
-- Menambahkan README.md & help text.
