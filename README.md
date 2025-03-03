@@ -11,16 +11,11 @@
 
 ERD (Entity-Relationship Diagram) yang ditampilkan menggambarkan struktur database untuk sistem manajemen novel. Berikut adalah interpretasi singkatnya:  
 
-- **Entitas Utama:**
-  - **Novel** (Memiliki atribut: id_novel, ISBN, judul, bahasa, tahun_terbit, deskripsi, edisi, kategori, jumlah_halaman, rating_novel, sampul, harga, link) 
-   - **Penulis** (Memiliki atribut: id_penulis, penulis, tempat_lahir, tanggal_lahir, jumlah_buku)  
-   - **Penerbit** (Memiliki atribut: id_penerbit, nama_penerbit, alamat)   
-   - **Ulasan** (Memiliki atribut: id_user, id_novel, nama_user, tanggal_ulasan, ulasan, rating_user)  
+**Entitas Utama:**
+**Novel** (Memiliki atribut: id_novel, ISBN, judul, bahasa, tahun_terbit, deskripsi, edisi, kategori, jumlah_halaman, rating_novel, sampul, harga, link), **Penulis** (Memiliki atribut: id_penulis, penulis, tempat_lahir, tanggal_lahir, jumlah_buku), **Penerbit** (Memiliki atribut: id_penerbit, nama_penerbit, alamat), **Ulasan** (Memiliki atribut: id_user, id_novel, nama_user, tanggal_ulasan, ulasan, rating_user)  
 
--  **Hubungan (Relationship):**  
-   - **Menulis (1:M)** → Satu penulis bisa menulis banyak novel.  
-   - **Menerbitkan (1:M)** → Satu penerbit dapat menerbitkan banyak novel.  
-   - **Diberi Ulasan (1:M)** → Satu novel bisa memiliki banyak ulasan dari pengguna yang berbeda.  
+**Hubungan (Relationship):**  
+**Menulis (1:M)** → Satu penulis bisa menulis banyak novel, **Menerbitkan (1:M)** → Satu penerbit dapat menerbitkan banyak novel, **Diberi Ulasan (1:M)** → Satu novel bisa memiliki banyak ulasan dari pengguna yang berbeda.  
 
 
 # Skema Database
