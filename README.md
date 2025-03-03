@@ -15,10 +15,14 @@
 
 # :heavy_check_mark: Deskripsi Data
 
-## :abacus: Membuat Database
+## :desktop_computer: Membuat Database
 
-Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. 
+Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
+## :desktop_computer: Membuat Tabel Novel
+
+
+```{r}
 dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
     id_novel VARCHAR(50) PRIMARY KEY,
     id_penulis VARCHAR(50),
@@ -31,8 +35,12 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
     jumlah_halaman INT,
     deskripsi TEXT,
     rating_novel FLOAT
-);") 
+);")
+```
 
+## :desktop_computer: Membuat Tabel Penulis
+
+```{r}
 query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
     id_penulis VARCHAR(50) PRIMARY KEY,
     penulis VARCHAR(50),
@@ -40,12 +48,20 @@ query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
     tanggal_lahir DATE,
     jumlah_buku INT
     );")
+```
 
+## :desktop_computer: Membuat Tabel Penerbit
+
+
+```{r}
 query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
     id_penerbit VARCHAR(50) PRIMARY KEY,
     nama_penerbit VARCHAR(250),
     alamat VARCHAR(255)
     );")
+```
+
+## :desktop_computer: Membuat Tabel Ulasan
 
 ```{r}
 query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
