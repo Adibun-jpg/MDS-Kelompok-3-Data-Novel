@@ -38,6 +38,22 @@ dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
 );")
 ```
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_novel                   | character varying(50)  | Id Novel                       		             |
+| id_penulis                 | character varying(50)  | Id Penulis                   		             |
+| id_penerbit                | character varying(50)  | Id Penerbit                     	             |	
+| judul                      | character varying(255) | Judul Novel                		                 |
+| ISBN                       | character varying(100) | ISBN Novel	                                     |
+| bahasa	    	         | character varying(50)  | Bahasa yang digunakan pada novel                 |
+| tahun terbit	    	     | integer                | Tahun terbit novel                               |
+| edisi	    	             | character varying(255) | Edisi Novel                                      |
+| jumlah_halaman	    	 | integer                | Jumlah Halaman Novel                             |
+| deskripsi    	             | text                   | Deskripsi/Sinopsis Novel                         |
+| rating_novel	    	     | float                  | Rating Novel                                     |
+
+
+
 ## :desktop_computer: Membuat Tabel Penulis
 
 ```{r}
@@ -50,6 +66,15 @@ query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
     );")
 ```
 
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_penulis                 | character varying(50)  | Id Penulis                       		         |
+| penulis                    | character varying(50)  | Nama Penulis Novel                   		     |
+| tempat_lahir               | character varying(50)  | Tempat Lahir Penulis Novel                     	 |	
+| tanggal_lahir              | date                   | Tanggal Lahir Penulis Novel              		 |
+| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
+
+
 ## :desktop_computer: Membuat Tabel Penerbit
 
 
@@ -60,6 +85,13 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
     alamat VARCHAR(255)
     );")
 ```
+
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
+| nama_penerbit              | character varying(250) | Nama Penerbit Novel                  		     |
+| alamat                     | character varying(255) | Alamat Penerbit                     	 |	
+
 
 ## :desktop_computer: Membuat Tabel Ulasan
 
@@ -73,3 +105,12 @@ query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
     rating_user FLOAT
     );")
 ```
+
+| Attribute                  | Type                   | Description                     		         |
+|:---------------------------|:-----------------------|:-------------------------------------------------|
+| id_user                    | character varying(50)  | Id Pengguna                       		         |
+| id_novel                   | character varying(50)  | Id Novel                   		                 |
+| nama_user                  | character varying(100) | Nama Pengguna                    	             |	
+| tanggal_ulasan             | character varying(100) | Tanggal Ulasan yang Diberikan Pengguna           |
+| ulasan                     | text                   | Ulasan Pengguna	                                 |
+| rating_user	    	     | float                  | Rating dari Pengguna                             |
