@@ -4,3 +4,5 @@
 - Membuat Entity Relationship Diagram (ERD).
 - Menulis skrip SQL untuk tabel novel, ulasan, dsb..
 - Menentukan indeks dan optimasi query.
+
+update 3 maret 2025
