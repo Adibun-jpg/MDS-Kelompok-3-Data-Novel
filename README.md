@@ -15,7 +15,7 @@
 
 # Deskripsi Data
 
-## :desktop_computer: Membuat Database
+## :abacus: Membuat Database
 
 Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
