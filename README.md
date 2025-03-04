@@ -41,6 +41,7 @@ screenshoot dashboard
 📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
 # Skema Database atau Pondasi Perpustakaan
+Database terdiri dari beberapa tabel utama. Tabel Penulis menyimpan data penulis dengan id_penulis sebagai primary key, sedangkan tabel Penerbit menggunakan id_penerbit sebagai primary key. Tabel Novel menjadi pusat data novel dengan id_novel sebagai primary key, serta menghubungkan penulis dan penerbit melalui id_penulis dan id_penerbit sebagai foreign key. Untuk ulasan, tabel Ulasan menyimpan review pembaca dengan id_user sebagai primary key dan id_novel sebagai foreign key agar setiap ulasan terhubung ke novel yang direview.
 ![Skema Database](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/Designer/Skema%20Database%20Novel.jpg)
 
 # ERD atau Alur Cerita
