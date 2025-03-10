@@ -35,8 +35,59 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 - Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
 
 # Tampilan Halaman
-screenshoot dashboard
+Website Chapter & Coffee dilengkapi dengan berbagai fitur yang mempermudah pengguna dalam mencari dan mengeksplorasi novel. Dari daftar novel paling favorit, penulis dengan karya terbanyak, hingga rekomendasi berdasarkan kategori—semuanya dirancang untuk membantu pengguna menemukan bacaan yang paling pas. Adapun fitur dari setiap sidebar di website Chapter & Coffee adalah sebagai berikut:
 
+1. **Home** <br>
+- Tampilan Halam Utama **"Cari Novel di Sini"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Home.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+
+- Tampilan isi novel
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Sekilas%20Tentang%20Novel.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   </br>
+
+2. **Penulis** <br>
+Tampilan Halam **"Penulis"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   <br>
+
+3. **Penerbit** <br>
+Tampilan Halam **"Penerbit"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penerbit.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   <br>
+
+4. **Ulasan** <br>
+- Tampilan Halam **"Ulasan"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+
+- Tampilan ulasan pengguna
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan%20oleh%20Pengguna.jpeg">
+   </p>
+     Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   <br>
+
+5. **Tim Chapter & Coffee** <br>
+Tampilan Halam **"Tim Chapter & Coffee"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   <br>
 # Demo
 📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
