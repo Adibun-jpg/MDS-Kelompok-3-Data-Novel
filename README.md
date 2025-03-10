@@ -66,17 +66,21 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_novel                   | character varying(50)  | Id Novel                       		             |
-| id_penulis                 | character varying(50)  | Id Penulis                   		             |
-| id_penerbit                | character varying(50)  | Id Penerbit                     	             |	
-| judul                      | character varying(255) | Judul Novel                		                 |
-| ISBN                       | character varying(100) | ISBN Novel	                                     |
-| bahasa	    	         | character varying(50)  | Bahasa yang digunakan pada novel                 |
-| tahun terbit	    	     | integer                | Tahun terbit novel                               |
-| edisi	    	             | character varying(255) | Edisi Novel                                      |
-| jumlah_halaman	    	 | integer                | Jumlah Halaman Novel                             |
-| deskripsi    	             | text                   | Deskripsi/Sinopsis Novel                         |
-| rating_novel	    	     | float                  | Rating Novel                                     |
+| id_novel                   | TEXT			| Id Novel                       		             |
+| id_penulis                 | TEXT			  | Id Penulis                   		             |
+| id_penerbit                | TEXT		  | Id Penerbit                     	             |	
+| judul                      | TEXT | Judul Novel                		                 |
+| ISBN                       | TEXT | ISBN Novel	                                     |
+| bahasa	    	         | TEXT  | Bahasa yang digunakan pada novel                 |
+| tahun terbit	    	     | INTEGER                | Tahun terbit novel                               |
+| edisi	    	             | TEXT| Edisi Novel                                      |
+| jumlah_halaman	    	 | INTEGER                | Jumlah Halaman Novel                             |
+| deskripsi    	             | TEXT                   | Deskripsi/Sinopsis Novel                         |
+| rating_novel	    	     | REAL                  | Rating Novel                                     |
+| kategori		     | TEXT			| Kategori novel menjadi Fiksi, Bukan fiksi, Literatur Indonesia, Romansa, Horor|
+| harga			     | TEXT			| Harga buku |
+| link			     | TEXT			| direct link ke ecomerce |
+|sampul			     | TEXT			 | cover buku |
 
 
 dengan query sebagai berikut:
@@ -112,10 +116,10 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penulis                 | character varying(50)  | Id Penulis                       		         |
-| penulis                    | character varying(50)  | Nama Penulis Novel                   		     |
-| tempat_lahir               | character varying(50)  | Tempat Lahir Penulis Novel                     	 |	
-| tanggal_lahir              | date                   | Tanggal Lahir Penulis Novel              		 |
+| id_penulis                 | TEXT  | Id Penulis                       		         |
+| penulis                    | TEXT)  | Nama Penulis Novel                   		     |
+| tempat_lahir               | TEXT  | Tempat Lahir Penulis Novel                     	 |	
+| tanggal_lahir              | TEXT                  | Tanggal Lahir Penulis Novel              		 |
 | jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
 
 
@@ -139,9 +143,11 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
-| nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
-| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
+| id_penerbit                | TEXT  | Id Penerbit                    		             |
+| nama_penerbit              | TEXT | Nama Penerbit                  		     |
+| alamat                     | TEXT | Alamat Penerbit     |	
+| Latitude		     | TEXT | latitude	|
+|longitude		     |TEXT | longitude |
 
 dengan query sebagai berikut:
 
@@ -163,12 +169,12 @@ Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating d
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_user                    | character varying(50)  | Id Pengguna                       		         |
-| id_novel                   | character varying(50)  | Id Novel                   		                 |
-| nama_user                  | character varying(100) | Nama Pengguna                    	             |	
-| tanggal_ulasan             | character varying(100) | Tanggal Ulasan yang Diberikan Pengguna           |
+| id_user                    | TEXT  | Id Pengguna                       		         |
+| id_novel                   | TEXT  | Id Novel                   		                 |
+| nama_user                  | TEXT | Nama Pengguna                    	             |	
+| tanggal_ulasan             | TEXT) | Tanggal Ulasan yang Diberikan Pengguna           |
 | ulasan                     | text                   | Ulasan Pengguna	                                 |
-| rating_user	    	     | float                  | Rating dari Pengguna                             |
+| rating_user	    	     | REAL                  | Rating dari Pengguna                             |
 
 dengan query berikut:
 
