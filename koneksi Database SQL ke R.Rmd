@@ -20,7 +20,11 @@ library(RSQLite)
 
 ```{r}
 #pastikan ganti path
+
 conn <- dbConnect(RSQLite::SQLite(), "datanovel (1).sqlite")  # Buka kembali
+=======
+conn <- dbConnect(RSQLite::SQLite(), "datanovel (1).sqlite")  # Buka kembali
+
 dbListTables(conn)  # Coba cek lagi
 ```
 

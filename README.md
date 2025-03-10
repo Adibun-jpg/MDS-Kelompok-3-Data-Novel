@@ -1,3 +1,4 @@
+
 # Designer Database (Database-Manager branch)
 📍 Tugas di GitHub:
 
@@ -6,3 +7,7 @@
 - Menentukan indeks dan optimasi query.
 
 update 3 maret 2025
+=======
+# MAIN MANAJEMEN DATA STATISTIKA
+ Project ini merupakan Data Novel yang akan dibentuk menjadi sebuah dashboard dan terbagi menjadi 5 Role
+
