@@ -1,0 +1,91 @@
+optimation query
+
+#tampil all TABLE
+
+select * from novel
+select * from penerbit
+select * from penulis
+select * from ulasan
+
+#novel rating terbaik
+
+select n.judul, p.penulis, n.tahun_terbit, n.ISBN, n.bahasa, n.rating_novel
+from novel n
+left join penulis p  
+on n.id_penulis = p.id_penulis
+group by n.judul, p.penulis, n.tahun_terbit, n.ISBN, n.bahasa, n.rating_novel
+ORDER BY rating_novel DESC
+LIMIT 3
+
+# all novel
+select * from novel
+
+# kategori
+select distinct kategori  from novel
+
+select * from novel
+where kategori ="Bukan Fiksi"
+
+select * from novel
+where kategori ="Fantasi"
+
+Select * from novel
+where kategori ="Fiksi"
+
+Select * from novel
+where kategori ="Horor"
+
+Select * from novel
+where kategori ="Literatur Indonesia"
+
+Select * from novel
+where kategori ="Romansa"
+
+# total penulis = 37
+select count (distinct id_penulis) from penulis
+
+# total buku = 1258
+select sum (jumlah_buku) from penulis
+
+#  penulis karya terbanyk
+select 
+penulis,
+sum (jumlah_buku) as total_buku
+ from penulis
+group by penulis
+ORDER BY total_buku DESC
+LIMIT 3
+
+#  penulis karya terbanyk
+SELECT p.penulis, 
+       AVG(n.rating_novel) AS rata_rating, 
+       p.jumlah_buku
+FROM penulis p
+JOIN novel n ON p.id_penulis = n.id_penulis
+GROUP BY p.id_penulis, p.jumlah_buku
+ORDER BY rata_rating DESC
+LIMIT 3;
+
+# jumlah ulasan 245
+
+select count (id_user)
+from ulasan
+
+# rating2 rata 3,96
+select AVG(rating_user) as avg_rating
+from ulasan
+
+#ulasan group by buku 
+SELECT u.nama_user, u.ulasan, u.rating_user, n.judul
+FROM ulasan AS u
+LEFT JOIN novel AS n ON u.id_novel = n.id_novel
+WHERE n.judul = "Bumi Manusia"
+order by rating_user DESC;
+
+# total penerbit 25
+select count (distinct id_penerbit) from penerbit
+# total kota
+select count (distinct alamat) from penerbit
+
+
+
