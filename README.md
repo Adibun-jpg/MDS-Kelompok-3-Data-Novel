@@ -207,25 +207,18 @@ Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir 
 #### ⚙️ **Back-End Developer _(Plot Builder)_**  
 👨‍💻 **[Adib Roisilmi Abdullah](https://github.com/Adibun-jpg)**  
 📌 _Menulis "alur cerita" di balik layar agar platform berjalan lancar dan responsif._  
-- Mengembangkan sistem dengan **`server.R`**  
-- Mengelola API dan integrasi data  
-- Menjaga performa backend agar tetap optimal  
 
 #### 🗄 **Database Manager _(Librarian of Data)_**  
 👩‍💻 **[Sely Fitriatun Wakhidah](https://github.com/sel599)**  
 📌 _Mengelola dan mengamankan "rak buku" digital agar setiap data tersusun rapi dan siap diakses._  
-- Manajemen dan administrasi database  
 
 #### 🏗 **Database Designer _(Story Architect)_**  
 👨‍💻 **[Naufalia Alfiryal](https://github.com/Naufaliaa)**  
 📌 _Menyusun "kerangka cerita" agar setiap bagian data saling terhubung dengan baik._  
-- Merancang skema database
 
 #### 📝 **Technical Writer _(Storyteller of Code)_**  
 👨‍💻 **[Muhammad Rizal](https://github.com/rizalmmd)**  
 📌 _Menulis panduan agar setiap pengguna bisa memahami dan menikmati "cerita" di Chapter & Coffee._  
-- Menyusun dokumentasi teknis dan user guide  
-- Mengelola knowledge base untuk tim dan pengguna  
 
 ---
 
