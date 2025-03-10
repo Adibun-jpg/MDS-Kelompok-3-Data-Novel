@@ -15,3 +15,63 @@ ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencak
 # Skema Database
 
 ![Skema Database](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/Designer/Skema%20Database%20Novel.jpg)
+
+# Tabel Novel
+```sql
+CREATE TABLE "novel" (
+    "id_novel" TEXT,
+    "id_penulis" TEXT,
+    "id_penerbit" TEXT,
+    "judul" TEXT,
+    "ISBN" TEXT,
+    "bahasa" TEXT,
+    "tahun_terbit" INTEGER,
+    "edisi" TEXT,
+    "jumlah_halaman" INTEGER,
+    "deskripsi" TEXT,
+    "rating_novel" INTEGER,
+    "kategori" TEXT,
+    "harga" TEXT,
+    "link" TEXT,
+    "Sampul" TEXT,
+    PRIMARY KEY("id_novel"),
+    FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
+    FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
+);
+```
+
+# Tabel Penerbit
+```sql
+CREATE TABLE "penerbit" (
+    "id_penerbit" TEXT,
+    "nama_penerbit" TEXT,
+    "alamat" TEXT,
+    PRIMARY KEY("id_penerbit")
+);
+```
+
+# Tabel Penulis
+```sql
+CREATE TABLE "penulis" (
+    "id_penulis" TEXT,
+    "penulis" TEXT,
+    "tempat_lahir" TEXT,
+    "tanggal_lahir" TEXT,
+    "jumlah_buku" INTEGER,
+    PRIMARY KEY("id_penulis")
+);
+```
+
+# Tabel Ulasan
+```sql
+CREATE TABLE "ulasan" (
+    "id_user" TEXT,
+    "id_novel" TEXT,
+    "nama_user" TEXT,
+    "tanggal_ulasan" TEXT,
+    "ulasan" TEXT,
+    "rating_user" REAL,
+    PRIMARY KEY("id_user"),
+    FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
+);
+```
