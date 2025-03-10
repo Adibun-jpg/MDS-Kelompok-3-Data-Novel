@@ -16,23 +16,23 @@
 # Chapter and Coffee
 Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel dan asik. Dari novel paling hits, penulis dengan karya terbanyak, hingga kategori yang pas buat mood kamu—semuanya ada di sini! Buka halaman, temukan cerita, dan biarkan Chapter & Coffee jadi tempat terbaik untuk eksplorasi novel favoritmu. Karena setiap cerita layak untuk dinikmati! ✨📖
 
-## 📌 Fitur Utama
+## 📌 Fitur Utama  
 
-#### 1️⃣ Pencarian Novel
-- Cari novel favorit Anda dengan mengetikkan judul di kolom pencarian.
-- Sistem pencarian cepat dan akurat untuk menemukan novel yang Anda inginkan.
+### 1️⃣ **Pencarian Novel**  
+- Cari novel berdasarkan judul dengan sistem pencarian cepat dan akurat.  
 
-#### 2️⃣ Novel Terbaik Berdasarkan Rating
-- Menampilkan novel dengan rating tertinggi untuk rekomendasi terbaik.
-- Informasi detail seperti penulis, tahun terbit, ISBN, dan bahasa tersedia di setiap novel.
+### 2️⃣ **Rekomendasi Novel Terbaik**  
+- Menampilkan novel dengan rating tertinggi sebagai rekomendasi utama.  
+- Detail lengkap seperti penulis, tahun terbit, ISBN, dan bahasa tersedia.  
 
-#### 3️⃣ Koleksi Novel
-- Menyediakan berbagai novel dengan informasi mendetail.
-- Novel disusun dalam tampilan kartu untuk kemudahan eksplorasi.
-- Tombol **Read More** untuk melihat detail lengkap dari setiap novel.
+### 3️⃣ **Koleksi Novel & Ulasan Pengguna**  
+- Menyediakan berbagai novel dalam tampilan kartu yang interaktif.  
+- Fitur **Read More** untuk melihat detail novel dan ulasan pengguna.  
+- Ulasan pengguna menampilkan total ulasan, rating, serta kutipan dari pembaca.  
 
-#### 4️⃣ Navigasi Mudah
-- Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
+### 4️⃣ **Navigasi Mudah**  
+- Sidebar untuk akses cepat ke **Penulis, Penerbit, Ulasan**, dan **Statistik Novel**.  
+- Visualisasi seperti jumlah penerbit, kota dengan penerbit terbanyak, serta **peta interaktif** lokasi penerbit buku.  
 
 # Tampilan Halaman
 Website Chapter & Coffee dilengkapi dengan berbagai fitur yang mempermudah pengguna dalam mencari dan mengeksplorasi novel. Dari daftar novel paling favorit, penulis dengan karya terbanyak, hingga rekomendasi berdasarkan kategori—semuanya dirancang untuk membantu pengguna menemukan bacaan yang paling pas. Adapun fitur dari setiap sidebar di website Chapter & Coffee adalah sebagai berikut:
