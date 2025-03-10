@@ -42,13 +42,13 @@ Website Chapter & Coffee dilengkapi dengan berbagai fitur yang mempermudah pengg
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Home.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Menampilkan informasi judul novel, tahun terbit, penulis, ISBN, rating tertinggi, serta koleksi novel berdasarkan kategori, dengan fitur pencarian dan navigasi untuk eksplorasi lebih lanjut.
 
-- Tampilan isi novel
+- Sekilas tentang novel
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Sekilas%20Tentang%20Novel.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Menampilkan detail novel yang dipilih, termasuk judul, penulis, tahun terbit, bahasa, harga, serta sinopsis singkat, dengan opsi untuk membeli novel dan kembali ke daftar koleksi.
    </br>
 
 2. **Penulis** <br>
@@ -56,7 +56,7 @@ Tampilan Halam **"Penulis"**
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Menampilkan informasi jumlah penulis dan total buku yang diterbitkan, daftar penulis terfavorit berdasarkan jumlah karya, serta tabel daftar penulis novel beserta detailnya.
    <br>
 
 3. **Penerbit** <br>
@@ -64,7 +64,7 @@ Tampilan Halam **"Penerbit"**
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penerbit.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Menampilkan jumlah total penerbit dan jumlah kota yang memiliki penerbit, serta peta interaktif yang menunjukkan lokasi penerbit buku di berbagai kota.
    <br>
 
 4. **Ulasan** <br>
@@ -72,13 +72,13 @@ Tampilan Halam **"Penerbit"**
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Menampilkan jumlah total ulasan, rating rata-rata, dan daftar ulasan pengguna terhadap beberapa novel. Setiap ulasan mencakup nama pengguna, rating bintang, serta ulasan oleh pengguna.
 
 - Tampilan ulasan pengguna
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan%20oleh%20Pengguna.jpeg">
    </p>
-     Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+     Dengan menekan tombol "Selengkapnya", akan muncul pop-up berisi detail lengkap ulasan, termasuk nama pengulas, judul buku, rating, dan isi ulasan secara penuh.
    <br>
 
 5. **Tim Chapter & Coffee** <br>
