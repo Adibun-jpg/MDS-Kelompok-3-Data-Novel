@@ -461,12 +461,6 @@ output$novel_cards <- renderUI({
                     a(href = books$link[i], 
                       class = "btn btn-success",
                       icon("shopping-cart"), " Beli Di Sini"),
-                    
-                    # Ikon Bookmark
-                    actionButton(inputId = paste0("btn_wishlist_", book_id), 
-                                 label = "Wishlist", 
-                                 icon = icon("heart"), 
-                                 class = "btn-danger")
                 ),
                   hr(),
                   p(books$deskripsi[i])
@@ -674,8 +668,8 @@ output$team_mds <- renderUI({
   team_data <- data.frame(
     nama = c("Adib Roisilmi Abdullah", "Muhammad Rizal", "Baiq Nina Febriati", "Naufalia Alfiryal", "Sely Wakhidah"),
     role = c("Back-End", "Copy Writer", "Front-End", "Designer",  "Database Manager"),
-    nim = c("M0501241039", "M0501241040", "M0501241041", "M0501241042", "M0501241042"),
-    foto = c("images/IMG_2028.jpeg", "images/IMG_2028.jpeg", "images/IMG_2028.jpeg", "images/IMG_2028.jpeg", "images/IMG_2028.jpeg")
+    nim = c("M0501241039", "M0501241085", "M0501241063", "M0501241042", "M0501241038"),
+    foto = c("images/IMG_2028.jpeg", "images/Rizal.jpg", "images/Nina.jpg", "images/Nau.jpg", "images/Sely.jpg")
   )
 
   fluidRow(
