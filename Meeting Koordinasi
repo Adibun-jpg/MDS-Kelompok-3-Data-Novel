@@ -1,0 +1,28 @@
+Notes hasil diskusi 27 Feb :
+Isi Sumary Statistik : 
+1. Total Novel yang di kelola 
+2. total count tahun terbit
+3. filter by penerbit (count jmlh novel)
+4. filter by klasifikasi novel (count)
+5. total count tahun terbit
+6. Kategori Novel yang di terbitkan di wilayah X
+
+
+Penambahan Kategori Novel : Fiksi, Bukan Fiksi, Romansa,Literatur Indonesia, Horor, Fantasi
+Menampilkan Top Rating, Top Penulis pada setiap Sub Folder
+
+
+Missing Value ISBN : NUll => Tidak Terdaftar
+
+Urutan Subfolder :
+1. Sumary
+2. Cari Novel Di Sini
+3. Ulasan
+4. Penulis
+5. Penerbit
+
+Ulasan : 
+Novel, penulis, ulasan, 
+
+Penambahan kolom : Harga, link beli , kategori pada table novel
+
