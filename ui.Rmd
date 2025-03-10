@@ -6,7 +6,7 @@ output:
 ---
 
 
-```{r Fix}
+```{r}
 ui <- dashboardPage(
    dashboardHeader(
     title = tagList(
