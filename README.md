@@ -46,6 +46,8 @@ CREATE TABLE "penerbit" (
     "id_penerbit" TEXT,
     "nama_penerbit" TEXT,
     "alamat" TEXT,
+    "latitude" TEXT,
+    "longitude" TEXT,
     PRIMARY KEY("id_penerbit")
 );
 ```
