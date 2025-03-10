@@ -52,10 +52,11 @@ ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencak
 ## 🚀 Software yang Digunakan
 - **Frontend:** RShiny
 - **Backend:** RStudio
-- **Database:** MySQl
+- **Database:** SQLite
 
 # Deskripsi Data atau Data Synopsis
 ## :abacus: Membuat Database
+create database datanovel1;
 
 Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
@@ -81,19 +82,26 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 dengan query sebagai berikut:
 
 ```{r}
-dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
-    id_novel VARCHAR(50) PRIMARY KEY,
-    id_penulis VARCHAR(50),
-    id_penerbit VARCHAR(50),
-    judul VARCHAR(255),
-    ISBN VARCHAR(100),
-    bahasa VARCHAR(50),
-    tahun_terbit INT,
-    edisi VARCHAR(255),
-    jumlah_halaman INT,
-    deskripsi TEXT,
-    rating_novel FLOAT
-);")
+CREATE TABLE "novel" (
+	"id_novel"	TEXT,
+	"id_penulis"	TEXT,
+	"id_penerbit"	TEXT,
+	"judul"	TEXT,
+	"ISBN"	TEXT,
+	"bahasa"	TEXT,
+	"tahun_terbit"	INTEGER,
+	"edisi"	TEXT,
+	"jumlah_halaman"	INTEGER,
+	"deskripsi"	TEXT,
+	"rating_novel"	INTEGER,
+	"kategori"	TEXT,
+	"harga"	TEXT,
+	"link"	TEXT,
+	"Sampul"	TEXT,
+	PRIMARY KEY("id_novel"),
+	FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
+	FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
+)
 ```
 
 
@@ -114,13 +122,14 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 dengan query sebagai berikut:
 
 ```{r}
-query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
-    id_penulis VARCHAR(50) PRIMARY KEY,
-    penulis VARCHAR(50),
-    tempat_lahir VARCHAR(100),
-    tanggal_lahir DATE,
-    jumlah_buku INT
-    );")
+CREATE TABLE "penulis" (
+	"id_penulis"	TEXT,
+	"penulis"	TEXT,
+	"tempat_lahir"	TEXT,
+	"tanggal_lahir"	TEXT,
+	"jumlah_buku"	INTEGER,
+	PRIMARY KEY("id_penulis")
+)
 ```
 
 
@@ -137,11 +146,14 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 dengan query sebagai berikut:
 
 ```{r}
-query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
-    id_penerbit VARCHAR(50) PRIMARY KEY,
-    nama_penerbit VARCHAR(250),
-    alamat VARCHAR(255)
-    );")
+CREATE TABLE "penerbit" (
+	"id_penerbit"	TEXT,
+	"nama_penerbit"	TEXT,
+	"alamat"	TEXT,
+	"latitude"	TEXT,
+	"longitude"	TEXT,
+	PRIMARY KEY("id_penerbit")
+)
 ```
 
 
@@ -161,14 +173,16 @@ Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating d
 dengan query berikut:
 
 ```{r}
-query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
-    id_user VARCHAR(50) PRIMARY KEY,
-    id_novel VARCHAR(50),
-    nama_user VARCHAR(100),
-    tanggal_ulasan VARCHAR(100),
-    ulasan TEXT,
-    rating_user FLOAT
-    );")
+CREATE TABLE "ulasan" (
+	"id_user"	TEXT,
+	"id_novel"	TEXT,
+	"nama_user"	TEXT,
+	"tanggal_ulasan"	TEXT,
+	"ulasan"	TEXT,
+	"rating_user"	REAL,
+	PRIMARY KEY("id_user"),
+	FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
+)
 ```
 
 # :open_file_folder: Folder Structure atau Rak Buku
