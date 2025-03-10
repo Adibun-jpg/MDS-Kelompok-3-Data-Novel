@@ -200,9 +200,7 @@ Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir 
 
 #### 🎨 **Front-End Developer _(Cover Designer)_**  
 👩‍💻 **[Baiq Nina Febriati](https://github.com/ninafebriati)**  
-📌 _Merancang tampilan Chapter & Coffee agar semenarik sampul buku yang menggoda untuk dibuka._  
-- Mengembangkan **UI/UX** dengan `ui.R`  
-- Mendesain interface dan komponen interaktif   
+📌 _Merancang tampilan Chapter & Coffee agar semenarik sampul buku yang menggoda untuk dibuka._   
 
 #### ⚙️ **Back-End Developer _(Plot Builder)_**  
 👨‍💻 **[Adib Roisilmi Abdullah](https://github.com/Adibun-jpg)**  
