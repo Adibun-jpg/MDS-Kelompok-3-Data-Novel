@@ -1,0 +1,329 @@
+---
+title: "MDS"
+author: "Adib Roisilmi Abdullah"
+date: "2025-02-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Manajemen Data Statistika
+
+**Kelompok 3:**
+
+-   Adib Roisilmi Abdullah
+
+-   Muhammad Rizal
+
+-   Baiq Nina Febriati
+
+-   Naufalia Alfiryal
+
+-   Sely Wakhidah
+
+### - Memasukkan Library
+
+```{r cars}
+library(DBI)
+library(RMySQL)
+library(readr)
+library(shiny)
+```
+
+### - Connect ke Database
+
+```{r pressure, echo=FALSE}
+con <- dbConnect(
+  RMySQL::MySQL(),
+  dbname = "MDS5",
+  host = "127.0.0.1",
+  user = "root",
+  password = "",
+  port = 5555,
+  client.flag = CLIENT_LOCAL_FILES
+)
+```
+
+### - Cek Koneksi
+
+```{r}
+dbListTables(con)
+```
+
+```{r}
+dbGetQuery(con, "SELECT * FROM novel1")
+```
+
+## A. Data Novel
+
+### - Memasukkan Data Novel ke Data Base
+
+```{r}
+data_novel <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/data novel kategori fix.csv", stringsAsFactors = FALSE)
+
+head(data_novel)
+str(data_novel)
+```
+
+#### - Mengecek Data Hilang
+
+```{r}
+data_novel[data_novel == ""] <- "Belum Terdaftar"
+colSums(is.na(data_novel == "Belum Terdaftar"))
+```
+
+#### - Mengecek Data Duplikat
+
+sum(duplicated(data_novel))
+
+```{r}
+data_novel[data_novel$id_novel %in% data_novel$id_novel[duplicated(data_novel$id_novel)], ]
+
+table(data_novel$tahun_terbit)
+```
+
+### - Buat Tabel Novel di MySQL
+
+```{r}
+dbExecute(con, "CREATE TABLE IF NOT EXISTS novel1 (
+    id_novel VARCHAR(50) PRIMARY KEY,
+    id_penulis VARCHAR(50),
+    id_penerbit VARCHAR(50),
+    judul VARCHAR(255),
+    ISBN VARCHAR(100),
+    bahasa VARCHAR(50),
+    tahun_terbit INT,
+    edisi VARCHAR(255),
+    jumlah_halaman INT,
+    deskripsi TEXT,
+    rating_novel FLOAT
+);") 
+```
+
+### - Memastikan Apakah Tabel Novel telah terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE novel1;")
+```
+
+### - Memasukkan Data Novel ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "novel1", data_novel, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat apakah Data Novel Telah masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM novel1 LIMIT 10;")
+```
+
+## B. Data Penulis
+
+### - Memasukkan Data Penerbit ke Databae
+
+```{r}
+data_penulis <- read.csv("C:\\Users\\ASUS\\Downloads\\New folder\\Kelompok_3\\penulis.csv", stringsAsFactors = FALSE)
+
+head(data_penulis)  # Melihat beberapa baris pertama
+str(data_penulis)   # Melihat struktur data
+```
+
+```{r}
+data_penulis[data_penulis == ""] <- NA
+colSums(is.na(data_penulis))
+```
+
+### - Buat Tabel Penulis di MySQL
+
+```{r}
+query <- dbExecute(con,"CREATE TABLE IF NOT EXISTS penulis1 (
+    id_penulis VARCHAR(50) PRIMARY KEY,
+    penulis VARCHAR(50),
+    tempat_lahir VARCHAR(100),
+    tanggal_lahir DATE,
+    jumlah_buku INT
+    );")
+```
+
+### - Memastikan Apakah Tabel Penulis telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE penulis2;")
+```
+
+### - Memasukkan Data Penulis ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "penulis2", data_penulis, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Penulis Telah Masuk ke dalam Tavel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM penulis2 LIMIT 10;")
+```
+
+## C. Data Penerbit
+
+### - Memasukkan Data Penerbit ke Database
+
+```{r}
+data_penerbit <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/penerbit.csv", stringsAsFactors = FALSE)
+
+head(data_penerbit)  # Melihat beberapa baris pertama
+str(data_penerbit)   # Melihat struktur data
+```
+
+```{r}
+data_penerbit[data_penerbit == ""] <- NA
+colSums(is.na(data_penerbit))
+```
+
+### - Membuat Tabel Penerbit di MYSQL
+
+```{r}
+query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS penerbit1 (
+    id_penerbit VARCHAR(50) PRIMARY KEY,
+    nama_penerbit VARCHAR(250),
+    alamat VARCHAR(255)
+    );")
+```
+
+### - Memastikan Apakah Tabel Penerbit telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE penerbit1;")
+```
+
+### - Memasukkan Data Penerbit ke dalam Tabel
+
+```{r}
+dbWriteTable(con, "penerbit1", data_penerbit, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Penerbit Telah Masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM penerbit1 LIMIT 10;")
+```
+
+## D. Data Ulasan
+
+### - Memasukkan Data Ulasan ke Database
+
+```{r}
+data_ulasan <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/ulasan.csv", stringsAsFactors = FALSE)
+
+head(data_ulasan)  # Melihat beberapa baris pertama
+str(data_ulasan)   # Melihat struktur data
+```
+
+```{r}
+data_ulasan[data_ulasan == ""] <- NA
+colSums(is.na(data_ulasan))
+
+View(data_ulasan)
+```
+
+### - Membuat Tabel Ulasan di MySQL
+
+```{r}
+query <- dbExecute(con, "CREATE TABLE IF NOT EXISTS ulasan1 (
+    id_user VARCHAR(50) PRIMARY KEY,
+    id_novel VARCHAR(50),
+    nama_user VARCHAR(100),
+    tanggal_ulasan VARCHAR(100),
+    ulasan TEXT,
+    rating_user FLOAT
+    );")
+```
+
+### - Memastikan Apakah Tabel Ulasan Telah Terbentuk
+
+```{r}
+dbGetQuery(con, "DESCRIBE ulasan1;")
+```
+
+### - Memasukkan Data Ulasan ke Dalam Tabel
+
+```{r}
+dbWriteTable(con, "ulasan1", data_ulasan, append = TRUE, row.names = FALSE)
+```
+
+### - Melihat Apakah Data Ulasan Telah Masuk ke dalam Tabel
+
+```{r}
+dbGetQuery(con, "SELECT * FROM ulasan1 LIMIT 10;")
+```
+
+```{r}
+View(data_ulasan)
+```
+
+## E. Sampul Buku
+
+### - Memasukkan Sampul Buku ke Database
+
+```{r}
+sampul_buku <- read.csv("C:/Users/ASUS/Downloads/New folder/Kelompok_3/sampul buku.csv", stringsAsFactors = FALSE)
+
+head(sampul_buku)  # Melihat beberapa baris pertama
+str(sampul_buku)   # Melihat struktur data
+
+```
+
+## G. Data Kota untuk penerbit
+
+```{r}
+koordinat_kota <- data.frame(
+  alamat = c("Bandung", "Banten", "Bogor", "Jakarta", "Yogyakarta", "Sleman", "Malang"),
+  latitude = c(-6.9175, -6.4058, -6.5950, -6.2088, -7.7956, -7.7156, -7.9666),
+  longitude = c(107.6191, 106.1641, 106.8166, 106.8456, 110.3695, 110.3555, 112.6326)
+)
+```
+
+## F. Merge Sesuai Kebutuhan
+
+### - Menggabungkan data_novel dengan data_sampul berdasarkan judul
+
+```{r}
+# Menggabungkan data_novel dengan data_sampul berdasarkan judul
+data_novel <- merge(data_novel, sampul_buku[, c("judul", "sampul")], 
+                    by = "judul", all.x = TRUE)
+
+# Cek hasilnya
+head(data_novel)
+```
+
+### - Menggabungkan data_novel dengan data_penulis berdasarkan id_penulis
+
+```{r}
+# Menggabungkan data_novel dengan data_penulis berdasarkan id_penulis
+data_novel <- merge(data_novel, data_penulis[, c("id_penulis", "penulis")], 
+                    by = "id_penulis", all.x = TRUE)
+
+# Cek hasilnya
+head(data_novel)
+```
+
+### - Menggabungkan data_ulasan dengan data_novel berdasarkan id_novel
+
+```{r}
+# Menggabungkan data_novel dengan data_penulis berdasarkan id_penulis
+data_ulasan <- merge(data_ulasan, data_novel[, c("id_novel", "judul")], 
+                    by = "id_novel", all.x = TRUE)
+
+# Cek hasilnya
+head(data_ulasan)
+```
+
+### - Menggabungkan data_kota dengan data_penerbit alamat
+
+```{r}
+# Gabungkan data penerbit dengan koordinat kota
+data_kota <- merge(data_penerbit, koordinat_kota, by = "alamat")
+
+```
