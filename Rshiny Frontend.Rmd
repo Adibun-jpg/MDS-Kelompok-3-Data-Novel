@@ -208,7 +208,7 @@ ui <- dashboardPage(
           box(
             title = "Jumlah Novel per Klasifikasi",
             plotOutput("novels_per_category_plot"),
-            width = 6, status = "success", solidHeader = 
+            width = 6, status = "success", solidHeader = TRUE
           ),
           
           # Pie Chart for Number of Novels per Publisher
