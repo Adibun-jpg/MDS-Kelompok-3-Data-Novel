@@ -48,7 +48,7 @@ Website Chapter & Coffee dilengkapi dengan berbagai fitur yang mempermudah pengg
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Sekilas%20Tentang%20Novel.jpeg">
    </p>
-   Menampilkan detail novel yang dipilih, termasuk judul, penulis, tahun terbit, bahasa, harga, serta sinopsis singkat, dengan opsi untuk membeli novel dan kembali ke daftar koleksi.
+   Menampilkan detail novel yang dipilih, termasuk judul, penulis, tahun terbit, bahasa, harga, serta sinopsis singkat, dengan opsi untuk membeli novel yang mengarah ke toko buku online
    </br>
 
 2. **Penulis** <br>
