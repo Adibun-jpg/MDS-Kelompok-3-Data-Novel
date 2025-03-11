@@ -1,24 +1,25 @@
 
-# === Load Library ===
+# === 1. Load Library ===
 library(shiny)
 library(shinydashboard)
 library(DT)
 library(ggplot2)
 library(readr)
 library(dplyr)
-library(leaflet)  
+library(leaflet)
+library(DBI)
+library(RSQLite)
 
-# === Memanggil Koneksi Database ===
-conn <- dbConnect(RSQLite::SQLite(), "C:/Users/ASUS/Downloads/New folder/datanovel.sqlite")  # Buka kembali
-dbListTables(conn)
+#pastikan ganti path
+conn <- dbConnect(RSQLite::SQLite(), "C:/Users/ASUS/Downloads/New folder/datanovel2.sqlite")  # Buka kembali
+dbListTables(conn)  # Coba cek lagi
 
-# === Konfigurasi Database ===
+# Baca seluruh data dari tabel
 data_novel <- dbGetQuery(conn, "SELECT * From novel")
-data_penerbit <- dbGetQuery(conn, "SELECT * From penerbit")
 data_ulasan <- dbGetQuery(conn, "SELECT * From ulasan")
 data_penulis <- dbGetQuery(conn, "SELECT * From penulis")
 
-# === Menggabungkan data_ulasan dengan data_novel berdasarkan id_novel ===
+#cek sample query
 q1 <- "
 SELECT 
     u.id_user, 
@@ -35,12 +36,11 @@ ON u.id_novel = n.id_novel;"
 # Lihat hasilnya
 data_ulasan <- dbGetQuery(conn, q1)
 
-# === Menggabungkan kolom penulis dari data_penulis ke data_novel berdasarkan id_penulis ===
-q3 <- "
-SELECT 
+#join 
+q2 <- "SELECT 
     n.id_novel, 
     n.id_penulis, 
-    p.penulis AS penulis,
+    p.penulis_,
     n.id_penerbit, 
     n.judul, 
     n.ISBN, 
@@ -59,9 +59,19 @@ LEFT JOIN penulis p
 ON n.id_penulis = p.id_penulis;"
 
 # Lihat hasilnya
-data_ulasan <- dbGetQuery(conn, q3)
+data_novel <- dbGetQuery(conn, q2)
 
-# === UI: Struktur Dashboard ===
+# Close connection
+dbDisconnect(conn)
+
+#Memanggil data penerbit
+data_penerbit <- read.csv("C:/Users/ASUS/Downloads/New folder/data_penerbit - Sheet1.csv", stringsAsFactors = FALSE)
+
+#Merubah NA
+data_novel[data_novel == ""] <- "Belum Terdaftar"
+colSums(is.na(data_novel == "Belum Terdaftar"))
+
+# === 2. UI: Struktur Dashboard ===
 ui <- dashboardPage(
   dashboardHeader(
     title = tagList(

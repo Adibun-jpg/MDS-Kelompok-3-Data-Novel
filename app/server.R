@@ -1,4 +1,9 @@
 library(shiny)
+library(ggplot2)
+
+#pastikan ganti path
+conn <- dbConnect(RSQLite::SQLite(), "C:/Users/ASUS/Downloads/New folder/datanovel.sqlite")  # Buka kembali
+dbListTables(conn)  # Coba cek lagi
 
 server <- function(input, output, session) {
   
@@ -14,7 +19,7 @@ server <- function(input, output, session) {
         lapply(1:nrow(books), function(i) {
           div(style = "background: white; padding: 15px; border-radius: 10px;",
               h4(books$judul[i]),
-              p(paste("Penulis:", books$penulis[i])),
+              p(paste("Penulis:", books$penulis_[i])),
               p(paste("Tahun Terbit:", books$tahun_terbit[i]))
           )
         })
@@ -64,7 +69,7 @@ server <- function(input, output, session) {
                   # Informasi Novel
                   div(style = "text-align: left; width: 100%;",
                       h3(novel$judul[i], style = "font-size: 14px; font-weight: bold;"),
-                      p(paste("Penulis:", novel$penulis[i]), style = "font-size: 14px;"),
+                      p(paste("Penulis:", novel$penulis_[i]), style = "font-size: 14px;"),
                       p(paste("Tahun Terbit:", novel$tahun_terbit[i]), style = "font-size: 14px; color: gray;"),
                       p(paste("ISBN:", ifelse(is.na(novel$ISBN[i]) | novel$ISBN[i] == "", "Not Available", novel$ISBN[i]))),
                       p(paste("Bahasa:", novel$bahasa[i])),
@@ -128,13 +133,13 @@ server <- function(input, output, session) {
                      min-height: 320px;",
               
               # Gambar sampul novel
-              img(src = books$sampul[i], width = "auto", height = "200px",
+              img(src = books$Sampul[i], width = "auto", height = "200px",
                   style = "border-radius: 10px; box-shadow: 2px 2px 5px rgba(0,0,0,0.2);"),
               
               # Informasi Novel
               div(style = "text-align: left; margin-top: 10px; width: 100%;",
                   h4(books$judul[i], style = "font-size: 18px; font-weight: bold;"),
-                  p(paste("Penulis:", books$penulis[i]), style = "font-size: 14px;"),
+                  p(paste("Penulis:", books$penulis_[i]), style = "font-size: 14px;"),
                   p(paste("Kategori:", books$kategori[i]), style = "font-size: 14px; color: gray;"),
                   p(paste("Tahun Terbit:", books$tahun_terbit[i]), style = "font-size: 14px; color: gray;"),
                   p(paste("ISBN:", books$ISBN[i]), style = "font-size: 14px; color: gray;"),
@@ -168,11 +173,11 @@ server <- function(input, output, session) {
           title = "Sekilas Tentang Novel", 
           size = "m",
           div(style = "border-radius: 10px; display: flex; align-items: center; gap: 20px; padding: 20px;",
-              img(src = books$sampul[i], width = "150px", height = "220px",
+              img(src = books$Sampul[i], width = "150px", height = "220px",
                   style = "border-radius: 10px; box-shadow: 5px 5px 10px rgba(0,0,0,0.2);"),
               div(style = "text-align: justify; width: 100%;",
                   h4(books$judul[i]),
-                  p(paste("Penulis:", books$penulis[i])),
+                  p(paste("Penulis:", books$penulis_[i])),
                   p(paste("Tahun Terbit:", books$tahun_terbit[i])),
                   p(paste("ISBN:", books$ISBN[i])),
                   p(paste("Bahasa:", books$bahasa[i])),
@@ -205,7 +210,7 @@ server <- function(input, output, session) {
   # Menentukan 3 Penulis Terbaik berdasarkan jumlah buku yang ditulis
   top_authors <- reactive({
     data_novel %>%
-      count(penulis, name = "total_karya") %>%
+      count(penulis_, name = "total_karya") %>%
       arrange(desc(total_karya)) %>%
       head(3)  # Ambil 3 penulis terbaik
   })
@@ -243,7 +248,7 @@ server <- function(input, output, session) {
                   
                   # Informasi Penulis
                   div(style = "text-align: left; width: 100%;",
-                      h3(authors$penulis[i], style = "font-size: 18px; font-weight: bold;"),
+                      h3(authors$penulis_[i], style = "font-size: 18px; font-weight: bold;"),
                       p(paste("Tempat Lahir:", authors1$tempat_lahir[i]), style = "font-size: 14px; color: gray;"),
                       p(paste("Tanggal Lahir:", authors1$tanggal_lahir[i]), style = "font-size: 14px; color: gray;"),
                       p(paste("Total Karya:", authors$total_karya[i]), style = "font-size: 14px; color: black;"),
@@ -269,7 +274,7 @@ server <- function(input, output, session) {
   
   # Render Peta Leaflet
   output$map_penerbit <- renderLeaflet({
-    leaflet(data_kota) %>%
+    leaflet(data_penerbit) %>%
       addTiles() %>%
       addMarkers(
         ~longitude, ~latitude,
@@ -283,7 +288,7 @@ server <- function(input, output, session) {
     if (is.null(click)) return()  # Jika tidak ada klik, jangan lanjut
     
     # Ambil daftar penerbit dari kota yang diklik
-    penerbit_dari_kota <- data_kota %>%
+    penerbit_dari_kota <- data_penerbit %>%
       filter(alamat == click$id) %>%
       pull(nama_penerbit)
     
@@ -424,7 +429,7 @@ server <- function(input, output, session) {
                   # Informasi Tim
                   div(style = "text-align: center; width: 100%;",
                       h3(team_data$nama[i], style = "font-size: 14px; font-weight: bold;"),
-                      p(paste("Role:", team_data$role[i]), style = "font-size: 14px;"),
+                      p(paste(team_data$role[i]), style = "font-size: 14px;"),
                       p(paste("NIM:", team_data$nim[i]), style = "font-size: 14px;")
                   )
               )
