@@ -19,16 +19,16 @@ Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel
 ## 📌 Fitur Utama  
 
 ### 1️⃣ **Pencarian Novel**  
-- Cari novel berdasarkan judul dengan sistem pencarian cepat dan akurat.  
+- Temukan novel favorit dengan cepat menggunakan fitur pencarian instan.
 
 ### 2️⃣ **Rekomendasi Novel Terbaik**  
 - Menampilkan novel dengan rating tertinggi sebagai rekomendasi utama.  
-- Detail lengkap seperti penulis, tahun terbit, ISBN, dan bahasa tersedia.  
+- Detail lengkap seperti penulis, tahun terbit, ISBN, dan bahasa yang tersedia.  
 
 ### 3️⃣ **Koleksi Novel & Ulasan Pengguna**  
 - Menyediakan berbagai novel dalam tampilan kartu yang interaktif.  
 - Fitur **Read More** untuk melihat detail novel dan ulasan pengguna.  
-- Ulasan pengguna menampilkan total ulasan, rating, serta kutipan dari pembaca.  
+- Ulasan pengguna menampilkan total ulasan, rating, serta ulasan dari pembaca.  
 
 ### 4️⃣ **Navigasi Mudah**  
 - Sidebar untuk akses cepat ke **Penulis, Penerbit, Ulasan**, dan **Statistik Novel**.  
