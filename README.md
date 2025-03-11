@@ -16,27 +16,78 @@
 # Chapter and Coffee
 Selamat datang di Chapter & Coffee! Jelajahi dunia novel dengan cara yang simpel dan asik. Dari novel paling hits, penulis dengan karya terbanyak, hingga kategori yang pas buat mood kamu—semuanya ada di sini! Buka halaman, temukan cerita, dan biarkan Chapter & Coffee jadi tempat terbaik untuk eksplorasi novel favoritmu. Karena setiap cerita layak untuk dinikmati! ✨📖
 
-## 📌 Fitur Utama
+## 📌 Fitur Utama  
 
-#### 1️⃣ Pencarian Novel
-- Cari novel favorit Anda dengan mengetikkan judul di kolom pencarian.
-- Sistem pencarian cepat dan akurat untuk menemukan novel yang Anda inginkan.
+### 1️⃣ **Pencarian Novel**  
+- Temukan novel favorit dengan cepat menggunakan fitur pencarian instan.
 
-#### 2️⃣ Novel Terbaik Berdasarkan Rating
-- Menampilkan novel dengan rating tertinggi untuk rekomendasi terbaik.
-- Informasi detail seperti penulis, tahun terbit, ISBN, dan bahasa tersedia di setiap novel.
+### 2️⃣ **Rekomendasi Novel Terbaik**  
+- Menampilkan novel dengan rating tertinggi sebagai rekomendasi utama.  
+- Detail lengkap seperti penulis, tahun terbit, ISBN, dan bahasa yang tersedia.  
 
-#### 3️⃣ Koleksi Novel
-- Menyediakan berbagai novel dengan informasi mendetail.
-- Novel disusun dalam tampilan kartu untuk kemudahan eksplorasi.
-- Tombol **Read More** untuk melihat detail lengkap dari setiap novel.
+### 3️⃣ **Koleksi Novel & Ulasan Pengguna**  
+- Menyediakan berbagai novel dalam tampilan kartu yang interaktif.  
+- Fitur **Read More** untuk melihat detail novel dan ulasan pengguna.  
+- Ulasan pengguna menampilkan total ulasan, rating, serta ulasan dari pembaca.  
 
-#### 4️⃣ Navigasi Mudah
-- Sidebar dengan kategori seperti **Penulis**, **Penerbit**, **Ulasan**, dan **Novel dalam Statistik** untuk pengalaman pengguna yang lebih baik.
+### 4️⃣ **Navigasi Mudah**  
+- Sidebar untuk akses cepat ke **Penulis, Penerbit, Ulasan**, dan **Statistik Novel**.  
+- Visualisasi seperti jumlah penerbit, kota dengan penerbit terbanyak, serta **peta interaktif** lokasi penerbit buku.  
 
 # Tampilan Halaman
-screenshoot dashboard
+Website Chapter & Coffee dilengkapi dengan berbagai fitur yang mempermudah pengguna dalam mencari dan mengeksplorasi novel. Dari daftar novel paling favorit, penulis dengan karya terbanyak, hingga rekomendasi berdasarkan kategori—semuanya dirancang untuk membantu pengguna menemukan bacaan yang paling pas. Adapun fitur dari setiap sidebar di website Chapter & Coffee adalah sebagai berikut:
 
+1. **Home** <br>
+- Tampilan Halam Utama **"Cari Novel di Sini"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Home.jpeg">
+   </p>
+   Menampilkan informasi judul novel, tahun terbit, penulis, ISBN, rating tertinggi, serta koleksi novel berdasarkan kategori, dengan fitur pencarian dan navigasi untuk eksplorasi lebih lanjut.
+
+- Sekilas tentang novel
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Sekilas%20Tentang%20Novel.jpeg">
+   </p>
+   Menampilkan detail novel yang dipilih, termasuk judul, penulis, tahun terbit, bahasa, harga, serta sinopsis singkat, dengan opsi untuk membeli novel yang mengarah ke toko buku online.
+   </br>
+
+2. **Penulis** <br>
+Tampilan Halam **"Penulis"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
+   </p>
+   Menampilkan informasi jumlah penulis dan total buku yang diterbitkan, daftar penulis terfavorit berdasarkan rating, serta tabel daftar penulis novel beserta detailnya.
+   <br>
+
+3. **Penerbit** <br>
+Tampilan Halam **"Penerbit"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penerbit.jpeg">
+   </p>
+   Menampilkan jumlah total penerbit dan jumlah kota yang memiliki penerbit, serta peta interaktif yang menunjukkan lokasi penerbit buku di berbagai kota.
+   <br>
+
+4. **Ulasan** <br>
+- Tampilan Halam **"Ulasan"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan.jpeg">
+   </p>
+   Menampilkan jumlah total ulasan, rating rata-rata, dan daftar ulasan pengguna terhadap beberapa novel. Setiap ulasan mencakup nama pengguna, rating bintang, serta ulasan oleh pengguna.
+
+- Tampilan ulasan pengguna
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Ulasan%20oleh%20Pengguna.jpeg">
+   </p>
+     Dengan menekan tombol "Selengkapnya", akan muncul pop-up berisi detail lengkap ulasan, termasuk nama pengulas, judul buku, rating, dan isi ulasan secara penuh.
+   <br>
+
+5. **Tim Chapter & Coffee** <br>
+Tampilan Halam **"Tim Chapter & Coffee"**
+   <p align="center">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
+   </p>
+   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   <br>
 # Demo
 📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
@@ -85,6 +136,28 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 
 dengan query sebagai berikut:
 
+```sql
+CREATE TABLE "novel" (
+    "id_novel" TEXT,
+    "id_penulis" TEXT,
+    "id_penerbit" TEXT,
+    "judul" TEXT,
+    "ISBN" TEXT,
+    "bahasa" TEXT,
+    "tahun_terbit" INTEGER,
+    "edisi" TEXT,
+    "jumlah_halaman" INTEGER,
+    "deskripsi" TEXT,
+    "rating_novel" INTEGER,
+    "kategori" TEXT,
+    "harga" TEXT,
+    "link" TEXT,
+    "Sampul" TEXT,
+    PRIMARY KEY("id_novel"),
+    FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
+    FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
+);
+=======
 ```{r}
 CREATE TABLE "novel" (
 	"id_novel"	TEXT,
@@ -125,6 +198,17 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 
 dengan query sebagai berikut:
 
+
+```sql
+CREATE TABLE "penulis" (
+    "id_penulis" TEXT,
+    "penulis" TEXT,
+    "tempat_lahir" TEXT,
+    "tanggal_lahir" TEXT,
+    "jumlah_buku" INTEGER,
+    PRIMARY KEY("id_penulis")
+);
+
 ```{r}
 CREATE TABLE "penulis" (
 	"id_penulis"	TEXT,
@@ -134,6 +218,7 @@ CREATE TABLE "penulis" (
 	"jumlah_buku"	INTEGER,
 	PRIMARY KEY("id_penulis")
 )
+
 ```
 
 
@@ -143,6 +228,25 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 
 | Attribute                  | Type                   | Description                     		         |
 |:---------------------------|:-----------------------|:-------------------------------------------------|
+
+| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
+| nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
+| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
+| latitude                   | character varying(255) | Titik Koordinat                     	         |	
+| longitude                  | character varying(255) | Titik Koordinat                      	         |	
+
+dengan query sebagai berikut:
+
+```sql
+CREATE TABLE "penerbit" (
+    "id_penerbit" TEXT,
+    "nama_penerbit" TEXT,
+    "alamat" TEXT,
+    "latitude" TEXT,
+    "longitude" TEXT,
+    PRIMARY KEY("id_penerbit")
+);
+
 | id_penerbit                | TEXT  | Id Penerbit                    		             |
 | nama_penerbit              | TEXT | Nama Penerbit                  		     |
 | alamat                     | TEXT | Alamat Penerbit     |	
@@ -178,6 +282,19 @@ Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating d
 
 dengan query berikut:
 
+
+```sql
+CREATE TABLE "ulasan" (
+    "id_user" TEXT,
+    "id_novel" TEXT,
+    "nama_user" TEXT,
+    "tanggal_ulasan" TEXT,
+    "ulasan" TEXT,
+    "rating_user" REAL,
+    PRIMARY KEY("id_user"),
+    FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
+);
+
 ```{r}
 CREATE TABLE "ulasan" (
 	"id_user"	TEXT,
@@ -189,6 +306,7 @@ CREATE TABLE "ulasan" (
 	PRIMARY KEY("id_user"),
 	FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
 )
+
 ```
 
 # :open_file_folder: Folder Structure atau Rak Buku
@@ -206,11 +324,8 @@ CREATE TABLE "ulasan" (
 └── 📄 README.md
 ```
 
-## 🔥 Kontribusi
-Kami selalu terbuka untuk kontribusi dari komunitas! Jika Anda ingin menambahkan fitur baru atau meningkatkan performa dashboard, silakan fork repository ini dan buat pull request.
-
 ## 📩 Hubungi Kami
-Jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercoffee.com atau kunjungi forum diskusi kami.
+Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercoffee.com.
 
 ---
 Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
@@ -219,34 +334,25 @@ Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 ### 📚 **Tim di Balik Chapter & Coffee**  
 Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir berkat tim yang menyusun kode, data, dan desain menjadi pengalaman terbaik bagi pencinta novel. Inilah para "barista" di balik platform ini!  
 
-#### 🎨 **Front-End Developer _(Cover Designer)_**  
-👩‍💻 **[Baiq Nina Febriati](https://github.com/ninafebriati)**  
-📌 _Merancang tampilan Chapter & Coffee agar semenarik sampul buku yang menggoda untuk dibuka._  
-- Mengembangkan **UI/UX** dengan `ui.R`  
-- Mendesain interface dan komponen interaktif   
+🎨 **Front-End Developer _(Cover Designer)_**  
+👩‍💻 [Baiq Nina Febriati](https://github.com/ninafebriati)  
+📌 _Merancang tampilan Chapter & Coffee agar semenarik sampul buku yang menggoda untuk dibuka._   
 
-#### ⚙️ **Back-End Developer _(Plot Builder)_**  
-👨‍💻 **[Adib Roisilmi Abdullah](https://github.com/Adibun-jpg)**  
+⚙️ **Back-End Developer _(Plot Builder)_**  
+👨‍💻 [Adib Roisilmi Abdullah](https://github.com/Adibun-jpg)  
 📌 _Menulis "alur cerita" di balik layar agar platform berjalan lancar dan responsif._  
-- Mengembangkan sistem dengan **`server.R`**  
-- Mengelola API dan integrasi data  
-- Menjaga performa backend agar tetap optimal  
 
-#### 🗄 **Database Manager _(Librarian of Data)_**  
-👩‍💻 **[Sely Fitriatun Wakhidah](https://github.com/sel599)**  
+🗄 **Database Manager _(Librarian of Data)_**  
+👩‍💻 [Sely Fitriatun Wakhidah](https://github.com/sel599)  
 📌 _Mengelola dan mengamankan "rak buku" digital agar setiap data tersusun rapi dan siap diakses._  
-- Manajemen dan administrasi database  
 
-#### 🏗 **Database Designer _(Story Architect)_**  
-👨‍💻 **[Naufalia Alfiryal](https://github.com/Naufaliaa)**  
+🏗 **Database Designer _(Story Architect)_**  
+👨‍💻 [Naufalia Alfiryal](https://github.com/Naufaliaa)  
 📌 _Menyusun "kerangka cerita" agar setiap bagian data saling terhubung dengan baik._  
-- Merancang skema database
 
-#### 📝 **Technical Writer _(Storyteller of Code)_**  
-👨‍💻 **[Muhammad Rizal](https://github.com/rizalmmd)**  
+📝 **Technical Writer _(Storyteller of Code)_**  
+👨‍💻 [Muhammad Rizal](https://github.com/rizalmmd)  
 📌 _Menulis panduan agar setiap pengguna bisa memahami dan menikmati "cerita" di Chapter & Coffee._  
-- Menyusun dokumentasi teknis dan user guide  
-- Mengelola knowledge base untuk tim dan pengguna  
 
 ---
 
