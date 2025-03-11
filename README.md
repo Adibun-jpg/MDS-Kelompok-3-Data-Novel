@@ -235,7 +235,7 @@ CREATE TABLE ulasan (
 
 # :open_file_folder: Folder Structure atau Rak Buku
 ```
-📂 MDS---Kelompok-5---Data-Novel
+📂 MDS-Kelompok-3-Data-Novel
 ├── 📁 Data
 │    ├── 📄 novel.csv
 │    ├── 📄 penerbit.csv
