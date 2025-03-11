@@ -1,89 +1,3 @@
-
-# Designer UI/UX (Designer branch)
-📍 Tugas di GitHub:
-
-- Membuat desain UI/UX dalam Figma atau Adobe XD.
-- Menyusun ikon, warna, dan layout untuk dashboard.
-- Bekerja sama dengan Front-End Developer.
-
-# ERD Novel
-
-![ERD Novel](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/ERD%20Novel%20New.jpg)
-
-ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencakup empat entitas utama, yaitu **Novel**, **Penulis**, **Penerbit**, dan **Ulasan**. Hubungan antar entitas menunjukkan bahwa satu penulis dapat menulis banyak novel (**1:M**), satu penerbit dapat menerbitkan banyak novel (**1:M**), dan satu novel dapat memiliki banyak ulasan dari berbagai pengguna (**1:M**). Struktur ini memungkinkan pengelolaan data yang sistematis, memudahkan pencarian informasi berdasarkan penulis atau penerbit tertentu, serta memungkinkan analisis ulasan dan rating yang diberikan oleh pengguna terhadap suatu novel.
-
-
-# Skema Database
-
-![Skema Database](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/Skema%20database.jpg)
-
-# Tabel Novel
-```sql
-CREATE TABLE novel (
-    id_novel TEXT NOT NULL,
-    id_penulis TEXT NOT NULL,
-    id_penerbit TEXT NOT NULL,
-    judul TEXT,
-    ISBN TEXT,
-    bahasa TEXT,
-    tahun_terbit INTEGER,
-    edisi TEXT,
-    jumlah_halaman INTEGER,
-    deskripsi TEXT,
-    rating_novel REAL,
-    kategori TEXT,
-    harga TEXT,
-    link TEXT,
-    Sampul TEXT,
-    PRIMARY KEY (id_novel)
-);
-```
-
-# Tabel Penerbit
-```sql
-CREATE TABLE penerbit (
-    id_penerbit TEXT NOT NULL,
-    nama_penerbit TEXT,
-    alamat TEXT,
-    latitude REAL,
-    longitude REAL,
-    PRIMARY KEY (id_penerbit)
-);
-```
-
-# Tabel Penulis
-```sql
-CREATE TABLE penulis (
-    id_penulis TEXT NOT NULL,
-    penulis_ TEXT,
-    tempat_lahir TEXT,
-    tanggal_lahir TEXT,
-    PRIMARY KEY (id_penulis)
-);
-```
-
-# Tabel Ulasan
-```sql
-CREATE TABLE ulasan (
-    id_user TEXT NOT NULL,
-    id_novel TEXT NOT NULL,
-    nama_user TEXT,
-    tanggal_ulasan TEXT,
-    ulasan TEXT,
-    rating_user REAL,
-    PRIMARY KEY (id_user, id_novel),
-    FOREIGN KEY (id_novel) REFERENCES novel(id_novel)
-);
-```
-=======
-
-# Front End Developer (Front-End branch)
-📍 Tugas di GitHub:
-
-- Mengembangkan tampilan dashboard dengan React.js, Vue.js, atau HTML+CSS.
-- Menghubungkan UI dengan API dari Back-End.
-- Menambahkan fitur pencarian, filter, dan sorting novel.
-=======
 <div align="center">
   <img width="1920" height="250" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
 </div>
@@ -216,50 +130,24 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 dengan query sebagai berikut:
 
 ```sql
-CREATE TABLE "novel" (
-    "id_novel" TEXT NOT NULL,
-    "id_penulis" TEXT NOT NULL,
-    "id_penerbit" TEXT NOT NULL,
-    "judul" TEXT,
-    "ISBN" TEXT,
-    "bahasa" TEXT,
-    "tahun_terbit" INTEGER,
-    "edisi" TEXT,
-    "jumlah_halaman" INTEGER,
-    "deskripsi" TEXT,
-    "rating_novel" INTEGER,
-    "kategori" TEXT,
-    "harga" TEXT,
-    "link" TEXT,
-    "Sampul" TEXT,
-    PRIMARY KEY("id_novel"),
-    FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
-    FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
+CREATE TABLE novel (
+    id_novel TEXT NOT NULL,
+    id_penulis TEXT NOT NULL,
+    id_penerbit TEXT NOT NULL,
+    judul TEXT,
+    ISBN TEXT,
+    bahasa TEXT,
+    tahun_terbit INTEGER,
+    edisi TEXT,
+    jumlah_halaman INTEGER,
+    deskripsi TEXT,
+    rating_novel REAL,
+    kategori TEXT,
+    harga TEXT,
+    link TEXT,
+    Sampul TEXT,
+    PRIMARY KEY (id_novel)
 );
-
-=======
-=======
-```{r}
-CREATE TABLE "novel" (
-	"id_novel"	TEXT NOT NULL,
-	"id_penulis"	TEXT NOT NULL,
-	"id_penerbit"	TEXT NOT NULL,
-	"judul"	TEXT,
-	"ISBN"	TEXT,
-	"bahasa"	TEXT,
-	"tahun_terbit"	INTEGER,
-	"edisi"	TEXT,
-	"jumlah_halaman"	INTEGER,
-	"deskripsi"	TEXT,
-	"rating_novel"	INTEGER,
-	"kategori"	TEXT,
-	"harga"	TEXT,
-	"link"	TEXT,
-	"Sampul"	TEXT,
-	PRIMARY KEY("id_novel"),
-	FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
-	FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
-)
 ```
 
 
@@ -280,29 +168,14 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 
 dengan query sebagai berikut:
 
-
 ```sql
-CREATE TABLE "penulis" (
-    "id_penulis" TEXT NOT NULL,
-    "penulis" TEXT,
-    "tempat_lahir" TEXT,
-    "tanggal_lahir" TEXT,
-    "jumlah_buku" INTEGER,
-    PRIMARY KEY("id_penulis")
+CREATE TABLE penulis (
+    id_penulis TEXT NOT NULL,
+    penulis_ TEXT,
+    tempat_lahir TEXT,
+    tanggal_lahir TEXT,
+    PRIMARY KEY (id_penulis)
 );
-
-=======
-
-```{r}
-CREATE TABLE "penulis" (
-	"id_penulis"	TEXT NOT NULL,
-	"penulis_"	TEXT,
-	"tempat_lahir"	TEXT,
-	"tanggal_lahir"	TEXT,
-	"jumlah_buku"	INTEGER,
-	PRIMARY KEY("id_penulis")
-)
-
 ```
 
 
@@ -321,52 +194,15 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 dengan query sebagai berikut:
 
 ```sql
-CREATE TABLE "penerbit" (
-    "id_penerbit" TEXT NOT NULL,
-    "nama_penerbit" TEXT,
-    "alamat" TEXT,
-    "latitude" REAL,
-    "longitude" REAL,
-    PRIMARY KEY("id_penerbit")
+CREATE TABLE penerbit (
+    id_penerbit TEXT NOT NULL,
+    nama_penerbit TEXT,
+    alamat TEXT,
+    latitude REAL,
+    longitude REAL,
+    PRIMARY KEY (id_penerbit)
 );
 ```
-
-| id_penerbit                | Type  | Id Penerbit                    		             |
-|:---------------------------|:------|:------------------------------------------------------|
-| nama_penerbit              | TEXT  | Nama Penerbit                  		             |
-| alamat                     | TEXT  | Alamat Penerbit                                       |	
-| Latitude		     | TEXT  | latitude	                                             |
-|longitude		     | TEXT  | longitude                                             |
-=======
-| id_penerbit                | TEXT  | Id Penerbit                    		             |
-| nama_penerbit              | TEXT | Nama Penerbit                  		     |
-| alamat                     | TEXT | Alamat Penerbit     |	
-| Latitude		     | REAL | latitude	|
-|longitude		     |REAL | longitude |
-
-
-dengan query sebagai berikut:
-
-```sql
-CREATE TABLE "penerbit" (
-
-    "id_penerbit" TEXT,
-    "nama_penerbit" TEXT,
-    "alamat" TEXT,
-    "latitude" TEXT,
-    "longitude" TEXT,
-    PRIMARY KEY("id_penerbit")
-);
-=======
-	"id_penerbit"	TEXT NOT NULL,
-	"nama_penerbit"	TEXT,
-	"alamat"	TEXT,
-	"latitude"	TEXT,
-	"longitude"	TEXT,
-	PRIMARY KEY("id_penerbit")
-)
-```
-
 
 ## :memo: Membuat Tabel Ulasan
 
@@ -385,15 +221,15 @@ dengan query berikut:
 
 
 ```sql
-CREATE TABLE "ulasan" (
-    "id_user" TEXT,
-    "id_novel" TEXT,
-    "nama_user" TEXT,
-    "tanggal_ulasan" TEXT,
-    "ulasan" TEXT,
-    "rating_user" REAL,
-    PRIMARY KEY("id_user"),
-    FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
+CREATE TABLE ulasan (
+    id_user TEXT NOT NULL,
+    id_novel TEXT NOT NULL,
+    nama_user TEXT,
+    tanggal_ulasan TEXT,
+    ulasan TEXT,
+    rating_user REAL,
+    PRIMARY KEY (id_user, id_novel),
+    FOREIGN KEY (id_novel) REFERENCES novel(id_novel)
 );
 ```
 
@@ -425,15 +261,14 @@ CREATE TABLE "ulasan" (
 │    ├── 📄 Skema database.jpg
 ├── 📁 source
 │    ├── 📄 datanovel.sqlite
-├── 📄 .gitattributes
+│    ├── 📄 koneksi Database SQL ke R.Rmd
+│    ├── 📄 optimation query.txt
 └── 📄 README.md
 ```
 
 ## 📩 Hubungi Kami
-Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercoffee.com.
+Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: naufaliaalfiryal@apps.ipb.ac.id.
 
----
-Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 
 # Tim Penulis
 ### 📚 **Tim di Balik Chapter & Coffee**  
