@@ -1,3 +1,11 @@
+
+# Front End Developer (Front-End branch)
+📍 Tugas di GitHub:
+
+- Mengembangkan tampilan dashboard dengan React.js, Vue.js, atau HTML+CSS.
+- Menghubungkan UI dengan API dari Back-End.
+- Menambahkan fitur pencarian, filter, dan sorting novel.
+=======
 <div align="center">
   <img width="1920" height="480" src="https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
 </div>
@@ -359,4 +367,3 @@ Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir 
 💡 _Dengan keahlian masing-masing, kami menciptakan Chapter & Coffee agar setiap orang dapat menemukan novel terbaik dengan cara yang lebih mudah dan menyenangkan!_  
 
 ---
-=======
