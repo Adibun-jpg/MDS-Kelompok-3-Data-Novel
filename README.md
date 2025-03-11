@@ -86,7 +86,7 @@ Tampilan Halam **"Tim Chapter & Coffee"**
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Di balik Chapter & Coffee, ada tim keren yang bekerja sama menghadirkan pengalaman terbaik untuk pencinta novel!
    <br>
 # Demo
 📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
