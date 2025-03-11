@@ -85,7 +85,7 @@ CREATE TABLE ulasan (
 - Menambahkan fitur pencarian, filter, dan sorting novel.
 =======
 <div align="center">
-  <img width="1920" height="480" src="https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
+  <img width="1920" height="250" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
 </div>
 
 # ☕Daftar Menu
@@ -170,12 +170,10 @@ Tampilan Halam **"Penerbit"**
 5. **Tim Chapter & Coffee** <br>
 Tampilan Halam **"Tim Chapter & Coffee"**
    <p align="center">
-      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Our%20Team%20Dashboard.jpeg">
    </p>
-   Menampilkan informasi Web Pemerintah Provinsi Jawa Barat.
+   Di balik Chapter & Coffee, ada tim keren yang bekerja sama menghadirkan pengalaman terbaik untuk pencinta novel!
    <br>
-# Demo
-📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
 # Skema Database atau Pondasi Perpustakaan
 Database terdiri dari beberapa tabel utama. Tabel **Penulis** menyimpan data penulis dengan id_penulis sebagai primary key, sedangkan tabel **Penerbit** menggunakan id_penerbit sebagai primary key. Tabel **Novel** menjadi pusat data novel dengan id_novel sebagai primary key, serta menghubungkan penulis dan penerbit melalui id_penulis dan id_penerbit sebagai foreign key. Untuk **Ulasan**, tabel Ulasan menyimpan review pembaca dengan id_user sebagai primary key dan id_novel sebagai foreign key agar setiap ulasan terhubung ke novel yang direview.
@@ -186,14 +184,9 @@ Database terdiri dari beberapa tabel utama. Tabel **Penulis** menyimpan data pen
 ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencakup empat entitas utama, yaitu **Novel**, **Penulis**, **Penerbit**, dan **Ulasan**. Hubungan antar entitas menunjukkan bahwa satu penulis dapat menulis banyak novel (**1:M**), satu penerbit dapat menerbitkan banyak novel (**1:M**), dan satu novel dapat memiliki banyak ulasan dari berbagai pengguna (**1:M**). Struktur ini memungkinkan pengelolaan data yang sistematis, memudahkan pencarian informasi berdasarkan penulis atau penerbit tertentu, serta memungkinkan analisis ulasan dan rating yang diberikan oleh pengguna terhadap suatu novel.
 ![ERD Novel](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/ERD%20Novel%20New.jpg)
 
-## 🚀 Software yang Digunakan
-- **Frontend:** RShiny
-- **Backend:** RStudio
-- **Database:** SQLite
 
 # Deskripsi Data atau Data Synopsis
 ## :abacus: Membuat Database
-create database datanovel1;
 
 Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
@@ -213,7 +206,7 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 | edisi	    	             | TEXT| Edisi Novel                                      |
 | jumlah_halaman	    	 | INTEGER                | Jumlah Halaman Novel                             |
 | deskripsi    	             | TEXT                   | Deskripsi/Sinopsis Novel                         |
-| rating_novel	    	     | REAL                  | Rating Novel                                     |
+| rating_novel	    	     | INTEGER                  | Rating Novel                                     |
 | kategori		     | TEXT			| Kategori novel menjadi Fiksi, Bukan fiksi, Literatur Indonesia, Romansa, Horor|
 | harga			     | TEXT			| Harga buku |
 | link			     | TEXT			| direct link ke ecomerce |
@@ -243,6 +236,8 @@ CREATE TABLE "novel" (
     FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
     FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
 );
+
+=======
 =======
 ```{r}
 CREATE TABLE "novel" (
@@ -268,18 +263,19 @@ CREATE TABLE "novel" (
 ```
 
 
+
 ## :books: Membuat Tabel Penulis
 
 Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal lahir, serta jumlah buku yang telah diterbitkan.
 
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penulis                 | TEXT  | Id Penulis                       		         |
-| penulis                    | TEXT)  | Nama Penulis Novel                   		     |
-| tempat_lahir               | TEXT  | Tempat Lahir Penulis Novel                     	 |	
-| tanggal_lahir              | TEXT                  | Tanggal Lahir Penulis Novel              		 |
-| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
+|:---------------------------|:-----------------------|:---------------------------------------------------------|
+| id_penulis                 | TEXT                   | Id Penulis                       		         |
+| penulis                    | TEXT                   | Nama Penulis Novel                   		         |
+| tempat_lahir               | TEXT                   | Tempat Lahir Penulis Novel                     	         |	
+| tanggal_lahir              | TEXT                   | Tanggal Lahir Penulis Novel              		 |
+| jumlah_buku                | INTEGER                | Jumlah Novel yang Diterbitkan                            |
 
 
 dengan query sebagai berikut:
@@ -294,6 +290,8 @@ CREATE TABLE "penulis" (
     "jumlah_buku" INTEGER,
     PRIMARY KEY("id_penulis")
 );
+
+=======
 
 ```{r}
 CREATE TABLE "penulis" (
@@ -313,13 +311,12 @@ CREATE TABLE "penulis" (
 Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distribusi novel.
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-
-| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
-| nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
-| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
-| latitude                   | character varying(255) | Titik Koordinat                     	         |	
-| longitude                  | character varying(255) | Titik Koordinat                      	         |	
+|:---------------------------|:-----------------------|:---------------------------------------------|
+| id_penerbit                | TEXT                   | Id Penerbit                    		           |
+| nama_penerbit              | TEXT                   | Nama Penerbit                  		           |
+| alamat                     | TEXT                   | Alamat Penerbit                     	       |	
+| latitude                   | TEXT                   | Titik Koordinat                     	       |	
+| longitude                  | TEXT                   | Titik Koordinat                      	       |	
 
 dengan query sebagai berikut:
 
@@ -332,17 +329,35 @@ CREATE TABLE "penerbit" (
     "longitude" REAL,
     PRIMARY KEY("id_penerbit")
 );
+```
 
+| id_penerbit                | Type  | Id Penerbit                    		             |
+|:---------------------------|:------|:------------------------------------------------------|
+| nama_penerbit              | TEXT  | Nama Penerbit                  		             |
+| alamat                     | TEXT  | Alamat Penerbit                                       |	
+| Latitude		     | TEXT  | latitude	                                             |
+|longitude		     | TEXT  | longitude                                             |
+=======
 | id_penerbit                | TEXT  | Id Penerbit                    		             |
 | nama_penerbit              | TEXT | Nama Penerbit                  		     |
 | alamat                     | TEXT | Alamat Penerbit     |	
 | Latitude		     | REAL | latitude	|
 |longitude		     |REAL | longitude |
 
+
 dengan query sebagai berikut:
 
-```{r}
+```sql
 CREATE TABLE "penerbit" (
+
+    "id_penerbit" TEXT,
+    "nama_penerbit" TEXT,
+    "alamat" TEXT,
+    "latitude" TEXT,
+    "longitude" TEXT,
+    PRIMARY KEY("id_penerbit")
+);
+=======
 	"id_penerbit"	TEXT NOT NULL,
 	"nama_penerbit"	TEXT,
 	"alamat"	TEXT,
@@ -358,13 +373,13 @@ CREATE TABLE "penerbit" (
 Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating dan komentar yang diberikan.
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_user                    | TEXT  | Id Pengguna                       		         |
-| id_novel                   | TEXT  | Id Novel                   		                 |
-| nama_user                  | TEXT | Nama Pengguna                    	             |	
-| tanggal_ulasan             | TEXT) | Tanggal Ulasan yang Diberikan Pengguna           |
-| ulasan                     | text                   | Ulasan Pengguna	                                 |
-| rating_user	    	     | REAL                  | Rating dari Pengguna                             |
+|:---------------------------|:-----------------------|:---------------------------------------------------------|
+| id_user                    | TEXT                   | Id Pengguna                       		         |
+| id_novel                   | TEXT                   | Id Novel                   		                 |
+| nama_user                  | TEXT                   | Nama Pengguna                    	                 |	
+| tanggal_ulasan             | TEXT                   | Tanggal Ulasan yang Diberikan Pengguna                   |
+| ulasan                     | Text                   | Ulasan Pengguna	                                         |
+| rating_user	    	     | REAL                   | Rating dari Pengguna                                     |
 
 dengan query berikut:
 
@@ -380,19 +395,6 @@ CREATE TABLE "ulasan" (
     PRIMARY KEY("id_user"),
     FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
 );
-
-```{r}
-CREATE TABLE "ulasan" (
-	"id_user"	TEXT,
-	"id_novel"	TEXT,
-	"nama_user"	TEXT,
-	"tanggal_ulasan"	TEXT,
-	"ulasan"	TEXT,
-	"rating_user"	REAL,
-	PRIMARY KEY("id_user"),
-	FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
-)
-
 ```
 
 # :open_file_folder: Folder Structure atau Rak Buku
@@ -405,7 +407,24 @@ CREATE TABLE "ulasan" (
 │    ├── 📄 ulasan.csv
 ├── 📁 Image
 │    ├── 📄 Header Chapter & Coffee .png
-│    ├── 📄 style.css
+│    ├── 📄 Home.jpeg
+│    ├── 📄 Our Team Dashboard.jpeg
+│    ├── 📄 Our Team.png
+│    ├── 📄 Penerbit.jpeg
+│    ├── 📄 Penulis.jpeg
+│    ├── 📄 Sekilas Tentang Novel.jpeg
+│    ├── 📄 Ulasan oleh Pengguna.jpeg
+│    ├── 📄 Ulasan.jpeg
+│    ├── 📄 logo mds.jpeg
+├── 📁 app
+│    ├── 📄 Rshiny Back End MYSQL Satu.Rmd
+│    ├── 📄 server.R
+│    ├── 📄 ui.R
+├── 📁 scheme
+│    ├── 📄 ERD Novel New.jpg
+│    ├── 📄 Skema database.jpg
+├── 📁 source
+│    ├── 📄 datanovel.sqlite
 ├── 📄 .gitattributes
 └── 📄 README.md
 ```
@@ -419,6 +438,10 @@ Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 # Tim Penulis
 ### 📚 **Tim di Balik Chapter & Coffee**  
 Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir berkat tim yang menyusun kode, data, dan desain menjadi pengalaman terbaik bagi pencinta novel. Inilah para "barista" di balik platform ini!  
+
+   <p align="center">
+      <img width="1000" height="475" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Our%20Team.png">
+   </p>
 
 🎨 **Front-End Developer _(Cover Designer)_**  
 👩‍💻 [Baiq Nina Febriati](https://github.com/ninafebriati)  
