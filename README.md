@@ -220,7 +220,7 @@ CREATE TABLE "penulis" (
 ```{r}
 CREATE TABLE "penulis" (
 	"id_penulis"	TEXT NOT NULL,
-	"penulis"	TEXT,
+	"penulis_"	TEXT,
 	"tempat_lahir"	TEXT,
 	"tanggal_lahir"	TEXT,
 	"jumlah_buku"	INTEGER,
