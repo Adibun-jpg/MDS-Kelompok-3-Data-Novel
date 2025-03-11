@@ -93,11 +93,11 @@ Tampilan Halam **"Tim Chapter & Coffee"**
 
 # Skema Database atau Pondasi Perpustakaan
 Database terdiri dari beberapa tabel utama. Tabel **Penulis** menyimpan data penulis dengan id_penulis sebagai primary key, sedangkan tabel **Penerbit** menggunakan id_penerbit sebagai primary key. Tabel **Novel** menjadi pusat data novel dengan id_novel sebagai primary key, serta menghubungkan penulis dan penerbit melalui id_penulis dan id_penerbit sebagai foreign key. Untuk **Ulasan**, tabel Ulasan menyimpan review pembaca dengan id_user sebagai primary key dan id_novel sebagai foreign key agar setiap ulasan terhubung ke novel yang direview.
-![Skema Database](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/Designer/Skema%20Database%20Novel.jpg)
+![Skema Database](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/Skema%20database.jpg)
 
 # ERD atau Alur Cerita
 ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencakup empat entitas utama, yaitu **Novel**, **Penulis**, **Penerbit**, dan **Ulasan**. Hubungan antar entitas menunjukkan bahwa satu penulis dapat menulis banyak novel (**1:M**), satu penerbit dapat menerbitkan banyak novel (**1:M**), dan satu novel dapat memiliki banyak ulasan dari berbagai pengguna (**1:M**). Struktur ini memungkinkan pengelolaan data yang sistematis, memudahkan pencarian informasi berdasarkan penulis atau penerbit tertentu, serta memungkinkan analisis ulasan dan rating yang diberikan oleh pengguna terhadap suatu novel.
-![ERD Novel](https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/raw/Designer/ERD%20Novel.jpg)
+![ERD Novel](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/ERD%20Novel%20New.jpg)
 
 # Deskripsi Data atau Data Synopsis
 ## :abacus: Membuat Database
@@ -186,6 +186,8 @@ Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distrib
 | id_penerbit                | character varying(50)  | Id Penerbit                    		             |
 | nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
 | alamat                     | character varying(255) | Alamat Penerbit                     	         |	
+| latitude                   | character varying(255) | Titik Koordinat                     	         |	
+| longitude                  | character varying(255) | Titik Koordinat                      	         |	
 
 dengan query sebagai berikut:
 
@@ -244,11 +246,8 @@ CREATE TABLE "ulasan" (
 └── 📄 README.md
 ```
 
-## 🔥 Kontribusi
-Kami selalu terbuka untuk kontribusi dari komunitas! Jika Anda ingin menambahkan fitur baru atau meningkatkan performa dashboard, silakan fork repository ini dan buat pull request.
-
 ## 📩 Hubungi Kami
-Jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercoffee.com atau kunjungi forum diskusi kami.
+Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: support@chaptercoffee.com.
 
 ---
 Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
