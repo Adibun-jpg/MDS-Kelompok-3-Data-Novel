@@ -88,8 +88,6 @@ Tampilan Halam **"Tim Chapter & Coffee"**
    </p>
    Di balik Chapter & Coffee, ada tim keren yang bekerja sama menghadirkan pengalaman terbaik untuk pencinta novel!
    <br>
-# Demo
-📚 Eksplorasi Dunia Novel Lewat Dashboard Chapter & Coffee: 
 
 # Skema Database atau Pondasi Perpustakaan
 Database terdiri dari beberapa tabel utama. Tabel **Penulis** menyimpan data penulis dengan id_penulis sebagai primary key, sedangkan tabel **Penerbit** menggunakan id_penerbit sebagai primary key. Tabel **Novel** menjadi pusat data novel dengan id_novel sebagai primary key, serta menghubungkan penulis dan penerbit melalui id_penulis dan id_penerbit sebagai foreign key. Untuk **Ulasan**, tabel Ulasan menyimpan review pembaca dengan id_user sebagai primary key dan id_novel sebagai foreign key agar setiap ulasan terhubung ke novel yang direview.
@@ -270,12 +268,24 @@ CREATE TABLE "ulasan" (
 │    ├── 📄 ulasan.csv
 ├── 📁 Image
 │    ├── 📄 Header Chapter & Coffee .png
-│    ├── 📄 style.css
+│    ├── 📄 Home.jpeg
+│    ├── 📄 Our Team Dashboard.jpeg
+│    ├── 📄 Our Team.png
+│    ├── 📄 Penerbit.jpeg
+│    ├── 📄 Penulis.jpeg
+│    ├── 📄 Sekilas Tentang Novel.jpeg
+│    ├── 📄 Ulasan oleh Pengguna.jpeg
+│    ├── 📄 Ulasan.jpeg
+│    ├── 📄 logo mds.jpeg
 ├── 📁 app
-│    ├── 📄 style.css
+│    ├── 📄 Rshiny Back End MYSQL Satu.Rmd
+│    ├── 📄 server.R
+│    ├── 📄 ui.R
 ├── 📁 scheme
-│    ├── 📄 style.css
+│    ├── 📄 ERD Novel New.jpg
+│    ├── 📄 Skema database.jpg
 ├── 📁 source
+│    ├── 📄 datanovel.sqlite
 ├── 📄 .gitattributes
 └── 📄 README.md
 ```
