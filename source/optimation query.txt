@@ -2,6 +2,26 @@ optimation query
 
 CREATE DATABASE datanovel;
 
+CREATE TABLE "novel" (
+	"id_novel"	TEXT NOT NULL,
+	"id_penulis"	TEXT NOT NULL,
+	"id_penerbit"	TEXT NOT NULL,
+	"judul"	TEXT,
+	"ISBN"	TEXT,
+	"bahasa"	TEXT,
+	"tahun_terbit"	INTEGER,
+	"edisi"	TEXT,
+	"jumlah_halaman"	INTEGER,
+	"deskripsi"	TEXT,
+	"rating_novel"	REAL,
+	"kategori"	TEXT,
+	"harga"	TEXT,
+	"link"	TEXT,
+	"Sampul"	TEXT,
+	PRIMARY KEY("id_novel"),
+	FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
+	FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
+);
 #tampil all TABLE
 
 select * from novel
