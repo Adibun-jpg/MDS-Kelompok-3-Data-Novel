@@ -286,7 +286,7 @@ Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 Seperti secangkir kopi yang diracik dengan sempurna, **Chapter & Coffee** hadir berkat tim yang menyusun kode, data, dan desain menjadi pengalaman terbaik bagi pencinta novel. Inilah para "barista" di balik platform ini!  
 
    <p align="center">
-      <img width="1000" height="500" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Our%20Team.png">
+      <img width="1000" height="475" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Our%20Team.png">
    </p>
 
 🎨 **Front-End Developer _(Cover Designer)_**  
