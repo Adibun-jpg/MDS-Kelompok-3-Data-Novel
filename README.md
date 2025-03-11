@@ -146,9 +146,9 @@ dengan query sebagai berikut:
 
 ```sql
 CREATE TABLE "novel" (
-    "id_novel" TEXT,
-    "id_penulis" TEXT,
-    "id_penerbit" TEXT,
+    "id_novel" TEXT NOT NULL,
+    "id_penulis" TEXT NOT NULL,
+    "id_penerbit" TEXT NOT NULL,
     "judul" TEXT,
     "ISBN" TEXT,
     "bahasa" TEXT,
@@ -168,9 +168,9 @@ CREATE TABLE "novel" (
 =======
 ```{r}
 CREATE TABLE "novel" (
-	"id_novel"	TEXT,
-	"id_penulis"	TEXT,
-	"id_penerbit"	TEXT,
+	"id_novel"	TEXT NOT NULL,
+	"id_penulis"	TEXT NOT NULL,
+	"id_penerbit"	TEXT NOT NULL,
 	"judul"	TEXT,
 	"ISBN"	TEXT,
 	"bahasa"	TEXT,
@@ -209,7 +209,7 @@ dengan query sebagai berikut:
 
 ```sql
 CREATE TABLE "penulis" (
-    "id_penulis" TEXT,
+    "id_penulis" TEXT NOT NULL,
     "penulis" TEXT,
     "tempat_lahir" TEXT,
     "tanggal_lahir" TEXT,
@@ -219,7 +219,7 @@ CREATE TABLE "penulis" (
 
 ```{r}
 CREATE TABLE "penulis" (
-	"id_penulis"	TEXT,
+	"id_penulis"	TEXT NOT NULL,
 	"penulis"	TEXT,
 	"tempat_lahir"	TEXT,
 	"tanggal_lahir"	TEXT,
@@ -247,25 +247,25 @@ dengan query sebagai berikut:
 
 ```sql
 CREATE TABLE "penerbit" (
-    "id_penerbit" TEXT,
+    "id_penerbit" TEXT NOT NULL,
     "nama_penerbit" TEXT,
     "alamat" TEXT,
-    "latitude" TEXT,
-    "longitude" TEXT,
+    "latitude" REAL,
+    "longitude" REAL,
     PRIMARY KEY("id_penerbit")
 );
 
 | id_penerbit                | TEXT  | Id Penerbit                    		             |
 | nama_penerbit              | TEXT | Nama Penerbit                  		     |
 | alamat                     | TEXT | Alamat Penerbit     |	
-| Latitude		     | TEXT | latitude	|
-|longitude		     |TEXT | longitude |
+| Latitude		     | REAL | latitude	|
+|longitude		     |REAL | longitude |
 
 dengan query sebagai berikut:
 
 ```{r}
 CREATE TABLE "penerbit" (
-	"id_penerbit"	TEXT,
+	"id_penerbit"	TEXT NOT NULL,
 	"nama_penerbit"	TEXT,
 	"alamat"	TEXT,
 	"latitude"	TEXT,
