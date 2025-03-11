@@ -269,8 +269,9 @@ CREATE TABLE ulasan (
 ## 📩 Hubungi Kami
 Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: naufaliaalfiryal@apps.ipb.ac.id.
 
-
+=======
 Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
+=======
 
 # Tim Penulis
 ### 📚 **Tim di Balik Chapter & Coffee**  
