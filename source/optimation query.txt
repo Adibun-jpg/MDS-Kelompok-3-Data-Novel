@@ -1,5 +1,7 @@
 optimation query
 
+CREATE DATABASE datanovel;
+
 #tampil all TABLE
 
 select * from novel
