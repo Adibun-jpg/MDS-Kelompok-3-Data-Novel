@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="1920" height="480" src="https://github.com/Adibun-jpg/MDS---Kelompok-5---Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
+  <img width="1920" height="250" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Header%20Chapter%20%26%20Coffee%20.png">
 </div>
 
 # ☕Daftar Menu
@@ -271,6 +271,11 @@ CREATE TABLE "ulasan" (
 ├── 📁 Image
 │    ├── 📄 Header Chapter & Coffee .png
 │    ├── 📄 style.css
+├── 📁 app
+│    ├── 📄 style.css
+├── 📁 scheme
+│    ├── 📄 style.css
+├── 📁 source
 ├── 📄 .gitattributes
 └── 📄 README.md
 ```
