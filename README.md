@@ -261,14 +261,15 @@ CREATE TABLE ulasan (
 │    ├── 📄 Skema database.jpg
 ├── 📁 source
 │    ├── 📄 datanovel.sqlite
-├── 📄 .gitattributes
+│    ├── 📄 koneksi Database SQL ke R.Rmd
+│    ├── 📄 optimation query.txt
 └── 📄 README.md
 ```
 
 ## 📩 Hubungi Kami
 Kami selalu terbuka jika ada pertanyaan atau masukan, hubungi kami melalui email: naufaliaalfiryal@apps.ipb.ac.id.
 
----
+
 Selamat menjelajah dunia novel dengan **Chapter & Coffee!** ☕📖
 
 # Tim Penulis
