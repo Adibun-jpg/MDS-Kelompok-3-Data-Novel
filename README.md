@@ -56,7 +56,7 @@ Tampilan Halam **"Penulis"**
    <p align="center">
       <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Penulis.jpeg">
    </p>
-   Menampilkan informasi jumlah penulis dan total buku yang diterbitkan, daftar penulis terfavorit berdasarkan jumlah karya, serta tabel daftar penulis novel beserta detailnya.
+   Menampilkan informasi jumlah penulis dan total buku yang diterbitkan, daftar penulis terfavorit berdasarkan rating, serta tabel daftar penulis novel beserta detailnya.
    <br>
 
 3. **Penerbit** <br>
