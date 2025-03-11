@@ -1,5 +1,5 @@
 <div align="center">
-  <img width="1920" height="250" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Copy%20of%20Header%20Chapter%20%26%20Coffee%20.png">
+  <img width="1920" height="250" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Header%20Chapter%20%26%20Coffee%20.png">
 </div>
 
 # ☕Daftar Menu
@@ -84,7 +84,7 @@ Tampilan Halam **"Penerbit"**
 5. **Tim Chapter & Coffee** <br>
 Tampilan Halam **"Tim Chapter & Coffee"**
    <p align="center">
-      <img width="900" height="450" src="httpsgithub.comAdibun-jpgMDS-Kelompok-3-Data-NovelblobmainImageCopy%20of%20Header%20Chapter%20%26%20Coffee%20.png">
+      <img width="900" height="450" src="https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/main/Image/Our%20Team%20Dashboard.jpeg">
    </p>
    Di balik Chapter & Coffee, ada tim keren yang bekerja sama menghadirkan pengalaman terbaik untuk pencinta novel!
    <br>
