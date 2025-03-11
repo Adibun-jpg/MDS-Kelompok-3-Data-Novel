@@ -100,14 +100,9 @@ Database terdiri dari beberapa tabel utama. Tabel **Penulis** menyimpan data pen
 ERD ini menggambarkan struktur database untuk sistem manajemen novel yang mencakup empat entitas utama, yaitu **Novel**, **Penulis**, **Penerbit**, dan **Ulasan**. Hubungan antar entitas menunjukkan bahwa satu penulis dapat menulis banyak novel (**1:M**), satu penerbit dapat menerbitkan banyak novel (**1:M**), dan satu novel dapat memiliki banyak ulasan dari berbagai pengguna (**1:M**). Struktur ini memungkinkan pengelolaan data yang sistematis, memudahkan pencarian informasi berdasarkan penulis atau penerbit tertentu, serta memungkinkan analisis ulasan dan rating yang diberikan oleh pengguna terhadap suatu novel.
 ![ERD Novel](https://github.com/Adibun-jpg/MDS-Kelompok-3-Data-Novel/blob/Designer/ERD%20Novel%20New.jpg)
 
-## 🚀 Software yang Digunakan
-- **Frontend:** RShiny
-- **Backend:** RStudio
-- **Database:** SQLite
 
 # Deskripsi Data atau Data Synopsis
 ## :abacus: Membuat Database
-create database datanovel1;
 
 Chapter & Coffee merupakan database yang berkaitan dengan informasi novel, yang mencakup detail mengenai penulis, penerbit, novel itu sendiri, serta ulasan dari pengguna. Untuk membuat database tersebut maka dapat digunakan sintaks berikut.
 
@@ -157,29 +152,8 @@ CREATE TABLE "novel" (
     FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
     FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
 );
-=======
-```{r}
-CREATE TABLE "novel" (
-	"id_novel"	TEXT,
-	"id_penulis"	TEXT,
-	"id_penerbit"	TEXT,
-	"judul"	TEXT,
-	"ISBN"	TEXT,
-	"bahasa"	TEXT,
-	"tahun_terbit"	INTEGER,
-	"edisi"	TEXT,
-	"jumlah_halaman"	INTEGER,
-	"deskripsi"	TEXT,
-	"rating_novel"	INTEGER,
-	"kategori"	TEXT,
-	"harga"	TEXT,
-	"link"	TEXT,
-	"Sampul"	TEXT,
-	PRIMARY KEY("id_novel"),
-	FOREIGN KEY("id_penerbit") REFERENCES "penerbit"("id_penerbit"),
-	FOREIGN KEY("id_penulis") REFERENCES "penulis"("id_penulis")
-)
 ```
+
 
 
 ## :books: Membuat Tabel Penulis
@@ -188,12 +162,12 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_penulis                 | TEXT  | Id Penulis                       		         |
-| penulis                    | TEXT)  | Nama Penulis Novel                   		     |
-| tempat_lahir               | TEXT  | Tempat Lahir Penulis Novel                     	 |	
-| tanggal_lahir              | TEXT                  | Tanggal Lahir Penulis Novel              		 |
-| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                    |
+|:---------------------------|:-----------------------|:---------------------------------------------------------|
+| id_penulis                 | TEXT                   | Id Penulis                       		         |
+| penulis                    | TEXT                   | Nama Penulis Novel                   		         |
+| tempat_lahir               | TEXT                   | Tempat Lahir Penulis Novel                     	         |	
+| tanggal_lahir              | TEXT                   | Tanggal Lahir Penulis Novel              		 |
+| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                            |
 
 
 dengan query sebagai berikut:
@@ -208,17 +182,6 @@ CREATE TABLE "penulis" (
     "jumlah_buku" INTEGER,
     PRIMARY KEY("id_penulis")
 );
-
-```{r}
-CREATE TABLE "penulis" (
-	"id_penulis"	TEXT,
-	"penulis"	TEXT,
-	"tempat_lahir"	TEXT,
-	"tanggal_lahir"	TEXT,
-	"jumlah_buku"	INTEGER,
-	PRIMARY KEY("id_penulis")
-)
-
 ```
 
 
@@ -227,13 +190,12 @@ CREATE TABLE "penulis" (
 Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distribusi novel.
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-
-| id_penerbit                | character varying(50)  | Id Penerbit                    		             |
-| nama_penerbit              | character varying(250) | Nama Penerbit                  		     |
-| alamat                     | character varying(255) | Alamat Penerbit                     	         |	
-| latitude                   | character varying(255) | Titik Koordinat                     	         |	
-| longitude                  | character varying(255) | Titik Koordinat                      	         |	
+|:---------------------------|:-----------------------|:---------------------------------------------------------|
+| id_penerbit                | character varying(50)  | Id Penerbit                    		                 |
+| nama_penerbit              | character varying(250) | Nama Penerbit                  		                 |
+| alamat                     | character varying(255) | Alamat Penerbit                     	                 |	
+| latitude                   | character varying(255) | Titik Koordinat                     	                 |	
+| longitude                  | character varying(255) | Titik Koordinat                      	                 |	
 
 dengan query sebagai berikut:
 
@@ -246,24 +208,26 @@ CREATE TABLE "penerbit" (
     "longitude" TEXT,
     PRIMARY KEY("id_penerbit")
 );
+```
 
-| id_penerbit                | TEXT  | Id Penerbit                    		             |
-| nama_penerbit              | TEXT | Nama Penerbit                  		     |
-| alamat                     | TEXT | Alamat Penerbit     |	
-| Latitude		     | TEXT | latitude	|
-|longitude		     |TEXT | longitude |
+| id_penerbit                | Type  | Id Penerbit                    		             |
+|:---------------------------|:------|:------------------------------------------------------|
+| nama_penerbit              | TEXT  | Nama Penerbit                  		             |
+| alamat                     | TEXT  | Alamat Penerbit                                       |	
+| Latitude		     | TEXT  | latitude	                                             |
+|longitude		     | TEXT  | longitude                                             |
 
 dengan query sebagai berikut:
 
-```{r}
+```sql
 CREATE TABLE "penerbit" (
-	"id_penerbit"	TEXT,
-	"nama_penerbit"	TEXT,
-	"alamat"	TEXT,
-	"latitude"	TEXT,
-	"longitude"	TEXT,
-	PRIMARY KEY("id_penerbit")
-)
+    "id_penerbit" TEXT,
+    "nama_penerbit" TEXT,
+    "alamat" TEXT,
+    "latitude" TEXT,
+    "longitude" TEXT,
+    PRIMARY KEY("id_penerbit")
+);
 ```
 
 
@@ -272,13 +236,13 @@ CREATE TABLE "penerbit" (
 Menampilkan ulasan dan penilaian dari pengguna terhadap novel, termasuk rating dan komentar yang diberikan.
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:-------------------------------------------------|
-| id_user                    | TEXT  | Id Pengguna                       		         |
-| id_novel                   | TEXT  | Id Novel                   		                 |
-| nama_user                  | TEXT | Nama Pengguna                    	             |	
-| tanggal_ulasan             | TEXT) | Tanggal Ulasan yang Diberikan Pengguna           |
-| ulasan                     | text                   | Ulasan Pengguna	                                 |
-| rating_user	    	     | REAL                  | Rating dari Pengguna                             |
+|:---------------------------|:-----------------------|:---------------------------------------------------------|
+| id_user                    | TEXT                   | Id Pengguna                       		         |
+| id_novel                   | TEXT                   | Id Novel                   		                 |
+| nama_user                  | TEXT                   | Nama Pengguna                    	                 |	
+| tanggal_ulasan             | TEXT                   | Tanggal Ulasan yang Diberikan Pengguna                   |
+| ulasan                     | Text                   | Ulasan Pengguna	                                         |
+| rating_user	    	     | REAL                   | Rating dari Pengguna                                     |
 
 dengan query berikut:
 
@@ -294,19 +258,6 @@ CREATE TABLE "ulasan" (
     PRIMARY KEY("id_user"),
     FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
 );
-
-```{r}
-CREATE TABLE "ulasan" (
-	"id_user"	TEXT,
-	"id_novel"	TEXT,
-	"nama_user"	TEXT,
-	"tanggal_ulasan"	TEXT,
-	"ulasan"	TEXT,
-	"rating_user"	REAL,
-	PRIMARY KEY("id_user"),
-	FOREIGN KEY("id_novel") REFERENCES "novel"("id_novel")
-)
-
 ```
 
 # :open_file_folder: Folder Structure atau Rak Buku
