@@ -122,7 +122,7 @@ Menyediakan detail lengkap tentang novel, termasuk ISBN, judul, bahasa, tahun te
 | edisi	    	             | TEXT| Edisi Novel                                      |
 | jumlah_halaman	    	 | INTEGER                | Jumlah Halaman Novel                             |
 | deskripsi    	             | TEXT                   | Deskripsi/Sinopsis Novel                         |
-| rating_novel	    	     | REAL                  | Rating Novel                                     |
+| rating_novel	    	     | INTEGER                  | Rating Novel                                     |
 | kategori		     | TEXT			| Kategori novel menjadi Fiksi, Bukan fiksi, Literatur Indonesia, Romansa, Horor|
 | harga			     | TEXT			| Harga buku |
 | link			     | TEXT			| direct link ke ecomerce |
@@ -167,7 +167,7 @@ Berisi informasi mengenai identitas penulis, termasuk nama, tempat dan tanggal l
 | penulis                    | TEXT                   | Nama Penulis Novel                   		         |
 | tempat_lahir               | TEXT                   | Tempat Lahir Penulis Novel                     	         |	
 | tanggal_lahir              | TEXT                   | Tanggal Lahir Penulis Novel              		 |
-| jumlah_buku                | integer                | Jumlah Novel yang Diterbitkan                            |
+| jumlah_buku                | INTEGER                | Jumlah Novel yang Diterbitkan                            |
 
 
 dengan query sebagai berikut:
@@ -190,12 +190,12 @@ CREATE TABLE "penulis" (
 Menyimpan data tentang penerbit yang bertanggung jawab atas produksi dan distribusi novel.
 
 | Attribute                  | Type                   | Description                     		         |
-|:---------------------------|:-----------------------|:---------------------------------------------------------|
-| id_penerbit                | character varying(50)  | Id Penerbit                    		                 |
-| nama_penerbit              | character varying(250) | Nama Penerbit                  		                 |
-| alamat                     | character varying(255) | Alamat Penerbit                     	                 |	
-| latitude                   | character varying(255) | Titik Koordinat                     	                 |	
-| longitude                  | character varying(255) | Titik Koordinat                      	                 |	
+|:---------------------------|:-----------------------|:---------------------------------------------|
+| id_penerbit                | TEXT                   | Id Penerbit                    		           |
+| nama_penerbit              | TEXT                   | Nama Penerbit                  		           |
+| alamat                     | TEXT                   | Alamat Penerbit                     	       |	
+| latitude                   | TEXT                   | Titik Koordinat                     	       |	
+| longitude                  | TEXT                   | Titik Koordinat                      	       |	
 
 dengan query sebagai berikut:
 
